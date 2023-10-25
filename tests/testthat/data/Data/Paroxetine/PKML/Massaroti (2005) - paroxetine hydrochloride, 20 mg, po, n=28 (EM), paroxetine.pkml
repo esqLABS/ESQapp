@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="fef36bb0-cea1-4404-90e3-c720c9351987" name="Massaroti (2005) - paroxetine hydrochloride, 20 mg, po, n=28 (EM), paroxetine" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="cd1c5433-73d7-4203-a8d1-e5528240d9f4" name="h" dimension="Time" isInternal="0" baseGrid="cd1c5433-73d7-4203-a8d1-e5528240d9f4">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Massaroti (2005) - paroxetine hydrochloride, 20 mg, po, n=28 (EM), paroxetine|h" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAABYAAAALAAAAAM3MrEGamT1CMzOdQmZm1ELNzAVDmpklQwAAYUOaGYBDM7ODQ81Mk0OamZxDzcypQwCA5UPNTBBEMzMvRABgsUSa6QVFZtYyRQCIhkVmlrNFM7PgRQs=</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="b8e9dd9d-e4cb-4c10-9c7a-ae7db426e78f" name="ng/mL" dimension="Concentration (mass)" isInternal="0" baseGrid="cd1c5433-73d7-4203-a8d1-e5528240d9f4">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="3.2937E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Massaroti (2005) - paroxetine hydrochloride, 20 mg, po, n=28 (EM), paroxetine|ObservedData|Peripheral Venous Blood|Plasma|PAROXETINE|ng/mL" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAABYAAAALAAAAABAmZDCbYAcxa54aMccHVTE/43wxq5+PMYF0qzE5UcgxX2bhMbEs8DGNnegx3d3lMR3f2jExNK4xUbeSMYsXVzEjezcxZ4jPMF9mYTCPLSIwX3CJLws=</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Paroxetine" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

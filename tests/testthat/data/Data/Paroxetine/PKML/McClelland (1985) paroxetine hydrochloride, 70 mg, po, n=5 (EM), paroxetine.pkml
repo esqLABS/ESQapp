@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="2e3ac161-9487-4e99-8eba-63ffac60a608" name="McClelland (1985) paroxetine hydrochloride, 70 mg, po, n=5 (EM), paroxetine" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="d462defc-b276-46e2-8a5c-1116011329b4" name="h" dimension="Time" isInternal="0" baseGrid="d462defc-b276-46e2-8a5c-1116011329b4">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="McClelland (1985) paroxetine hydrochloride, 70 mg, po, n=5 (EM), paroxetine|h" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAkAAAALhPwPQmW9nEJ1XS1DwquwQ2HZXURxwbFEC2PfREFZM0V7zYZFCw==</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="510b8792-99fa-4cf6-a7a6-cebb28b4e216" name="ng/mL(1)" dimension="Concentration (mass)" isInternal="0" baseGrid="d462defc-b276-46e2-8a5c-1116011329b4">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="3.2937E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="McClelland (1985) paroxetine hydrochloride, 70 mg, po, n=5 (EM), paroxetine|ObservedData|Peripheral Venous Blood|Plasma|Paroxetine|ng/mL(1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAkAAAALgGUzMZCqFjFmClYx2jajMZivjTFdE0QxDZEuMb00GjFt2MgwCw==</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="910d94bb-e9fa-4cbc-a371-2720071d3cae" name="ng/mL" dimension="Concentration (mass)" isInternal="0" baseGrid="d462defc-b276-46e2-8a5c-1116011329b4">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="3.2937E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="McClelland (1985) paroxetine hydrochloride, 70 mg, po, n=5 (EM), paroxetine|ObservedData|Peripheral Venous Blood|Plasma|Paroxetine|ng/mL" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAkAAAALIV+vMWzfIzJI1d4yGdL2Mi1olDIrPEQy0rPYMRAXpDHC9o0xCw==</Values>
+      <RelatedColumnsCache>
+        <ColumnId>510b8792-99fa-4cf6-a7a6-cebb28b4e216</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Paroxetine" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

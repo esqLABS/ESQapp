@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="4179480a-d341-4a0a-b1a0-6368ad9341fd" name="Lund (1982) - paroxetine hydrochloride, 28 mg, iv, n=1 (EM), A, paroxetine" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="b4846396-53e1-4fe4-b788-389c0f7f1eb3" name="[h]" dimension="Time" isInternal="0" baseGrid="b4846396-53e1-4fe4-b788-389c0f7f1eb3">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Lund (1982) - paroxetine hydrochloride, 28 mg, iv, n=1 (EM), A, paroxetine|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA4AAAALmY5SQs0KhkIjvNZCvw8fQzoCeUPt45tDbfa0Q6SY70O1sRVEFnA1ROFKYURoS4hE5PqdRPlqy0QL</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="1860d7a9-b43b-45b3-b74c-358463ed539b" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="b4846396-53e1-4fe4-b788-389c0f7f1eb3">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="3.2937E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Lund (1982) - paroxetine hydrochloride, 28 mg, iv, n=1 (EM), A, paroxetine|ObservedData|Peripheral Venous Blood|Plasma|Paroxetine|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA4AAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="d806b91e-80d5-43da-9d9d-af1da4e50c61" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="b4846396-53e1-4fe4-b788-389c0f7f1eb3">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="3.2937E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Lund (1982) - paroxetine hydrochloride, 28 mg, iv, n=1 (EM), A, paroxetine|ObservedData|Peripheral Venous Blood|Plasma|Paroxetine|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA4AAAALjxnZM3AdojOv5+cyJlSbMlX7KzJ0rDwyRTAbMgpO8DFeowky7XbwMfUs0DFNr4kxpHKLMWIPjDEL</Values>
+      <RelatedColumnsCache>
+        <ColumnId>1860d7a9-b43b-45b3-b74c-358463ed539b</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Paroxetine" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="a807bceb-454f-4a22-b5ff-0f623f89d8b4" name="Gazzaz 2018 NM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=30, AS=1.25" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="25d6a859-5c1f-4914-9a33-203a0f61f15f" name="[h]" dimension="Time" isInternal="0" baseGrid="25d6a859-5c1f-4914-9a33-203a0f61f15f">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Gazzaz 2018 NM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=30, AS=1.25|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA8AAAALQEsuQh2wjUJWZOhCjpX5QnC4AkPGnRND/s4kQwftM0PD6W5DoFCHQ+bWlUOfef5DloQyRFrzb0Q8aLNECw==</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="cb98e0b3-9b31-4fc7-8086-54cc0baa86c0" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="25d6a859-5c1f-4914-9a33-203a0f61f15f">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Gazzaz 2018 NM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=30, AS=1.25|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA8AAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw==</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="8ca7dcae-c066-4ab0-91b4-0b4aef307a62" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="25d6a859-5c1f-4914-9a33-203a0f61f15f">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Gazzaz 2018 NM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=30, AS=1.25|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAA8AAAALbyfHLsqmlC/vd1MwjS5CMPFaUDAVIVEwNP82MJN2QTAW4BAw2SkNMFXa4i/rucgvC8KVLwOU6S6n578uCw==</Values>
+      <RelatedColumnsCache>
+        <ColumnId>cb98e0b3-9b31-4fc7-8086-54cc0baa86c0</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextromethorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

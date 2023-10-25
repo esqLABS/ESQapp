@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="7e21fe2b-eb77-4cab-bfd2-decc3aa817db" name="Stage 2018 EM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=12" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="49945e9c-d610-49f1-9611-17f4215d3d3e" name="[h]" dimension="Time" isInternal="0" baseGrid="49945e9c-d610-49f1-9611-17f4215d3d3e">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Stage 2018 EM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=12|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAgAAAALKo30QqqHNUPLzW9DE720Q9ti7kOGMRVEl2YzRJOZs0QL</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="9ad85d0e-6c01-4ded-856a-76669d25fabd" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="49945e9c-d610-49f1-9611-17f4215d3d3e">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Stage 2018 EM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=12|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAgAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="de63b0d5-d94d-40d3-9852-b381a5500471" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="49945e9c-d610-49f1-9611-17f4215d3d3e">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Stage 2018 EM, dextromethorphan, 30 mg dextromethorphan hydrobromide (cocktail), n=12|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAgAAAALgRSsMCeVIjGWpCwxboQdMf9rDDH0GgUx94b1MN2KoDAL</Values>
+      <RelatedColumnsCache>
+        <ColumnId>9ad85d0e-6c01-4ded-856a-76669d25fabd</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextromethorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

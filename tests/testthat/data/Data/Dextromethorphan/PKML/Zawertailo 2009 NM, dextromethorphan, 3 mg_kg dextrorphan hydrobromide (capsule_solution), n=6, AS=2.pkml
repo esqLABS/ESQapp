@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="a9ad3407-36b8-4a87-8987-ba9e76cd84e0" name="Zawertailo 2009 NM, dextromethorphan, 3 mg/kg dextrorphan hydrobromide (capsule/solution), n=6, AS=2" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="3224e3a6-89c7-4bc8-9212-73954eca859d" name="[h]" dimension="Time" isInternal="0" baseGrid="3224e3a6-89c7-4bc8-9212-73954eca859d">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Zawertailo 2009 NM, dextromethorphan, 3 mg/kg dextrorphan hydrobromide (capsule/solution), n=6, AS=2|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAALAABwQgAA8EIAADRDAABwQwAAlkMAALRDCw==</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="629ff894-bdcb-40a1-9d77-3951c611fb57" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="3224e3a6-89c7-4bc8-9212-73954eca859d">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="2.5737E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Zawertailo 2009 NM, dextromethorphan, 3 mg/kg dextrorphan hydrobromide (capsule/solution), n=6, AS=2|ObservedData|Peripheral Venous Blood|Plasma|Dextrorphan|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw==</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="6237b041-34d9-4baa-9a76-d45bbee5a610" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="3224e3a6-89c7-4bc8-9212-73954eca859d">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.5737E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Zawertailo 2009 NM, dextromethorphan, 3 mg/kg dextrorphan hydrobromide (capsule/solution), n=6, AS=2|ObservedData|Peripheral Venous Blood|Plasma|Dextrorphan|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAALYdVjM8WKkTPZO3wzZUssMwm2CTNfuuUyCw==</Values>
+      <RelatedColumnsCache>
+        <ColumnId>629ff894-bdcb-40a1-9d77-3951c611fb57</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextrorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

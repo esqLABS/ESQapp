@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="50e42f45-dde4-44bc-b93b-e6d166ea0d42" name="Antecip Bioventures EM, dextromethorphan, 60 mg dextromethorphan hydrobromide multiple dose (capsule/solution), n=10" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="aa12f826-3889-446d-b179-f60baa096b49" name="Time  " dimension="Time" isInternal="0" baseGrid="aa12f826-3889-446d-b179-f60baa096b49">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Antecip Bioventures EM, dextromethorphan, 60 mg dextromethorphan hydrobromide multiple dose (capsule/solution), n=10|Time  " />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAoAAAALAMAoRgCwKUYAoCpGAJArRgCALEYAYC5GAEAwRgAANEYAQD9GAIBKRgs=</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="a9740b74-2f86-40d6-870a-4a14f2651ffe" name="Conc  " dimension="Concentration (mass)" isInternal="0" baseGrid="aa12f826-3889-446d-b179-f60baa096b49">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Antecip Bioventures EM, dextromethorphan, 60 mg dextromethorphan hydrobromide multiple dose (capsule/solution), n=10|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|Conc  " />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAoAAAALQO2kMEDtJDHfY3cx32N3MTfGYjF3zCsxJ5ECMc8ulzD/5tsv/+bbLgs=</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextromethorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>
