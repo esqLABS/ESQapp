@@ -14,9 +14,19 @@
 # Engineering
 
 ## Dependencies ----
+
+download.file("https://github.com/Open-Systems-Pharmacology/rClr/releases/download/v0.9.2/rClr_0.9.2.zip", "./renv/rClr_0.9.2.zip")
+
+renv::install("./renv/rClr_0.9.2.zip")
+renv::install("esqLABS/esqlabsR@*release")
+
+usethis::use_dev_package("esqlabsR", remote = "esqLABS/esqlabsR@*release")
+
 ## Amend DESCRIPTION with dependencies read from package code parsing
-## install.packages('attachment') # if needed.
+# install.packages('attachment') # if needed.
 attachment::att_amend_desc()
+
+
 
 ## Add modules ----
 ## Create a module infrastructure in R/
@@ -30,10 +40,10 @@ golem::add_utils("helpers", with_test = TRUE)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
-golem::add_js_file("script")
-golem::add_js_handler("handlers")
-golem::add_css_file("custom")
-golem::add_sass_file("custom")
+# golem::add_js_file("script")
+# golem::add_js_handler("handlers")
+# golem::add_css_file("custom")
+# golem::add_sass_file("custom")
 
 ## Add internal datasets ----
 ## If you have data in your package
