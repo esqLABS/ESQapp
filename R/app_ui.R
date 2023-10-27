@@ -3,14 +3,17 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @import bslib
 #' @noRd
 app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic
-    fluidPage(
-      h1("shinyScenarioEditor")
+    bslib::page_navbar(
+      title = "shinyScenarioEditor",
+      sidebar = mod_sidebar_ui("sidebar_1"),
+      !!!mod_main_panel_ui("main_panel_1")
     )
   )
 }

@@ -11,15 +11,26 @@ Imports:
     config (>= 0.3.2),
     golem (>= 0.4.1),
     shiny (>= 1.7.5),
-    esqlabsR (>= 5.1.1)
+    esqlabsR (>= 5.1.1),
+    bslib,
+    datamods,
+    shinyFiles,
+    rio,
+    DT,
+    editbl,
+    rlang
 Suggests: 
     spelling,
     pkgdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    styler
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.1.1
-Remotes:  
+RoxygenNote: 7.2.3
+Remotes: 
     esqLABS/esqlabsR@*release
+VignetteBuilder: knitr

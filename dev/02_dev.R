@@ -19,18 +19,29 @@ download.file("https://github.com/Open-Systems-Pharmacology/rClr/releases/downlo
 
 renv::install("./renv/rClr_0.9.2.zip")
 renv::install("esqLABS/esqlabsR@*release")
-
 usethis::use_dev_package("esqlabsR", remote = "esqLABS/esqlabsR@*release")
+usethis::use_package("datamods")
+usethis::use_package("bslib")
+usethis::use_package("styler", type = "Suggest")
+usethis::use_package("shinyFiles")
+usethis::use_package("rio")
+usethis::use_package("editbl")
 
 ## Amend DESCRIPTION with dependencies read from package code parsing
 # install.packages('attachment') # if needed.
 attachment::att_amend_desc()
 
 
-
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module(name = "name_of_module1", with_test = TRUE) # Name of the module
+golem::add_module(name = "sidebar")
+golem::add_module(name = "main_panel")
+golem::add_module(name = "import_project_configuration")
+golem::add_module(name = "edit_table")
+golem::add_module(name = "tab_scenarios")
+golem::add_module(name = "tab_individuals")
+golem::add_module(name = "tab_populations")
+golem::add_module(name = "tab_models")
 golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----
@@ -55,8 +66,13 @@ usethis::use_test("app")
 
 # Documentation
 
+
+## Pkgdown ----
+pkgdown::init_site()
+
 ## Vignette ----
 usethis::use_vignette("shinyScenarioEditor")
+usethis::use_vignette("appDesign")
 devtools::build_vignettes()
 
 ## Code Coverage----
