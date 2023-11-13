@@ -4,54 +4,21 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://packagemanager.posit.co/cran/latest"
+        "URL": "https://cloud.r-project.org"
       }
     ]
   },
   "Packages": {
-    "BH": {
-      "Package": "BH",
-      "Version": "1.81.0-1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "68122010f01c4dcfbe58ce7112f2433d"
-    },
-    "DT": {
-      "Package": "DT",
-      "Version": "0.30",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "crosstalk",
-        "htmltools",
-        "htmlwidgets",
-        "httpuv",
-        "jquerylib",
-        "jsonlite",
-        "magrittr",
-        "promises"
-      ],
-      "Hash": "dffb4d94a00be1b4a4507e53ab95bd90"
-    },
-    "FME": {
-      "Package": "FME",
-      "Version": "1.3.6.3",
+    "DEoptim": {
+      "Package": "DEoptim",
+      "Version": "2.2-8",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
-        "MASS",
-        "R",
-        "coda",
-        "deSolve",
-        "grDevices",
-        "graphics",
-        "minpack.lm",
-        "minqa",
-        "rootSolve",
-        "stats",
-        "utils"
+        "methods",
+        "parallel"
       ],
-      "Hash": "3970d627dcd134469bdacec1f4484b7e"
+      "Hash": "3d75dd10e7228c9d734237dda013ed90"
     },
     "MASS": {
       "Package": "MASS",
@@ -88,7 +55,7 @@
       "Package": "R.methodsS3",
       "Version": "1.8.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
@@ -99,7 +66,7 @@
       "Package": "R.oo",
       "Version": "1.25.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R.methodsS3",
@@ -112,7 +79,7 @@
       "Package": "R.utils",
       "Version": "2.12.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R.methodsS3",
@@ -158,7 +125,7 @@
       "Package": "anytime",
       "Version": "0.3.9",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "BH",
         "R",
@@ -343,17 +310,6 @@
       ],
       "Hash": "3f038e5ac7f41d4ac41ce658c85e3042"
     },
-    "coda": {
-      "Package": "coda",
-      "Version": "0.19-4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "lattice"
-      ],
-      "Hash": "24b6d006b8b2343876cf230687546932"
-    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.1-0",
@@ -384,6 +340,52 @@
         "yaml"
       ],
       "Hash": "8b7222e9d9eb5178eea545c0c4d33fc2"
+    },
+    "covr": {
+      "Package": "covr",
+      "Version": "3.6.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "crayon",
+        "digest",
+        "httr",
+        "jsonlite",
+        "methods",
+        "rex",
+        "stats",
+        "utils",
+        "withr",
+        "yaml"
+      ],
+      "Hash": "0cbf0435830e767ba9b292b313592362"
+    },
+    "covrpage": {
+      "Package": "covrpage",
+      "Version": "0.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "covrpage",
+      "RemoteUsername": "yonicd",
+      "RemotePkgRef": "yonicd/covrpage",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "bafeb195d1999b8c3a48186e26f59cafcdfa3670",
+      "Requirements": [
+        "R",
+        "covr",
+        "curl",
+        "git2r",
+        "remotes",
+        "rmarkdown",
+        "stats",
+        "testthat",
+        "utils",
+        "whisker",
+        "withr"
+      ],
+      "Hash": "c76669abb3ad72a85286f6d2e6c25985"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -421,19 +423,6 @@
       ],
       "Hash": "c7844b32098dcbd1c59cbd8dddb4ecc6"
     },
-    "crosstalk": {
-      "Package": "crosstalk",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R6",
-        "htmltools",
-        "jsonlite",
-        "lazyeval"
-      ],
-      "Hash": "6aa54f69598c32177e920eb3402e8293"
-    },
     "curl": {
       "Package": "curl",
       "Version": "5.1.0",
@@ -457,14 +446,9 @@
     },
     "datamods": {
       "Package": "datamods",
-      "Version": "1.4.2.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "datamods",
-      "RemoteUsername": "dreamRs",
-      "RemoteRef": "dev-2",
-      "RemoteSha": "13ed191ed9f28b6d143bb843caf85e3a2fb43ef8",
+      "Version": "1.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "data.table",
@@ -482,21 +466,7 @@
         "tools",
         "writexl"
       ],
-      "Hash": "8a7ac28e433bc2c789553a50c3e9c1f4"
-    },
-    "deSolve": {
-      "Package": "deSolve",
-      "Version": "1.38",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "methods",
-        "stats"
-      ],
-      "Hash": "860e6724c3bcdf194e8e043b97ab6f6e"
+      "Hash": "4966dd81eb82568e17834efec656a9db"
     },
     "desc": {
       "Package": "desc",
@@ -545,6 +515,16 @@
         "withr"
       ],
       "Hash": "ea5bc8b4a6a01e4f12d98b58329930bb"
+    },
+    "dfoptim": {
+      "Package": "dfoptim",
+      "Version": "2023.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "cbdb21c3cab8b7811eca032f266ff7b2"
     },
     "diffobj": {
       "Package": "diffobj",
@@ -628,16 +608,15 @@
     },
     "esqlabsR": {
       "Package": "esqlabsR",
-      "Version": "5.1.1",
-      "Source": "git",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/esqLABS/esqlabsR",
+      "Version": "5.1.1.9000",
+      "Source": "GitHub",
+      "Remotes": "github::Open-Systems-Pharmacology/OSPSuite.RUtils, github::Open-Systems-Pharmacology/TLF-Library, github::Open-Systems-Pharmacology/OSPSuite-R, github::Open-Systems-Pharmacology/OSPSuite.ParameterIdentification",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabsR",
-      "RemoteRef": "v5.1.1",
-      "RemoteSha": "3e72d39d80dd7cf4183e2a913446769f429551ae",
-      "Remotes": "Open-Systems-Pharmacology/OSPSuite.RUtils@8790585c38ed02710a918738866c164621bc2ce2, Open-Systems-Pharmacology/TLF-Library@bfce0e5bb7bb19db0b114d4bcd408eb2d94197e1, Open-Systems-Pharmacology/OSPSuite-R@55531ffb8d1b9a20fca533fa89909db50cff0b0b, Open-Systems-Pharmacology/ospsuite.parameteridentification@7bd8b45ca02235b61a74c6997bb9ac7031500115",
+      "RemoteUsername": "esqLABS",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "8e9c2df2a941980b18e6f0c9c85a112bdfa1e611",
       "Requirements": [
         "R",
         "R6",
@@ -660,13 +639,13 @@
         "vctrs",
         "writexl"
       ],
-      "Hash": "07974b23fec0e8181bb891567be95b11"
+      "Hash": "91594e3ccd32e58b1255ec4d5fe41a7c"
     },
     "evaluate": {
       "Package": "evaluate",
       "Version": "0.23",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
@@ -781,7 +760,7 @@
       "Package": "ggplot2",
       "Version": "3.4.4",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "MASS",
         "R",
@@ -832,6 +811,18 @@
         "rlang"
       ],
       "Hash": "03533b1c875028233598f848fda44c4c"
+    },
+    "git2r": {
+      "Package": "git2r",
+      "Version": "0.32.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "graphics",
+        "utils"
+      ],
+      "Hash": "1882d7a76fd8c14b2322865f74c9a348"
     },
     "gitcreds": {
       "Package": "gitcreds",
@@ -967,7 +958,7 @@
       "Package": "htmltools",
       "Version": "0.5.7",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "base64enc",
@@ -999,7 +990,7 @@
       "Package": "httpuv",
       "Version": "1.6.12",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
@@ -1048,7 +1039,7 @@
       "Package": "hunspell",
       "Version": "3.0.3",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "Rcpp",
@@ -1108,7 +1099,7 @@
       "Package": "knitr",
       "Version": "1.45",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "evaluate",
@@ -1161,7 +1152,7 @@
       "Package": "lazyeval",
       "Version": "0.2.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
@@ -1171,7 +1162,7 @@
       "Package": "lifecycle",
       "Version": "1.0.4",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "cli",
@@ -1253,23 +1244,6 @@
       ],
       "Hash": "fec5f52652d60615fdb3957b3d74324a"
     },
-    "minpack.lm": {
-      "Package": "minpack.lm",
-      "Version": "1.2-4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0d04497c6553720b3f1c2ae373c57aa9"
-    },
-    "minqa": {
-      "Package": "minqa",
-      "Version": "1.2.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "Rcpp"
-      ],
-      "Hash": "f48238f8d4740426ca12f53f27d004dd"
-    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.0",
@@ -1295,6 +1269,26 @@
       ],
       "Hash": "0984ce8da8da9ead8643c5cbbb60f83e"
     },
+    "nloptr": {
+      "Package": "nloptr",
+      "Version": "2.0.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "testthat"
+      ],
+      "Hash": "277c67a08f358f42b6a77826e4492f79"
+    },
+    "numDeriv": {
+      "Package": "numDeriv",
+      "Version": "2016.8-1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "df58958f293b166e4ab885ebcad90e02"
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.1.1",
@@ -1308,14 +1302,13 @@
     "ospsuite": {
       "Package": "ospsuite",
       "Version": "12.0.0",
-      "Source": "git",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/Open-Systems-Pharmacology/OSPSuite-R",
+      "Source": "GitHub",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "Open-Systems-Pharmacology",
       "RemoteRepo": "OSPSuite-R",
-      "RemoteRef": "55531ffb8d1b9a20fca533fa89909db50cff0b0b",
-      "RemoteSha": "55531ffb8d1b9a20fca533fa89909db50cff0b0b",
+      "RemoteUsername": "Open-Systems-Pharmacology",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "8bc3200ad44c3ea7b0261bbe13a5f34f2899d4b8",
       "Requirements": [
         "R",
         "data.table",
@@ -1330,49 +1323,50 @@
         "tidyr",
         "tlf"
       ],
-      "Hash": "eda5a26a5b75eb87b0b1b317d08301c8"
+      "Hash": "aed7615b24b2bd5c0a6b5f41ae5162f2"
     },
     "ospsuite.parameteridentification": {
       "Package": "ospsuite.parameteridentification",
       "Version": "1.3.0",
-      "Source": "git",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/Open-Systems-Pharmacology/ospsuite.parameteridentification",
+      "Source": "GitHub",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteRepo": "OSPSuite.ParameterIdentification",
       "RemoteUsername": "Open-Systems-Pharmacology",
-      "RemoteRepo": "ospsuite.parameteridentification",
-      "RemoteRef": "7bd8b45ca02235b61a74c6997bb9ac7031500115",
-      "RemoteSha": "7bd8b45ca02235b61a74c6997bb9ac7031500115",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "0f675cc47a7bd1968f73e14c4ab5b5c073dd5913",
       "Requirements": [
-        "FME",
+        "DEoptim",
         "R",
         "R6",
+        "dfoptim",
         "ggplot2",
         "ggtext",
         "grDevices",
+        "nloptr",
+        "numDeriv",
         "ospsuite",
         "ospsuite.utils",
         "rClr"
       ],
-      "Hash": "02c5cc2546fc877168a908009df3e4a8"
+      "Hash": "af59496b39144089c30192d8811518f5"
     },
     "ospsuite.utils": {
       "Package": "ospsuite.utils",
       "Version": "1.5.0",
-      "Source": "git",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/Open-Systems-Pharmacology/OSPSuite.RUtils",
+      "Source": "GitHub",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "Open-Systems-Pharmacology",
       "RemoteRepo": "OSPSuite.RUtils",
-      "RemoteRef": "8790585c38ed02710a918738866c164621bc2ce2",
+      "RemoteUsername": "Open-Systems-Pharmacology",
+      "RemoteRef": "HEAD",
       "RemoteSha": "8790585c38ed02710a918738866c164621bc2ce2",
       "Requirements": [
         "R",
         "R6",
         "purrr"
       ],
-      "Hash": "11c794f033f46fe56e72f04024feef49"
+      "Hash": "3289140a3de4720716bb31c965743302"
     },
     "packrat": {
       "Package": "packrat",
@@ -1415,7 +1409,7 @@
       "Package": "phosphoricons",
       "Version": "0.2.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "htmltools"
@@ -1687,7 +1681,7 @@
       "Package": "reactR",
       "Version": "0.5.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "htmltools"
       ],
@@ -1787,6 +1781,16 @@
       ],
       "Hash": "41b847654f567341725473431dd0d5ab"
     },
+    "rex": {
+      "Package": "rex",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "lazyeval"
+      ],
+      "Hash": "ae34cd56890607370665bee5bd17812f"
+    },
     "rhub": {
       "Package": "rhub",
       "Version": "1.1.2",
@@ -1821,7 +1825,7 @@
       "Package": "rio",
       "Version": "1.0.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R.utils",
@@ -1844,7 +1848,7 @@
       "Package": "rlang",
       "Version": "1.1.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
@@ -1875,19 +1879,6 @@
       ],
       "Hash": "d65e35823c817f09f4de424fcdfa812a"
     },
-    "rootSolve": {
-      "Package": "rootSolve",
-      "Version": "1.8.2.4",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "stats"
-      ],
-      "Hash": "c6fa270a97604238a5ce5fe5d327fdad"
-    },
     "roxygen2": {
       "Package": "roxygen2",
       "Version": "7.2.3",
@@ -1916,13 +1907,13 @@
     },
     "rprojroot": {
       "Package": "rprojroot",
-      "Version": "2.0.3",
+      "Version": "2.0.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "1de7ab598047a87bba48434ba35d497d"
+      "Hash": "4c8415e0ec1e29f3f4f6fc108bef0144"
     },
     "rsconnect": {
       "Package": "rsconnect",
@@ -2014,7 +2005,7 @@
       "Package": "shiny",
       "Version": "1.7.5.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
@@ -2048,7 +2039,7 @@
       "Package": "shinyFiles",
       "Version": "0.9.3",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "fs",
         "htmltools",
@@ -2063,7 +2054,7 @@
       "Package": "shinyWidgets",
       "Version": "0.8.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "anytime",
@@ -2081,7 +2072,7 @@
       "Package": "shinybusy",
       "Version": "0.3.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "htmltools",
         "htmlwidgets",
@@ -2104,7 +2095,7 @@
       "Package": "spelling",
       "Version": "2.2.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "commonmark",
         "hunspell",
@@ -2274,14 +2265,13 @@
     "tlf": {
       "Package": "tlf",
       "Version": "1.5.0",
-      "Source": "git",
-      "RemoteType": "git",
-      "RemoteUrl": "https://github.com/Open-Systems-Pharmacology/TLF-Library",
+      "Source": "GitHub",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "Open-Systems-Pharmacology",
       "RemoteRepo": "TLF-Library",
-      "RemoteRef": "bfce0e5bb7bb19db0b114d4bcd408eb2d94197e1",
-      "RemoteSha": "bfce0e5bb7bb19db0b114d4bcd408eb2d94197e1",
+      "RemoteUsername": "Open-Systems-Pharmacology",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "033b7f70208a691c8a6e65e3803ccc73d449019d",
       "Requirements": [
         "R",
         "R6",
@@ -2292,7 +2282,7 @@
         "patchwork",
         "stringr"
       ],
-      "Hash": "534a99a887b2dd824e2cea101eb7e691"
+      "Hash": "e778e98899582e5aef8e9c83dca934c4"
     },
     "tzdb": {
       "Package": "tzdb",
@@ -2354,7 +2344,7 @@
       "Package": "utf8",
       "Version": "1.2.4",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
@@ -2364,7 +2354,7 @@
       "Package": "uuid",
       "Version": "1.1-1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
@@ -2398,7 +2388,7 @@
       "Package": "vroom",
       "Version": "1.6.4",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "bit64",
@@ -2422,10 +2412,11 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.5.1",
+      "Version": "0.5.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
+        "R",
         "cli",
         "diffobj",
         "fansi",
@@ -2435,7 +2426,7 @@
         "rlang",
         "tibble"
       ],
-      "Hash": "2c993415154cdb94649d99ae138ff5e5"
+      "Hash": "c7d3fd6d29ab077cbac8f0e2751449e6"
     },
     "whisker": {
       "Package": "whisker",
@@ -2460,7 +2451,7 @@
       "Package": "withr",
       "Version": "2.5.2",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "grDevices",
@@ -2480,7 +2471,7 @@
       "Package": "xfun",
       "Version": "0.41",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "stats",
         "tools"
