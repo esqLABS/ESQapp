@@ -26,7 +26,9 @@ usethis::use_dev_package("esqlabsR", remote = "esqLABS/esqlabsR")
 usethis::use_package("bslib")
 usethis::use_package("shinyFiles")
 usethis::use_package("rio")
-usethis::use_dev_package("datamods", remote = "datamods@dev-2")
+usethis::use_package("validate")
+usethis::use_package("fs")
+usethis::use_dev_package("datamods", remote = "dreamrs/datamods")
 usethis::use_package("devtools", type = "Suggest")
 usethis::use_package("attachment", type = "Suggest")
 usethis::use_package("styler", type = "Suggest")
@@ -45,13 +47,15 @@ attachment::att_amend_desc()
 ## Create a module infrastructure in R/
 golem::add_module(name = "sidebar")
 golem::add_module(name = "main_panel")
+golem::add_module(name = "data_structure")
 golem::add_module(name = "import")
+golem::add_module(name = "export")
 golem::add_module(name = "edit_table")
+golem::add_module(name = "table_tab")
 golem::add_module(name = "tab_scenarios")
 golem::add_module(name = "tab_individuals")
 golem::add_module(name = "tab_populations")
 golem::add_module(name = "tab_models")
-golem::add_module(name = "name_of_module2", with_test = TRUE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
