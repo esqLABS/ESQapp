@@ -25,7 +25,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       id = "edit_df",
       download_excel = FALSE,
       download_csv = FALSE,
-      data_r = reactive(r$data[[tab_section]][[sheet]]),
+      data_r = reactive(r$data[[tab_section]][[sheet]]$original),
       reactable_options = list(
         searchable = TRUE,
         pagination = FALSE
@@ -36,7 +36,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
     observe({
       req(edited_data())
 
-      r$data[[tab_section]][[paste0(sheet, "_modified")]] <- edited_data()
+      r$data[[tab_section]][[sheet]]$modified <- edited_data()
     })
   })
 }
