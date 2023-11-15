@@ -9,6 +9,13 @@
     ]
   },
   "Packages": {
+    "BH": {
+      "Package": "BH",
+      "Version": "1.81.0-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "68122010f01c4dcfbe58ce7112f2433d"
+    },
     "DEoptim": {
       "Package": "DEoptim",
       "Version": "2.2-8",
@@ -446,9 +453,14 @@
     },
     "datamods": {
       "Package": "datamods",
-      "Version": "1.4.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "1.4.2.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "datamods",
+      "RemoteUsername": "dreamRs",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "67eb094a358cad42f78261c8d3d4119275bfc94a",
       "Requirements": [
         "R",
         "data.table",
@@ -466,7 +478,7 @@
         "tools",
         "writexl"
       ],
-      "Hash": "4966dd81eb82568e17834efec656a9db"
+      "Hash": "4904bb7586628ea96d3b13512ef1f901"
     },
     "desc": {
       "Package": "desc",
@@ -2001,6 +2013,17 @@
       ],
       "Hash": "3f9796a8d0a0e8c6eb49a4b029359d1f"
     },
+    "settings": {
+      "Package": "settings",
+      "Version": "0.2.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "grDevices",
+        "graphics"
+      ],
+      "Hash": "044078dfd387c9a6e160103978d23be4"
+    },
     "shiny": {
       "Package": "shiny",
       "Version": "1.7.5.1",
@@ -2359,6 +2382,22 @@
         "R"
       ],
       "Hash": "3d78edfb977a69fc7a0341bee25e163f"
+    },
+    "validate": {
+      "Package": "validate",
+      "Version": "1.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "graphics",
+        "grid",
+        "methods",
+        "settings",
+        "stats",
+        "yaml"
+      ],
+      "Hash": "429b1cdf290b6d3ae000ff2e4b110434"
     },
     "vctrs": {
       "Package": "vctrs",
