@@ -23,7 +23,7 @@ mod_main_panel_ui <- function(id) {
       mod_tab_populations_ui(ns("tab_populations_1"))
     ),
     nav_panel(
-      title = "Model Parameters",
+      title = "Models",
       mod_tab_models_ui(ns("tab_models_1"))
     )
   )

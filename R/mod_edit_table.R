@@ -10,28 +10,34 @@
 mod_edit_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    editbl::eDTOutput(ns("df_editor"))
+    datamods::edit_data_ui(ns("edit_df"))
   )
 }
 
 #' tab_edit_table Server Functions
 #'
 #' @noRd
-mod_edit_table_server <- function(id, data) {
+mod_edit_table_server <- function(id, r, tab_section, sheet) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    editbl::eDT(
-      id = "df_editor",
-      data = reactive({
-        req(data())
-        data()
-      }),
-      options = list(
-        searching = TRUE,
-        paging = FALSE
+    edited_data <- datamods::edit_data_server(
+      id = "edit_df",
+      download_excel = FALSE,
+      download_csv = FALSE,
+      data_r = reactive(r$data[[tab_section]][[sheet]]),
+      reactable_options = list(
+        searchable = TRUE,
+        pagination = FALSE
       )
     )
+
+    # When data is edited, update the modified copy of data in r$data
+    observe({
+      req(edited_data())
+
+      r$data[[tab_section]][[paste0(sheet, "_modified")]] <- edited_data()
+    })
   })
 }
 

@@ -7,22 +7,25 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_sidebar_ui <- function(id){
+mod_sidebar_ui <- function(id) {
   ns <- NS(id)
   bslib::sidebar(
-    mod_import_project_configuration_ui(ns("import_project_configuration_1"))
+    mod_import_ui(ns("import_project_configuration_1")),
+    hr(),
+    mod_export_ui(ns("export_1"))
   )
 }
 
 #' sidebar Server Functions
 #'
 #' @noRd
-mod_sidebar_server <- function(id, r){
-  moduleServer( id, function(input, output, session){
+mod_sidebar_server <- function(id, r) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    mod_import_project_configuration_server("import_project_configuration_1", r)
+    mod_import_server("import_project_configuration_1", r)
 
+    mod_export_server("export_1", r)
   })
 }
 

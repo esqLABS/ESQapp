@@ -7,24 +7,25 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_tab_populations_ui <- function(id){
+mod_tab_populations_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    mod_edit_table_ui(ns("tab_populations"))
+    mod_table_tab_ui(ns("tab_populations"))
   )
 }
 
 #' tab_populations Server Functions
 #'
 #' @noRd
-mod_tab_populations_server <- function(id, r){
-  moduleServer( id, function(input, output, session){
+mod_tab_populations_server <- function(id, r) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    mod_edit_table_server("tab_populations",
-                          data = reactive(r$imported_data$populations$df)
+    mod_table_tab_server(
+      id = "tab_populations",
+      r = r,
+      tab_section = "populations"
     )
-
   })
 }
 

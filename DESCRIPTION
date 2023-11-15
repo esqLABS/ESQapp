@@ -13,10 +13,12 @@ Imports:
     shiny (>= 1.7.5),
     esqlabsR (>= 5.1.1),
     bslib,
-    datamods (>= 1.4.2),
+    datamods (>= 1.4.2.9000),
     shinyFiles,
     rio,
-    rlang
+    rlang,
+    validate,
+    fs
 Suggests: 
     spelling,
     pkgdown,
@@ -35,7 +37,7 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 RoxygenNote: 7.2.3
-Remotes:  
+Remotes: 
     esqLABS/esqlabsR@*release,
     datamods@dev-2,
     yonicd/covrpage
