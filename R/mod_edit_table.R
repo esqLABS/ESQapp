@@ -25,7 +25,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       id = "edit_df",
       download_excel = FALSE,
       download_csv = FALSE,
-      data_r = reactive(r$data[[tab_section]][[sheet]]$original),
+      data_r = reactive(r$data[[tab_section]][[sheet]]$modified),
       reactable_options = list(
         searchable = TRUE,
         pagination = FALSE

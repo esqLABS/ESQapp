@@ -26,6 +26,18 @@ mod_tab_scenarios_server <- function(id, r) {
       r = r,
       tab_section = "scenarios"
     )
+
+    # Update factor levels
+    # observe({
+    #   req(r$data$scenarios$Scenarios$modified)
+    #   r$data$scenarios$Scenarios$modified$IndividualId <-
+    #     factor(r$data$scenarios$Scenarios$modified$IndividualId,
+    #       levels = unique(c(
+    #         r$data$scenarios$Scenarios$modified$IndividualId,
+    #         r$data$individuals$IndividualBiometrics$modified$IndividualId
+    #       ))
+    #     )
+    # })
   })
 }
 

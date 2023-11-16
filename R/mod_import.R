@@ -71,15 +71,21 @@ mod_import_server <- function(id, r) {
         for (sheet in sheet_names) {
           r$data[[config_file]][[sheet]] <- reactiveValues()
 
-          r$data[[config_file]][[sheet]]$original <-
+
+          data_original <-
             rio::import(
               r$data[[config_file]]$file_path,
               sheet = sheet,
               col_types = "text"
             )
 
+
+          r$data[[config_file]][[sheet]]$imported <- data_original
+
+          data_typed <- type_columns(data_original, config_file, sheet)
+
           # preassign modified data with original data
-          r$data[[config_file]][[sheet]]$modified <- r$data[[config_file]][[sheet]]$original
+          r$data[[config_file]][[sheet]]$modified <- data_typed
         }
       }
     })
