@@ -31,12 +31,12 @@ mod_export_server <- function(id, r) {
           export_path <- r$data[[config_file]]$file_path
         }
 
-        message("Exporting ", config_file, " to ", export_path)
+        message("Exporting modified", config_file, " to ", export_path)
 
         sheet_list <- list()
 
         for (sheet in r$data[[config_file]]$sheets) {
-          sheet_list[[sheet]] <- r$data[[config_file]][[paste(sheet, "modified", sep = "_")]]
+          sheet_list[[sheet]] <- r$data[[config_file]][[sheet]]$modified
         }
 
         rio::export(

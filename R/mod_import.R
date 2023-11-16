@@ -55,27 +55,31 @@ mod_import_server <- function(id, r) {
 
     observeEvent(projectConfiguration(), {
       for (config_file in names(r$data)) {
-        r$data[[config_file]]$file_path <- dplyr::case_match(
-          config_file,
-          "scenarios" ~ projectConfiguration()$scenarioDefinitionFile,
-          "individuals" ~ projectConfiguration()$individualsFile,
-          "populations" ~ projectConfiguration()$populationParamsFile,
-          "models" ~ projectConfiguration()$paramsFile
-        )
+        r$data[[config_file]]$file_path <-
+          dplyr::case_match(
+            config_file,
+            "scenarios" ~ projectConfiguration()$scenarioDefinitionFile,
+            "individuals" ~ projectConfiguration()$individualsFile,
+            "populations" ~ projectConfiguration()$populationParamsFile,
+            "models" ~ projectConfiguration()$paramsFile
+          )
 
         sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
 
         r$data[[config_file]]$sheets <- sheet_names
 
         for (sheet in sheet_names) {
-          r$data[[config_file]][[sheet]] <-
+          r$data[[config_file]][[sheet]] <- reactiveValues()
+
+          r$data[[config_file]][[sheet]]$original <-
             rio::import(
               r$data[[config_file]]$file_path,
               sheet = sheet,
               col_types = "text"
             )
+
           # preassign modified data with original data
-          r$data[[config_file]][[paste(sheet, "modified", sep = "_")]] <- r$data[[config_file]][[sheet]]
+          r$data[[config_file]][[sheet]]$modified <- r$data[[config_file]][[sheet]]$original
         }
       }
     })
