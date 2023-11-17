@@ -458,9 +458,9 @@
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "datamods",
-      "RemoteUsername": "dreamRs",
+      "RemoteUsername": "dreamrs",
       "RemoteRef": "HEAD",
-      "RemoteSha": "67eb094a358cad42f78261c8d3d4119275bfc94a",
+      "RemoteSha": "a7d85d0ae25f5f67188d54beedd78a64fcfef98d",
       "Requirements": [
         "R",
         "data.table",
@@ -478,7 +478,7 @@
         "tools",
         "writexl"
       ],
-      "Hash": "4904bb7586628ea96d3b13512ef1f901"
+      "Hash": "3217af0fc6f48eb92611f4d5091dba02"
     },
     "desc": {
       "Package": "desc",
@@ -2142,7 +2142,7 @@
     },
     "stringr": {
       "Package": "stringr",
-      "Version": "1.5.0",
+      "Version": "1.5.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2155,7 +2155,7 @@
         "stringi",
         "vctrs"
       ],
-      "Hash": "671a4d384ae9d32fc47a14e98bfa3dc8"
+      "Hash": "960e2ae9e09656611e0b8214ad543207"
     },
     "sys": {
       "Package": "sys",
