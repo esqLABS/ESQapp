@@ -36,7 +36,25 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
     observe({
       req(edited_data())
 
-      r$data[[tab_section]][[sheet]]$modified <- edited_data()
+      temp_data <- edited_data()
+
+      for (column in names(temp_data)) {
+        column_data <- columns_data[[tab_section]][[sheet]][[column]]
+
+        if (!is.null(column_data$reactive_levels)) {
+          reactive_levels <- eval(parse(text = column_data$reactive_levels))
+
+          temp_data[[column]] <- factor(
+            temp_data[[column]],
+            levels = sort(unique(c(
+              reactive_levels,
+              as.character(temp_data[[column]])
+            )))
+          )
+        }
+      }
+
+      r$data[[tab_section]][[sheet]]$modified <- temp_data
     })
   })
 }
