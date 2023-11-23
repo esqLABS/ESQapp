@@ -16,6 +16,8 @@ app_server <- function(input, output, session) {
 
   r$data <- data_structure()
 
+  r$columns_data <- columns_data(r)
+
   mod_sidebar_server("sidebar_1", r)
   mod_main_panel_server("main_panel_1", r)
 }

@@ -39,10 +39,10 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       temp_data <- edited_data()
 
       for (column in names(temp_data)) {
-        column_data <- columns_data[[tab_section]][[sheet]][[column]]
+        column_data <- r$columns_data[[tab_section]][[sheet]][[column]]
 
         if (!is.null(column_data$reactive_levels)) {
-          reactive_levels <- eval(parse(text = column_data$reactive_levels))
+          reactive_levels <- column_data$reactive_levels()
 
           temp_data[[column]] <- factor(
             temp_data[[column]],

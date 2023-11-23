@@ -82,7 +82,7 @@ mod_import_server <- function(id, r) {
 
           r$data[[config_file]][[sheet]]$imported <- data_original
 
-          data_typed <- type_columns(data_original, config_file, sheet)
+          data_typed <- type_columns(r, data_original, config_file, sheet)
 
           # preassign modified data with original data
           r$data[[config_file]][[sheet]]$modified <- data_typed
