@@ -54,6 +54,7 @@ mod_import_server <- function(id, r) {
     })
 
     observeEvent(projectConfiguration(), {
+      browser
       for (config_file in names(r$data)) {
         r$data[[config_file]]$file_path <-
           dplyr::case_match(
@@ -69,8 +70,6 @@ mod_import_server <- function(id, r) {
         r$data[[config_file]]$sheets <- sheet_names
 
         for (sheet in sheet_names) {
-          r$data[[config_file]][[sheet]] <- reactiveValues()
-
 
           data_original <-
             rio::import(
@@ -80,12 +79,12 @@ mod_import_server <- function(id, r) {
             )
 
 
-          r$data[[config_file]][[sheet]]$imported <- data_original
+          r$data[[config_file]][[sheet]]$df$imported <- data_original
 
           data_typed <- type_columns(r, data_original, config_file, sheet)
 
           # preassign modified data with original data
-          r$data[[config_file]][[sheet]]$modified <- data_typed
+          r$data[[config_file]][[sheet]]$df$modified <- data_typed
         }
       }
     })

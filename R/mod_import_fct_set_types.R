@@ -1,8 +1,8 @@
-type_columns <- function(r, df,config_file, sheet) {
-  types <- r$columns_data[[config_file]][[sheet]]
+type_columns <- function(r, df, config_file, sheet) {
+  types <- r$data[[config_file]][[sheet]]$columns
 
   if (is.null(types)) {
-    types <- r$columns_data[[config_file]][["Generic"]]
+    types <- r$data[[config_file]][["Generic"]]
   }
 
   columns <- colnames(df)

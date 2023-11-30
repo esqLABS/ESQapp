@@ -25,7 +25,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       id = "edit_df",
       download_excel = FALSE,
       download_csv = FALSE,
-      data_r = reactive(r$data[[tab_section]][[sheet]]$modified),
+      data_r = reactive(r$data[[tab_section]][[sheet]]$df$modified),
       reactable_options = list(
         searchable = TRUE,
         pagination = FALSE
@@ -39,7 +39,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       temp_data <- edited_data()
 
       for (column in names(temp_data)) {
-        column_data <- r$columns_data[[tab_section]][[sheet]][[column]]
+
+        column_data <- r$data[[tab_section]][[sheet]]$columns[[column]]
 
         if (!is.null(column_data$reactive_levels)) {
           reactive_levels <- column_data$reactive_levels()
@@ -54,7 +55,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
         }
       }
 
-      r$data[[tab_section]][[sheet]]$modified <- temp_data
+      r$data[[tab_section]][[sheet]]$df$modified <- temp_data
     })
   })
 }
