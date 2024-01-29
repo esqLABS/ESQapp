@@ -25,6 +25,10 @@ mod_main_panel_ui <- function(id) {
     nav_panel(
       title = "Models",
       mod_tab_models_ui(ns("tab_models_1"))
+    ),
+    nav_panel(
+      title = "Plots",
+      mod_tab_plots_ui(ns("tab_plots_1"))
     )
   )
 }
@@ -43,6 +47,8 @@ mod_main_panel_server <- function(id, r) {
     mod_tab_populations_server("tab_populations_1", r)
 
     mod_tab_models_server("tab_models_1", r)
+
+    mod_tab_plots_server("tab_plots_1", r)
   })
 }
 

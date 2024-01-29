@@ -28,7 +28,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet) {
       data_r = reactive(r$data[[tab_section]][[sheet]]$original),
       reactable_options = list(
         searchable = TRUE,
-        pagination = FALSE
+        pagination = FALSE,
+        resizable = TRUE
       )
     )
 

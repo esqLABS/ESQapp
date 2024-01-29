@@ -15,6 +15,10 @@ data_structure <- function() {
     "models" = reactiveValues(
       file_path = NA,
       sheets = NA
+    ),
+    "plots" = reactiveValues(
+      file_path = NA,
+      sheets = NA
     )
   )
 }

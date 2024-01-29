@@ -61,7 +61,8 @@ mod_import_server <- function(id, r) {
             "scenarios" ~ projectConfiguration()$scenarioDefinitionFile,
             "individuals" ~ projectConfiguration()$individualsFile,
             "populations" ~ projectConfiguration()$populationParamsFile,
-            "models" ~ projectConfiguration()$paramsFile
+            "models" ~ projectConfiguration()$paramsFile,
+            "plots" ~ projectConfiguration()$plotsFile
           )
 
         sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
