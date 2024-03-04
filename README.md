@@ -19,7 +19,19 @@ You can install the development version of shinyScenarioEditor from
 ``` r
 # install.packages("devtools")
 devtools::install_github("esqLABS/shinyScenarioEditor")
+
+# install.packages("renv")
+renv::restore(lockfile = 'renv.lock') # to install the packages used in the package
 ```
+
+## Development
+
+Snapshot working enviroment
+
+``` r
+source(file = 'dev/get_snapshot.R')
+```
+
 
 ## Example
 
