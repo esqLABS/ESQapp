@@ -17,7 +17,7 @@ mod_table_tab_ui <- function(id) {
 #' table_tab Server Functions
 #'
 #' @noRd
-mod_table_tab_server <- function(id, r, tab_section) {
+mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -41,13 +41,15 @@ mod_table_tab_server <- function(id, r, tab_section) {
 
     observe({
       req(r$data[[tab_section]]$sheets)
+      req(DROPDOWNS)
 
       for (sheet in r$data[[tab_section]]$sheets) {
         do.call(mod_edit_table_server, args = list(
           id = paste("tab", sheet, sep = "_"),
           r = r,
           tab_section = tab_section,
-          sheet = sheet
+          sheet = sheet,
+          DROPDOWNS = DROPDOWNS
         ))
       }
     })

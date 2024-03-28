@@ -306,7 +306,7 @@
     },
     "bslib": {
       "Package": "bslib",
-      "Version": "0.6.1",
+      "Version": "0.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -323,7 +323,7 @@
         "rlang",
         "sass"
       ],
-      "Hash": "c0d8599494bc7fb408cd206bbdd9cab0"
+      "Hash": "7fb73102553e0c8e478bfaa0ccebe479"
     },
     "cachem": {
       "Package": "cachem",
@@ -731,14 +731,31 @@
       "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabs.handsontable",
       "RemoteRef": "main",
-      "RemoteSha": "4a33a6570b9bc20f50d4c827b45b418a027fb8f8",
+      "RemoteSha": "da63fce04bf05b47b116462b8301c4bc5c0cac70",
       "Requirements": [
         "htmltools",
         "jsonlite",
         "reactR",
         "shiny"
       ],
-      "Hash": "d1ade72366d0d91ab964ffc5803be589"
+      "Hash": "f9be7db6fbab6040e76b70ba86f1042c"
+    },
+    "esqlabs.ui": {
+      "Package": "esqlabs.ui",
+      "Version": "0.0.0.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "esqLABS",
+      "RemoteRepo": "esqlabs.ui",
+      "RemoteRef": "main",
+      "RemoteSha": "11a573dca02b0a40dd04538975bd7c0d5042160b",
+      "Requirements": [
+        "htmltools",
+        "htmlwidgets",
+        "reactR"
+      ],
+      "Hash": "df3f835a67d99c54f8ccf22c4985568a"
     },
     "esqlabsR": {
       "Package": "esqlabsR",
@@ -2003,7 +2020,7 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.25",
+      "Version": "2.26",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2016,14 +2033,13 @@
         "jsonlite",
         "knitr",
         "methods",
-        "stringr",
         "tinytex",
         "tools",
         "utils",
         "xfun",
         "yaml"
       ],
-      "Hash": "d65e35823c817f09f4de424fcdfa812a"
+      "Hash": "9b148e7f95d33aac01f31282d49e4f44"
     },
     "rootSolve": {
       "Package": "rootSolve",
@@ -2130,7 +2146,7 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.7",
+      "Version": "0.4.9",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2140,7 +2156,7 @@
         "rappdirs",
         "rlang"
       ],
-      "Hash": "6bd4d33b50ff927191ec9acbf52fd056"
+      "Hash": "d53dbfddf695303ea4ad66f86e99b95d"
     },
     "scales": {
       "Package": "scales",
@@ -2186,9 +2202,9 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.8.0",
+      "Version": "1.8.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
@@ -2196,7 +2212,6 @@
         "cachem",
         "commonmark",
         "crayon",
-        "ellipsis",
         "fastmap",
         "fontawesome",
         "glue",
@@ -2216,7 +2231,7 @@
         "withr",
         "xtable"
       ],
-      "Hash": "3a1f41807d648a908e3c7f0334bf85e6"
+      "Hash": "a49e145ac3d0d1299e19ab215504f88e"
     },
     "shinyFiles": {
       "Package": "shinyFiles",

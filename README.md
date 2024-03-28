@@ -11,6 +11,12 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 The goal of shinyScenarioEditor is to …
 
+## esqlabs.handsontable
+
+``` r
+renv::install("esqLABS/esqlabs.handsontable")
+```
+
 ## Installation
 
 You can install the development version of shinyScenarioEditor from

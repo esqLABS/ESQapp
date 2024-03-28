@@ -17,14 +17,15 @@ mod_tab_populations_ui <- function(id) {
 #' tab_populations Server Functions
 #'
 #' @noRd
-mod_tab_populations_server <- function(id, r) {
+mod_tab_populations_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     mod_table_tab_server(
       id = "tab_populations",
       r = r,
-      tab_section = "populations"
+      tab_section = "populations",
+      DROPDOWNS = DROPDOWNS
     )
   })
 }

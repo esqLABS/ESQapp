@@ -17,14 +17,15 @@ mod_tab_scenarios_ui <- function(id) {
 #' tab_scenarios Server Functions
 #'
 #' @noRd
-mod_tab_scenarios_server <- function(id, r) {
+mod_tab_scenarios_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     mod_table_tab_server(
       id = "tab_scenarios",
       r = r,
-      tab_section = "scenarios"
+      tab_section = "scenarios",
+      DROPDOWNS = DROPDOWNS
     )
   })
 }
