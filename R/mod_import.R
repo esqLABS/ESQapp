@@ -23,7 +23,7 @@ mod_import_ui <- function(id) {
 #' import Server Functions
 #'
 #' @noRd
-mod_import_server <- function(id, r) {
+mod_import_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -61,7 +61,8 @@ mod_import_server <- function(id, r) {
             "scenarios" ~ projectConfiguration()$scenarioDefinitionFile,
             "individuals" ~ projectConfiguration()$individualsFile,
             "populations" ~ projectConfiguration()$populationParamsFile,
-            "models" ~ projectConfiguration()$paramsFile
+            "models" ~ projectConfiguration()$paramsFile,
+            "plots" ~ projectConfiguration()$plotsFile
           )
 
         sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
@@ -81,6 +82,14 @@ mod_import_server <- function(id, r) {
           # preassign modified data with original data
           r$data[[config_file]][[sheet]]$modified <- r$data[[config_file]][[sheet]]$original
         }
+
+        # Populate dropdowns
+        DROPDOWNS$scenarios$individual_id        <- r$data$individuals$IndividualBiometrics$modified$IndividualId
+        DROPDOWNS$scenarios$population_id        <- r$data$populations$Demographics$modified$PopulationName
+        DROPDOWNS$scenarios$outputpath_id        <- r$data$scenarios$OutputPaths$modified$OutputPathId
+        DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
+        DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
+        DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
       }
     })
 

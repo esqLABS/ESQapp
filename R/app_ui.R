@@ -9,6 +9,7 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    esqlabs.ui::intro_screen(width = '100%'),
     # Your application UI logic
     bslib::page_navbar(
       title = "shinyScenarioEditor",
@@ -34,6 +35,7 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon(),
+    # tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
     bundle_resources(
       path = app_sys("app/www"),
       app_title = "shinyScenarioEditor"

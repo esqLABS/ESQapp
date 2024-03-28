@@ -10,34 +10,89 @@
 mod_edit_table_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    datamods::edit_data_ui(ns("edit_df"))
+  # datamods::edit_data_ui(ns("edit_df"))
+    shiny::uiOutput(ns("edit_df"))
   )
 }
 
 #' tab_edit_table Server Functions
 #'
 #' @noRd
-mod_edit_table_server <- function(id, r, tab_section, sheet) {
+mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    edited_data <- datamods::edit_data_server(
-      id = "edit_df",
-      download_excel = FALSE,
-      download_csv = FALSE,
-      data_r = reactive(r$data[[tab_section]][[sheet]]$original),
-      reactable_options = list(
-        searchable = TRUE,
-        pagination = FALSE
+    output$edit_df <- renderUI({
+
+      # browser()
+
+      esqlabs.handsontable::scenario_table_Input(
+        inputId = ns("scenario_table_input"),
+        data = esqlabs.handsontable::prepare_js_data(
+          r$data[[tab_section]][[sheet]]$modified
+        ),
+        individual_id_options        = DROPDOWNS$scenarios$individual_id,
+        population_id_options        = DROPDOWNS$scenarios$population_id,
+        outputpath_id_options        = DROPDOWNS$scenarios$outputpath_id,
+        steatystatetime_unit_options = DROPDOWNS$scenarios$steadystatetime_unit,
+        species_options              = DROPDOWNS$individuals$species_options,
+        population_options           = DROPDOWNS$individuals$specieshuman_options,
+        gender_options               = DROPDOWNS$individuals$gender_options,
+        weight_unit_options          = DROPDOWNS$populations$weight_unit,
+        height_unit_options          = DROPDOWNS$populations$height_unit,
+        bmi_unit_options             = DROPDOWNS$populations$bmi_unit,
+        datatype_options             = DROPDOWNS$plots$datatype_options,
+        scenario_options             = DROPDOWNS$plots$scenario_options,
+        datacombinedname_options     = DROPDOWNS$plots$datacombinedname_options,
+        plottype_options             = DROPDOWNS$plots$plottype_options,
+        axisscale_options            = DROPDOWNS$plots$axisscale_options,
+        aggregation_options          = DROPDOWNS$plots$aggregation_options,
+        path_options                 = DROPDOWNS$plots$path_options,
+        sheet_name                   = sheet
       )
-    )
+    })
+
+    observeEvent(input$scenario_table_input_edited, {
+      # print(
+      #   esqlabs.handsontable::parse_js_data(
+      #     input$scenario_table_input_edited
+      #   )
+      # )
+
+      r$data[[tab_section]][[sheet]]$modified <- esqlabs.handsontable::parse_js_data(
+                                                    input$scenario_table_input_edited
+                                                 )
+
+      # Populate dropdowns
+      DROPDOWNS$scenarios$individual_id        <- r$data$individuals$IndividualBiometrics$modified$IndividualId
+      DROPDOWNS$scenarios$population_id        <- r$data$populations$Demographics$modified$PopulationName
+      DROPDOWNS$scenarios$outputpath_id        <- r$data$scenarios$OutputPaths$modified$OutputPathId
+      DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
+      DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
+      DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
+
+    })
+
+    # edited_data <- datamods::edit_data_server(
+    #   id = "edit_df",
+    #   download_excel = FALSE,
+    #   download_csv = FALSE,
+    #   data_r = reactive(r$data[[tab_section]][[sheet]]$original),
+    #   reactable_options = list(
+    #     searchable = TRUE,
+    #     pagination = FALSE,
+    #     resizable = TRUE
+    #   )
+    # )
 
     # When data is edited, update the modified copy of data in r$data
-    observe({
-      req(edited_data())
-
-      r$data[[tab_section]][[sheet]]$modified <- edited_data()
-    })
+    # observe({
+    #   req(edited_data())
+    #
+    #   print(edited_data())
+    #
+    #   r$data[[tab_section]][[sheet]]$modified <- edited_data()
+    # })
   })
 }
 

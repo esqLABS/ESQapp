@@ -1,0 +1,14 @@
+/* .bslib-sidebar-layout > .main {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 10px !important;
+  padding: 0px !important;
+}
+*/
+/*.handsontable {
+  height: 100% !important;
+}*/
+
+.tab-content>.active.html-fill-container {
+    width: calc(100% + 15%) !important;
+}
