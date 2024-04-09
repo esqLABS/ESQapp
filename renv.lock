@@ -778,14 +778,14 @@
       "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabs.handsontable",
       "RemoteRef": "main",
-      "RemoteSha": "da63fce04bf05b47b116462b8301c4bc5c0cac70",
+      "RemoteSha": "cbbc16ac6fdcda769c4f97a46ddf3edf2bcaf1bc",
       "Requirements": [
         "htmltools",
         "jsonlite",
         "reactR",
         "shiny"
       ],
-      "Hash": "f9be7db6fbab6040e76b70ba86f1042c"
+      "Hash": "fc728427f1b1a3dd1f53be6cd1a15a89"
     },
     "esqlabs.ui": {
       "Package": "esqlabs.ui",
@@ -2280,7 +2280,7 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.8.1",
+      "Version": "1.8.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2309,7 +2309,7 @@
         "withr",
         "xtable"
       ],
-      "Hash": "a49e145ac3d0d1299e19ab215504f88e"
+      "Hash": "54b26646816af9960a4c64d8ceec75d6"
     },
     "shinyFiles": {
       "Package": "shinyFiles",
