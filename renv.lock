@@ -778,14 +778,14 @@
       "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabs.handsontable",
       "RemoteRef": "main",
-      "RemoteSha": "cbbc16ac6fdcda769c4f97a46ddf3edf2bcaf1bc",
+      "RemoteSha": "4c98ccb0bbcf0df9318c74845ae401265103505a",
       "Requirements": [
         "htmltools",
         "jsonlite",
         "reactR",
         "shiny"
       ],
-      "Hash": "fc728427f1b1a3dd1f53be6cd1a15a89"
+      "Hash": "2e261496a3a30f207d98055f3c827c31"
     },
     "esqlabs.ui": {
       "Package": "esqlabs.ui",

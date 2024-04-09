@@ -55,3 +55,10 @@ plot(pressure)
 ```
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+
+```{r, echo = FALSE}
+
+# Install esqlabs.handsontable
+renv::install('esqLABS/esqlabs.handsontable')
+
+```
