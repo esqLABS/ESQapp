@@ -29,7 +29,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
       esqlabs.handsontable::scenario_table_Input(
         inputId = ns("scenario_table_input"),
         data = esqlabs.handsontable::prepare_js_data(
-          r$data[[tab_section]][[sheet]]$modified
+          isolate(r$data[[tab_section]][[sheet]]$modified)
         ),
         individual_id_options        = DROPDOWNS$scenarios$individual_id,
         population_id_options        = DROPDOWNS$scenarios$population_id,
@@ -70,6 +70,34 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
       DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
       DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
       DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
+
+
+      esqlabs.handsontable::updateScenario_table_Input(session = getDefaultReactiveDomain(),
+                         inputId = 'scenario_table_input',
+                         value = input$scenario_table_input_edited,
+                         configuration = list(
+                           individual_id_dropdown        = DROPDOWNS$scenarios$individual_id,
+                           population_id_dropdown        = DROPDOWNS$scenarios$population_id,
+                           outputpath_id_dropdown        = DROPDOWNS$scenarios$outputpath_id,
+                           steatystatetime_unit_dropdown = DROPDOWNS$scenarios$steadystatetime_unit,
+                           species_option_dropdown              = DROPDOWNS$individuals$species_options,
+                           population_option_dropdown           = DROPDOWNS$individuals$specieshuman_options,
+                           gender_option_dropdown               = DROPDOWNS$individuals$gender_options,
+                           weight_unit_dropdown          = DROPDOWNS$populations$weight_unit,
+                           height_unit_dropdown          = DROPDOWNS$populations$height_unit,
+                           bmi_unit_dropdown             = DROPDOWNS$populations$bmi_unit,
+                           datatype_option_dropdown             = DROPDOWNS$plots$datatype_options,
+                           scenario_option_dropdown             = DROPDOWNS$plots$scenario_options,
+                           datacombinedname_option_dropdown     = DROPDOWNS$plots$datacombinedname_options,
+                           plottype_option_dropdown             = DROPDOWNS$plots$plottype_options,
+                           axisscale_option_dropdown            = DROPDOWNS$plots$axisscale_options,
+                           aggregation_option_dropdown          = DROPDOWNS$plots$aggregation_options,
+                           path_option_dropdown                 = DROPDOWNS$plots$path_options,
+                           sheet                        = sheet,
+                           shiny_el_id_name = ns("scenario_table_input")
+                         )
+      )
+
 
     })
 
