@@ -9,12 +9,12 @@
       {
         "Name": "End time",
         "Value": 100,
-        "Unit": "s"
+        "Unit": "day(s)"
       },
       {
         "Name": "Resolution",
         "Value": 10,
-        "Unit": "s"
+        "Unit": "day"
       }
     ]
   },

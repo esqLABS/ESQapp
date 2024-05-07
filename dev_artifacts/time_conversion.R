@@ -42,9 +42,9 @@
 }
 
 # JSON schema
-json_example <- jsonlite::fromJSON('dev/project-test.json', simplifyVector = FALSE)
+json_example <- jsonlite::fromJSON('dev_artifacts/project-test.json', simplifyVector = FALSE)
 
 # Run the function
-.createOutputSchemaStringFromJson(json_example, schemaUnit = 's')
+.createOutputSchemaStringFromJson(json_example, schemaUnit = 'h')
 
 
