@@ -775,17 +775,17 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabs.handsontable",
-      "RemoteRef": "main",
-      "RemoteSha": "7f2eac44f8aff33e25b0781950c54e34ff71ddaf",
+      "RemoteUsername": "esqLABS",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "2cb738d9a00c3dd99c520957200f1cf4352fe446",
       "Requirements": [
         "htmltools",
         "jsonlite",
         "reactR",
         "shiny"
       ],
-      "Hash": "f45b8747481a5fcf1741c0487964f79d"
+      "Hash": "f1b931c05945e2bb2f5a3eed7b90a64a"
     },
     "esqlabs.ui": {
       "Package": "esqlabs.ui",
