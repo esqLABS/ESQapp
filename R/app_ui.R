@@ -35,7 +35,6 @@ golem_add_external_resources <- function() {
 
   tags$head(
     favicon(),
-    # tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
     bundle_resources(
       path = app_sys("app/www"),
       app_title = "shinyScenarioEditor"

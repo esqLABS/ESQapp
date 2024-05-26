@@ -38,7 +38,6 @@ mod_simulationtime_module_server <- function(id){
         simulation_time_list_res$Intervals
       )
 
-      # print(input$process_simulation_time_conversion)
     })
 
   })

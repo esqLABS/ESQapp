@@ -27,7 +27,6 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
       nav_panel_list <- list()
 
       for (sheet in r$data[[tab_section]]$sheets) {
-        # message("creating edit_table_ui for sheet: ", sheet)
         nav_panel_list[[length(nav_panel_list) + 1]] <-
           nav_panel(
             title = sheet,
