@@ -103,6 +103,11 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       req(projectConfiguration())
       projectConfiguration()$projectConfigurationFilePath
     })
+
+
+    # Share project configuration path with the export module
+    return(projectConfiguration)
+
   })
 }
 
