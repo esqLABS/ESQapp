@@ -23,9 +23,9 @@ mod_sidebar_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    mod_import_server("import_project_configuration_1", r, DROPDOWNS)
+    configuration_path <- mod_import_server("import_project_configuration_1", r, DROPDOWNS)
 
-    mod_export_server("export_1", r)
+    mod_export_server("export_1", r, configuration_path = configuration_path)
   })
 }
 
