@@ -45,15 +45,27 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
         axisscale_options            = DROPDOWNS$plots$axisscale_options,
         aggregation_options          = DROPDOWNS$plots$aggregation_options,
         path_options                 = DROPDOWNS$plots$path_options,
-        sheet_name                   = sheet
+        sheet_name                   = sheet,
+        column_headers = (
+          colnames(
+            isolate(r$data[[tab_section]][[sheet]]$modified)
+          )
+        )
       )
     })
 
     observeEvent(input$scenario_table_input_edited, {
 
+
       r$data[[tab_section]][[sheet]]$modified <- esqlabs.handsontable::parse_js_data(
                                                     input$scenario_table_input_edited
                                                  )
+      # Column names
+      column_names_header <- (
+        colnames(
+          isolate(r$data[[tab_section]][[sheet]]$modified)
+        )
+      )
 
       # Populate dropdowns
       DROPDOWNS$scenarios$individual_id        <- r$data$individuals$IndividualBiometrics$modified$IndividualId
@@ -62,7 +74,6 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
       DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
       DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
       DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
-
 
       esqlabs.handsontable::updateScenario_table_Input(session = getDefaultReactiveDomain(),
                          inputId = 'scenario_table_input',
@@ -86,9 +97,36 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
                            aggregation_option_dropdown          = DROPDOWNS$plots$aggregation_options,
                            path_option_dropdown                 = DROPDOWNS$plots$path_options,
                            sheet                        = sheet,
-                           shiny_el_id_name = ns("scenario_table_input")
+                           shiny_el_id_name = ns("scenario_table_input"),
+                           column_headers = column_names_header
                          )
       )
+
+      # Add/Remove new individual_id sheet
+      if(tab_section == 'individuals') {
+
+        new_sheet_name <- r$data$individuals$IndividualBiometrics$modified$IndividualId[!(
+          r$data$individuals$IndividualBiometrics$modified$IndividualId %in% r$data[[tab_section]]$sheets
+        )] |> stats::na.omit()
+
+        if(!isTruthy(new_sheet_name)) return(NULL)
+
+        r$data[[tab_section]]$sheets <- c(
+          r$data[[tab_section]]$sheets,
+          new_sheet_name
+        )
+
+        r$data[[tab_section]][[new_sheet_name]]$modified <- data.frame(
+          `Container Path` = NA_character_,
+          `Parameter Name` = NA_character_,
+          Value = NA_character_,
+          Unit = NA_character_,
+          check.names = FALSE,
+          row.names = NULL
+        )
+
+      }
+
 
 
     })

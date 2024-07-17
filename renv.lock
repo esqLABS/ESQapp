@@ -778,14 +778,14 @@
       "RemoteRepo": "esqlabs.handsontable",
       "RemoteUsername": "esqLABS",
       "RemoteRef": "HEAD",
-      "RemoteSha": "af397915120a7c9312f9c53bfa7618cbe07eaa67",
+      "RemoteSha": "26c359cdac358eb4878f1434e281ee7cc3aba81c",
       "Requirements": [
         "htmltools",
         "jsonlite",
         "reactR",
         "shiny"
       ],
-      "Hash": "bb7cdb6502f540b1364d5144c3c56fbf"
+      "Hash": "fc9b9c1f174c120eae7ee652e76b1e5c"
     },
     "esqlabs.ui": {
       "Package": "esqlabs.ui",
@@ -793,16 +793,17 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "esqLABS",
       "RemoteRepo": "esqlabs.ui",
-      "RemoteRef": "main",
-      "RemoteSha": "11a573dca02b0a40dd04538975bd7c0d5042160b",
+      "RemoteUsername": "esqLABS",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "5446e3fe00fe2f1aad64250519f8b6248004ce94",
       "Requirements": [
         "htmltools",
         "htmlwidgets",
-        "reactR"
+        "reactR",
+        "shiny"
       ],
-      "Hash": "df3f835a67d99c54f8ccf22c4985568a"
+      "Hash": "bc6f81e18c7e92b40dd92d6ab8597f23"
     },
     "esqlabsR": {
       "Package": "esqlabsR",

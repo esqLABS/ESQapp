@@ -23,7 +23,10 @@ Imports:
     dplyr,
     esqlabs.ui,
     esqlabs.handsontable,
-    ospsuite
+    ospsuite,
+    jsonlite,
+    stats,
+    methods
 Suggests: 
     spelling,
     pkgdown,
@@ -44,5 +47,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Remotes: 
     esqLABS/esqlabsR@*release,
-    yonicd/covrpage
+    yonicd/covrpage,
+    esqLABS/esqlabs.ui@5446e3fe00fe2f1aad64250519f8b6248004ce94,
+    esqLABS/esqlabs.handsontable@26c359cdac358eb4878f1434e281ee7cc3aba81c
 VignetteBuilder: knitr
