@@ -28,8 +28,8 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     ns <- session$ns
 
     volumes <- c(
-      # "Current Project" = getwd(),
-      "Test Project" = testthat::test_path("data"),
+      "Current Project" = getwd(),
+      # "Test Project" = testthat::test_path("data"),
       Home = Sys.getenv("R_USER"),
       shinyFiles::getVolumes()()
     )
