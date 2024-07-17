@@ -2,14 +2,33 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # shinyScenarioEditor
+> _shinyScenarioEditor UI for the esqlabsR package
 
 <!-- badges: start -->
-
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of shinyScenarioEditor is to …
+
+## How to install?
+GitHub:
+```r
+remotes::install_github("esqLABS/shinyScenarioEditor", force = TRUE)
+```
+### How to use it?
+
+```r
+library(shinyScenarioEditor)
+shinyScenarioEditor::run_app()
+```
+
+## Use development version
+
+```r
+remotes::install_github("esqLABS/shinyScenarioEditor", ref = "dev", force = TRUE)
+library(shinyScenarioEditor)
+shinyScenarioEditor::run_app()
+```
 
 ## esqlabs.handsontable
 
@@ -17,7 +36,7 @@ The goal of shinyScenarioEditor is to …
 renv::install("esqLABS/esqlabs.handsontable")
 ```
 
-## Installation
+## Installation dev
 
 You can install the development version of shinyScenarioEditor from
 [GitHub](https://github.com/) with:
