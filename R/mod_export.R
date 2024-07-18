@@ -10,17 +10,24 @@
 mod_export_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    actionButton(ns("export"), "Export")
+    actionButton(ns("export"), "Export", disabled = TRUE)
   )
 }
 
 #' export Server Functions
 #'
 #' @noRd
-mod_export_server <- function(id, r) {
+mod_export_server <- function(id, r, configuration_path) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
+    # Enable the export button when the configuration file is loaded first time
+    observeEvent(configuration_path(), {
+      updateActionButton(session, inputId = "export", disabled = FALSE)
+    }, once = TRUE)
+
+
+    # Listen to the export button
     observeEvent(input$export, {
       message("exporting data")
 

@@ -7,49 +7,89 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/esqLABS/shinyScenarioEditor/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
 <!-- badges: end -->
 
-The goal of shinyScenarioEditor is to …
+shinyScenarioEditor is UI for the
+[esqlabsR](https://github.com/esqLABS/esqlabsR) package. It allows users
+to create, edit, and run scenarios for the Open Systems Pharmacology
+Suite.
 
 ## Installation
 
-You can install the development version of shinyScenarioEditor from
-[GitHub](https://github.com/) with:
+Currently, esqlabsR and shinyScenarioEditor are only available for
+Windows systems. You can install the package by running:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("esqLABS/shinyScenarioEditor")
+# {esqlabsR} and its Open Systems Pharmacology Suite's dependencies relies on
+# {rClr} (https://github.com/Open-Systems-Pharmacology/rClr) which is not
+# available on CRAN.
+# Therefore, these must be installed from github using `{remotes}`.
+
+install.packages("remotes")
+install.packages("https://github.com/Open-Systems-Pharmacology/rClr/releases/download/v0.9.2/rClr_0.9.2.zip",
+  repos = NULL,
+  type = "binary"
+)
+
+remotes::install_github("esqLABS/shinyScenarioEditor@*release")
 ```
 
-## Example
+Get the latest development version with:
 
-This is a basic example which shows you how to solve a common problem:
+``` r
+remotes::install_github("esqLABS/shinyScenarioEditor")
+```
+
+## Usage
 
 ``` r
 library(shinyScenarioEditor)
-## basic example code
+shinyScenarioEditor::run_app()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Development
+
+To run the package locally:
+
+1.  Clone the repository from GitHub
+
+<!-- -->
+
+    https://github.com/esqLABS/shinyScenarioEditor.git
+
+2.  Open the project in RStudio
+
+3.  Install the dependencies
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+renv::restore(lockfile = 'renv.lock')
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+4.  Run the app
 
-You can also embed plots, for example:
+``` r
+source("dev/run_dev.R")
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+5.  Make changes to the code
+6.  Snapshot the changes
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+renv::install("package_name")
+source("dev/get_snapshot.R")
+golem::add_to_description("package_name")
+golem::document_and_reload()
+```
+
+Note: For changes related to the table interface, `shinyScenarioEditor`
+depends on
+[`esqlabs.handsontable`](https://github.com/esqLABS/esqlabs.handsontable).
+
+## Code of Conduct
+
+Please note that the shinyScenarioEditor project is released with a
+[Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

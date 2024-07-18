@@ -1,0 +1,41 @@
+[
+  {
+    "Parameters": [
+      {
+        "Name": "Start time",
+        "Value": 0,
+        "Unit": "s"
+      },
+      {
+        "Name": "End time",
+        "Value": 100,
+        "Unit": "day(s)"
+      },
+      {
+        "Name": "Resolution",
+        "Value": 10,
+        "Unit": "day"
+      }
+    ]
+  },
+  {
+    "Parameters": [
+      {
+        "Name": "Start time",
+        "Value": 200,
+        "Unit": "s"
+      },
+      {
+        "Name": "End time",
+        "Value": 300,
+        "Unit": "day(s)"
+      },
+      {
+        "Name": "Resolution",
+        "Value": 20,
+        "Unit": "s"
+      }
+    ]
+  }
+]
+

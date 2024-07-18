@@ -9,9 +9,17 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    esqlabs.ui::intro_screen(width = '100%'),
     # Your application UI logic
     bslib::page_navbar(
-      title = "shinyScenarioEditor",
+      title = span(
+        img(
+          src = "www/ESQLabs_Sign_RZ_positive_Rings - Copy.png",
+          width = 55,
+          style = "font-weight: bold;"
+        ),
+        span(style="font-weight: 600;", "ESQapp")
+      ),
       sidebar = mod_sidebar_ui("sidebar_1"),
       !!!mod_main_panel_ui("main_panel_1")
     )

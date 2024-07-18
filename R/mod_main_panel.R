@@ -23,8 +23,12 @@ mod_main_panel_ui <- function(id) {
       mod_tab_populations_ui(ns("tab_populations_1"))
     ),
     nav_panel(
-      title = "Models",
+      title = "Parameter sets",
       mod_tab_models_ui(ns("tab_models_1"))
+    ),
+    nav_panel(
+      title = "Plots",
+      mod_tab_plots_ui(ns("tab_plots_1"))
     )
   )
 }
@@ -32,17 +36,19 @@ mod_main_panel_ui <- function(id) {
 #' main_panel Server Functions
 #'
 #' @noRd
-mod_main_panel_server <- function(id, r) {
+mod_main_panel_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    mod_tab_scenarios_server("tab_scenarios_1", r)
+    mod_tab_scenarios_server("tab_scenarios_1", r, DROPDOWNS)
 
-    mod_tab_individuals_server("tab_individuals_1", r)
+    mod_tab_individuals_server("tab_individuals_1", r, DROPDOWNS)
 
-    mod_tab_populations_server("tab_populations_1", r)
+    mod_tab_populations_server("tab_populations_1", r, DROPDOWNS)
 
-    mod_tab_models_server("tab_models_1", r)
+    mod_tab_models_server("tab_models_1", r, DROPDOWNS)
+
+    mod_tab_plots_server("tab_plots_1", r, DROPDOWNS)
   })
 }
 

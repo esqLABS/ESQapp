@@ -1,8 +1,11 @@
 Package: shinyScenarioEditor
 Title: Shiny App to edit {esqLABSR} Edit Simulation Scenarios
 Version: 0.0.0.9000
-Authors@R: 
-    person("Felix", "MIL", , "felix.mil@esqlabs.com", role = c("cre", "aut"))
+Authors@R:c(
+    person("Felix", "Mil", email = "felix.mil@esqlabs.com", role = c('cre', 'aut')),
+    person("Anastasiia", "Kostiv", email = "anastasiia.kostiv.ext@esqlabs.com", role = c("aut"),
+           comment = "https://github.com/AKostiv8")
+  )
 Description: Shiny App to edit {esqLABSR} Edit Simulation Scenarios.
 License: file LICENSE
 URL: https://github.com/esqLABS/shinyScenarioEditor
@@ -13,12 +16,17 @@ Imports:
     shiny (>= 1.7.5),
     esqlabsR (>= 5.1.1),
     bslib,
-    datamods (>= 1.4.2.9000),
     shinyFiles,
     rio,
-    rlang,
-    validate,
-    fs
+    fs,
+    readxl,
+    dplyr,
+    esqlabs.ui,
+    esqlabs.handsontable,
+    ospsuite,
+    jsonlite,
+    stats,
+    methods
 Suggests: 
     spelling,
     pkgdown,
@@ -39,6 +47,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Remotes: 
     esqLABS/esqlabsR@*release,
-    datamods@dev-2,
-    yonicd/covrpage
+    yonicd/covrpage,
+    esqLABS/esqlabs.ui@5446e3fe00fe2f1aad64250519f8b6248004ce94,
+    esqLABS/esqlabs.handsontable@26c359cdac358eb4878f1434e281ee7cc3aba81c
 VignetteBuilder: knitr
