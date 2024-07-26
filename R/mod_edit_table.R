@@ -102,28 +102,50 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
                          )
       )
 
-      # Add/Remove new individual_id sheet
+      # Add/Remove/Rename individual_id sheet
       if(tab_section == 'individuals') {
 
-        new_sheet_name <- r$data$individuals$IndividualBiometrics$modified$IndividualId[!(
-          r$data$individuals$IndividualBiometrics$modified$IndividualId %in% r$data[[tab_section]]$sheets
-        )] |> stats::na.omit()
+        if(isTruthy(input$scenario_table_input_individual_event)) {
+          # The input$scenario_table_input_individual_event can have the following possible values:
+          # 1. {"eventType": "individualId_added", "individualIdName": "<new_name>"}
+          #    - This indicates that a new individual ID has been added.
+          #    - `individualIdName` will contain the name of the newly added individual.
+          #
+          # 2. {"eventType": "individualId_removed", "individualIdName": "<removed_name>"}
+          #    - This indicates that an individual ID has been removed.
+          #    - `individualIdName` will contain the name of the individual that was removed.
+          #
+          # 3. {"eventType": "individualId_renamed", "individualIdOldName": "<old_name>", "individualIdNewName": "<new_name>"}
+          #    - This indicates that an individual ID has been renamed.
+          #    - `individualIdOldName` will contain the old name of the individual.
+          #    - `individualIdNewName` will contain the new name of the individual.
 
-        if(!isTruthy(new_sheet_name)) return(NULL)
+          event_recorded <- input$scenario_table_input_individual_event |> 
+            jsonlite::fromJSON()
+          
+          if(event_recorded$eventType == "individualId_added") {
+            r$data$create_new_individual_sheet(
+              config_name = tab_section,
+              sheet_name = event_recorded$individualIdName
+            )
+          }
 
-        r$data[[tab_section]]$sheets <- c(
-          r$data[[tab_section]]$sheets,
-          new_sheet_name
-        )
+          if(event_recorded$eventType == "individualId_removed") {
+            r$data$remove_individual_sheet(
+              config_name = tab_section,
+              sheet_name = event_recorded$individualIdName
+            )
+          }
 
-        r$data[[tab_section]][[new_sheet_name]]$modified <- data.frame(
-          `Container Path` = NA_character_,
-          `Parameter Name` = NA_character_,
-          Value = NA_character_,
-          Unit = NA_character_,
-          check.names = FALSE,
-          row.names = NULL
-        )
+          if(event_recorded$eventType == "individualId_renamed") {
+            r$data$rename_individual_sheet(
+              config_name = tab_section,
+              old_sheet_name = event_recorded$individualIdOldName,
+              new_sheet_name = event_recorded$individualIdNewName
+            )
+          }
+
+        }
 
       }
 

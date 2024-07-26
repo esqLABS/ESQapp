@@ -14,7 +14,7 @@ app_server <- function(input, output, session) {
 
   r$states <- reactiveValues()
 
-  r$data <- data_structure()
+  r$data <- DataStructure$new()
 
   DROPDOWNS <- dropdown_values()
 
