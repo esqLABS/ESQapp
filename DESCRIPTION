@@ -26,7 +26,8 @@ Imports:
     ospsuite,
     jsonlite,
     stats,
-    methods
+    methods,
+    R6
 Suggests: 
     spelling,
     pkgdown,

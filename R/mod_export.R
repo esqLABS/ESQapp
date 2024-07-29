@@ -31,7 +31,7 @@ mod_export_server <- function(id, r, configuration_path) {
     observeEvent(input$export, {
       message("exporting data")
 
-      for (config_file in names(r$data)) {
+      for (config_file in r$data$get_config_files()) {
         if (!golem::app_prod()) {
           export_path <- paste0(fs::path_ext_remove(r$data[[config_file]]$file_path), "_copy.xlsx")
         } else {
