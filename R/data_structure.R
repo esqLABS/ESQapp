@@ -78,18 +78,30 @@ DataStructure <- R6::R6Class("DataStructure",
                                   c("scenarios", "individuals", "populations", "models", "plots")
                                 },
 
+                                is_sheet_empty = function(file_path, sheet) {
+                                  # Read the sheet without importing data to check dimensions
+                                  sheet_data <- readxl::read_excel(file_path, sheet = sheet, n_max = 1)
+
+                                  # Check if the sheet has data
+                                  return(nrow(sheet_data) == 0 & ncol(sheet_data) == 0)
+                                },
+
                                 add_sheet = function(config_file, sheet_name) {
+
                                   if (is.null(self[[config_file]][[sheet_name]])) {
                                     self[[config_file]][[sheet_name]] <- reactiveValues()
                                   }
 
-                                  self[[config_file]][[sheet_name]]$original <- rio::import(
-                                    self[[config_file]]$file_path,
-                                    sheet = sheet_name,
-                                    col_types = "text"
-                                  )
+                                  # Import the sheet using rio if not empty
+                                  if (!self$is_sheet_empty(self[[config_file]]$file_path, sheet_name)) {
+                                    self[[config_file]][[sheet_name]]$original <- rio::import(
+                                      self[[config_file]]$file_path,
+                                      sheet = sheet_name,
+                                      col_types = "text"
+                                    )
 
-                                  self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
+                                    self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
+                                  }
                                 },
 
                                 remove_individual_sheet = function(config_name, sheet_name) {
@@ -100,7 +112,7 @@ DataStructure <- R6::R6Class("DataStructure",
                                   } else {
                                     # Remove the sheet name from the list of sheets
                                     self[[config_name]]$sheets <- setdiff(self[[config_name]]$sheets, sheet_name)
-                                
+
                                     # Remove the corresponding reactive values
                                     self[[config_name]][[sheet_name]] <- NULL
                                   }
@@ -133,20 +145,20 @@ DataStructure <- R6::R6Class("DataStructure",
                                     message("Old sheet does not exist")
                                     return()
                                   }
-                                
+
                                   if(new_sheet_name %in% self[[config_name]]$sheets) {
                                     message("New sheet name already exists")
                                     return()
                                   }
-                                
+
                                   # Rename the sheet in the list of sheets
                                   self[[config_name]]$sheets <- gsub(old_sheet_name, new_sheet_name, self[[config_name]]$sheets)
-                                
+
                                   # Rename the reactive values
                                   self[[config_name]][[new_sheet_name]] <- self[[config_name]][[old_sheet_name]]
                                   self[[config_name]][[old_sheet_name]] <- NULL
                                 }
-                                
+
                           )
 )
 
