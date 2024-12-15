@@ -21,7 +21,11 @@ app_ui <- function(request) {
         span(style="font-weight: 600;", "ESQapp")
       ),
       sidebar = mod_sidebar_ui("sidebar_1"),
-      !!!mod_main_panel_ui("main_panel_1")
+      nav_spacer(),
+      !!!mod_main_panel_ui("main_panel_1"),
+      # Show warning modal
+      mod_warning_ui("warning_modal")
+
     )
   )
 }

@@ -28,8 +28,8 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     ns <- session$ns
 
     volumes <- c(
-      # "Current Project" = getwd(),
-      "Test Project" = testthat::test_path("data"),
+      "Current Project" = getwd(),
+      # "Test Project" = testthat::test_path("data"),
       Home = Sys.getenv("R_USER"),
       shinyFiles::getVolumes()()
     )
@@ -70,7 +70,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
           sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
           r$data[[config_file]]$sheets <- sheet_names
           for (sheet in sheet_names) {
-            r$data$add_sheet(config_file, sheet)
+            r$data$add_sheet(config_file, sheet, r$warnings)
           }
         }
 

@@ -86,7 +86,28 @@ DataStructure <- R6::R6Class("DataStructure",
                                   return(nrow(sheet_data) == 0 & ncol(sheet_data) == 0)
                                 },
 
-                                add_sheet = function(config_file, sheet_name) {
+                                check_empty_column_names = function(file_path, sheet_name) {
+                                  empty_columns <- c()  # Vector to store empty column names
+
+                                  # Read the entire sheet (to access column names)
+                                  sheet_data <- readxl::read_excel(file_path, sheet = sheet_name)
+                                  # Check for empty or auto-assigned column names (e.g., ...1, ...2, etc.)
+                                  for (col_name in names(sheet_data)) {
+                                    # Check if the column name is NA, empty, or follows the auto-generated pattern (e.g., ...1, ...2)
+                                    if (is.na(col_name) || col_name == "" || grepl("^\\.{3}[0-9]+$", col_name)) {
+                                      empty_columns <- c(empty_columns, col_name)  # Add empty or auto-assigned column name to the list
+                                    }
+                                  }
+
+                                  # Return the empty or auto-assigned column names, or NULL if none are empty
+                                  if (length(empty_columns) > 0) {
+                                    return(empty_columns)
+                                  } else {
+                                    return(NULL)
+                                  }
+                                },
+
+                                add_sheet = function(config_file, sheet_name, warning_obj) {
 
                                   if (is.null(self[[config_file]][[sheet_name]])) {
                                     self[[config_file]][[sheet_name]] <- reactiveValues()
@@ -94,13 +115,22 @@ DataStructure <- R6::R6Class("DataStructure",
 
                                   # Import the sheet using rio if not empty
                                   if (!self$is_sheet_empty(self[[config_file]]$file_path, sheet_name)) {
+
+                                    # Check if any column names are empty
+                                    empty_columns <- self$check_empty_column_names(self[[config_file]]$file_path, sheet_name)
+                                    if (!is.null(empty_columns)) {
+                                      warning_obj$add_warning(config_file, sheet_name,
+                                                              sprintf("Sheet contains empty column names: %s", paste(empty_columns, collapse = ", ")))
+                                    }
+
                                     self[[config_file]][[sheet_name]]$original <- rio::import(
                                       self[[config_file]]$file_path,
                                       sheet = sheet_name,
                                       col_types = "text"
                                     )
-
                                     self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
+                                  } else {
+                                    warning_obj$add_warning(config_file, sheet_name, "Sheet is empty")
                                   }
                                 },
 
@@ -162,3 +192,25 @@ DataStructure <- R6::R6Class("DataStructure",
                           )
 )
 
+
+WarningHandler <- R6::R6Class(
+  "WarningHandler",
+  public = list(
+
+    # Store warning messages
+    warning_messages = NULL,
+
+    # Initialize
+    initialize = function() {
+      self$warning_messages <- reactiveValues()
+    },
+
+    # Method to add a warning
+    add_warning = function(config_file, sheet_name, message) {
+      self$warning_messages$config_files <- c(self$warning_messages$config_files, config_file)
+      warning_msg <- sprintf("Warning for sheet <b>'%s'</b>: %s", sheet_name, message)
+      self$warning_messages[[config_file]] <- c(self$warning_messages[[config_file]], warning_msg)
+    }
+
+  )
+)
