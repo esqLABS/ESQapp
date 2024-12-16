@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# shinyScenarioEditor
-
+# ESQapp
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -11,42 +10,30 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/esqLABS/shinyScenarioEditor/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
 <!-- badges: end -->
 
-shinyScenarioEditor is UI for the
+ESQapp is UI for the
 [esqlabsR](https://github.com/esqLABS/esqlabsR) package. It allows users
 to create, edit, and run scenarios for the Open Systems Pharmacology
 Suite.
 
 ## Installation
 
-Currently, esqlabsR and shinyScenarioEditor are only available for
-Windows systems. You can install the package by running:
+You can install the package by running:
 
 ``` r
-# {esqlabsR} and its Open Systems Pharmacology Suite's dependencies relies on
-# {rClr} (https://github.com/Open-Systems-Pharmacology/rClr) which is not
-# available on CRAN.
-# Therefore, these must be installed from github using `{remotes}`.
-
-install.packages("remotes")
-install.packages("https://github.com/Open-Systems-Pharmacology/rClr/releases/download/v0.9.2/rClr_0.9.2.zip",
-  repos = NULL,
-  type = "binary"
-)
-
-remotes::install_github("esqLABS/shinyScenarioEditor@*release")
+remotes::install_github("esqLABS/ESQapp@*release")
 ```
 
 Get the latest development version with:
 
 ``` r
-remotes::install_github("esqLABS/shinyScenarioEditor")
+remotes::install_github("esqLABS/ESQapp")
 ```
 
 ## Usage
 
 ``` r
-library(shinyScenarioEditor)
-shinyScenarioEditor::run_app()
+library(ESQapp)
+ESQapp::run_app()
 ```
 
 ## Development
@@ -57,7 +44,7 @@ To run the package locally:
 
 <!-- -->
 
-    https://github.com/esqLABS/shinyScenarioEditor.git
+    https://github.com/esqLABS/ESQapp.git
 
 2.  Open the project in RStudio
 
