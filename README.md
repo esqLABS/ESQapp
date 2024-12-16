@@ -1,25 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# shinyScenarioEditor
+# ESQapp
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/esqLABS/shinyScenarioEditor/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
+coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
 <!-- badges: end -->
 
-shinyScenarioEditor is UI for the
-[esqlabsR](https://github.com/esqLABS/esqlabsR) package. It allows users
-to create, edit, and run scenarios for the Open Systems Pharmacology
-Suite.
+ESQapp is UI for the [esqlabsR](https://github.com/esqLABS/esqlabsR)
+package. It allows users to create, edit, and run scenarios for the Open
+Systems Pharmacology Suite.
 
 ## Installation
 
-Currently, esqlabsR and shinyScenarioEditor are only available for
-Windows systems. You can install the package by running:
+Currently, esqlabsR and ESQapp are only available for Windows systems.
+You can install the package by running:
 
 ``` r
 # {esqlabsR} and its Open Systems Pharmacology Suite's dependencies relies on
@@ -33,20 +32,20 @@ install.packages("https://github.com/Open-Systems-Pharmacology/rClr/releases/dow
   type = "binary"
 )
 
-remotes::install_github("esqLABS/shinyScenarioEditor@*release")
+remotes::install_github("esqLABS/ESQapp@*release")
 ```
 
 Get the latest development version with:
 
 ``` r
-remotes::install_github("esqLABS/shinyScenarioEditor")
+remotes::install_github("esqLABS/ESQapp")
 ```
 
 ## Usage
 
 ``` r
-library(shinyScenarioEditor)
-shinyScenarioEditor::run_app()
+library(ESQapp)
+ESQapp::run_app()
 ```
 
 ## Development
@@ -57,7 +56,7 @@ To run the package locally:
 
 <!-- -->
 
-    https://github.com/esqLABS/shinyScenarioEditor.git
+    https://github.com/esqLABS/ESQapp.git
 
 2.  Open the project in RStudio
 
@@ -83,13 +82,12 @@ golem::add_to_description("package_name")
 golem::document_and_reload()
 ```
 
-Note: For changes related to the table interface, `shinyScenarioEditor`
-depends on
+Note: For changes related to the table interface, `ESQapp` depends on
 [`esqlabs.handsontable`](https://github.com/esqLABS/esqlabs.handsontable).
 
 ## Code of Conduct
 
-Please note that the shinyScenarioEditor project is released with a
-[Contributor Code of
+Please note that the ESQapp project is released with a [Contributor Code
+of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

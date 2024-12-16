@@ -2358,6 +2358,26 @@
       ],
       "Hash": "cf0b9330f677599316a4b36682081e8b"
     },
+    "shinycssloaders": {
+      "Package": "shinycssloaders",
+      "Version": "1.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "shinycssloaders",
+      "RemoteUsername": "daattali",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "2f2623fa8762c7351e5e6d044d3dae08a677b06f",
+      "Requirements": [
+        "R",
+        "digest",
+        "glue",
+        "grDevices",
+        "htmltools",
+        "shiny"
+      ],
+      "Hash": "29ed4e6c0052b0584ea214bd66ca5a79"
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7-1",

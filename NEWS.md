@@ -1,10 +1,10 @@
 #  News
 
-## Version 0.0.0.9000
+## Version 0.0.1 (2024-12-17)
 
 ### Initial Release (development version)
 
-This is the initial release of the `shinyScenarioEditor` package, providing core features for project configuration and data manipulation through a user interface, as an alternative to the `esqlabsR` package.
+This is the initial release of the `ESQapp` package, providing core features for project configuration and data manipulation through a user interface, as an alternative to the `esqlabsR` package.
 
 ### Core Features
 - **Select and Import Configuration File**: Allows users to select a project configuration Excel file and import connected sheets.
@@ -23,4 +23,4 @@ This is the initial release of the `shinyScenarioEditor` package, providing core
 
 ---
 
-This version marks the beginning of the `shinyScenarioEditor` package, bringing a robust set of features to enhance data handling and project management through an intuitive user interface.
+This version marks the beginning of the `ESQapp` package, bringing a robust set of features to enhance data handling and project management through an intuitive user interface.
