@@ -2,7 +2,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ESQapp
-
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -17,21 +16,13 @@ Systems Pharmacology Suite.
 
 ## Installation
 
-Currently, esqlabsR and ESQapp are only available for Windows systems.
 You can install the package by running:
 
 ``` r
-# {esqlabsR} and its Open Systems Pharmacology Suite's dependencies relies on
-# {rClr} (https://github.com/Open-Systems-Pharmacology/rClr) which is not
-# available on CRAN.
-# Therefore, these must be installed from github using `{remotes}`.
-
 install.packages("remotes")
-install.packages("https://github.com/Open-Systems-Pharmacology/rClr/releases/download/v0.9.2/rClr_0.9.2.zip",
-  repos = NULL,
-  type = "binary"
-)
+```
 
+``` r
 remotes::install_github("esqLABS/ESQapp@*release")
 ```
 
