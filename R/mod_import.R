@@ -35,11 +35,10 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     )
 
     shinyFiles::shinyFileChoose(input,
-      id = "projectConfigurationFile",
-      roots = volumes,
-      session = session
+                                id = "projectConfigurationFile",
+                                roots = volumes,
+                                session = session
     )
-
 
     projectConfiguration <- reactive({
       req(input$projectConfigurationFile)
@@ -54,33 +53,25 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     })
 
     observeEvent(projectConfiguration(), {
-      for (config_file in names(r$data)) {
-        r$data[[config_file]]$file_path <-
-          dplyr::case_match(
-            config_file,
-            "scenarios" ~ projectConfiguration()$scenarioDefinitionFile,
-            "individuals" ~ projectConfiguration()$individualsFile,
-            "populations" ~ projectConfiguration()$populationParamsFile,
-            "models" ~ projectConfiguration()$paramsFile,
-            "plots" ~ projectConfiguration()$plotsFile
-          )
+      config_map <- list(
+        "scenarios" = projectConfiguration()$scenarioDefinitionFile,
+        "individuals" = projectConfiguration()$individualsFile,
+        "populations" = projectConfiguration()$populationParamsFile,
+        "models" = projectConfiguration()$paramsFile,
+        "plots" = projectConfiguration()$plotsFile
+      )
 
-        sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
+      for (config_file in r$data$get_config_files()) {
+        r$data[[config_file]]$file_path <- config_map[[config_file]]
 
-        r$data[[config_file]]$sheets <- sheet_names
 
-        for (sheet in sheet_names) {
-          r$data[[config_file]][[sheet]] <- reactiveValues()
-
-          r$data[[config_file]][[sheet]]$original <-
-            rio::import(
-              r$data[[config_file]]$file_path,
-              sheet = sheet,
-              col_types = "text"
-            )
-
-          # preassign modified data with original data
-          r$data[[config_file]][[sheet]]$modified <- r$data[[config_file]][[sheet]]$original
+        # Check if the file path is valid
+        if (!is.na(r$data[[config_file]]$file_path) && file.exists(r$data[[config_file]]$file_path)) {
+          sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
+          r$data[[config_file]]$sheets <- sheet_names
+          for (sheet in sheet_names) {
+            r$data$add_sheet(config_file, sheet, r$warnings)
+          }
         }
 
         # Populate dropdowns
@@ -104,12 +95,12 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       projectConfiguration()$projectConfigurationFilePath
     })
 
-
     # Share project configuration path with the export module
     return(projectConfiguration)
-
   })
 }
+
+
 
 ## To be copied in the UI
 # mod_import_ui("import_1")
