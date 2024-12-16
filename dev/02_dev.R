@@ -86,7 +86,7 @@ usethis::use_test("app")
 pkgdown::init_site()
 
 ## Vignette ----
-usethis::use_vignette("shinyScenarioEditor")
+usethis::use_vignette("ESQapp")
 usethis::use_vignette("appDesign")
 devtools::build_vignettes()
 

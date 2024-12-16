@@ -19,13 +19,13 @@
 ## to change the name in the app_sys() function in app_config.R /!\
 ##
 golem::fill_desc(
-  pkg_name = "shinyScenarioEditor", # The Name of the package containing the App
+  pkg_name = "ESQapp", # The Name of the package containing the App
   pkg_title = "Shiny App to edit {esqLABSR} Edit Simulation Scenarios", # The Title of the package containing the App
   pkg_description = "Shiny App to edit {esqLABSR} Edit Simulation Scenarios.", # The Description of the package containing the App
   author_first_name = "Felix", # Your First Name
   author_last_name = "MIL", # Your Last Name
   author_email = "felix.mil@esqlabs.com", # Your Email
-  repo_url = "https://github.com/esqLABS/shinyScenarioEditor", # The URL of the GitHub Repo (optional),
+  repo_url = "https://github.com/esqLABS/ESQapp", # The URL of the GitHub Repo (optional),
   pkg_version = "0.0.0.9000" # The Version of the package containing the App
 )
 

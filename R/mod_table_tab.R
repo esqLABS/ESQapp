@@ -10,7 +10,7 @@
 mod_table_tab_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    uiOutput(ns("ui"))
+    uiOutput(ns("ui")) |> shinycssloaders::withSpinner(type = 2, color.background = "#ffffff", color = "#2bc1ca")
   )
 }
 

@@ -7,17 +7,20 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/esqLABS/shinyScenarioEditor/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
+coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
 <!-- badges: end -->
 
-ESQapp is UI for the
-[esqlabsR](https://github.com/esqLABS/esqlabsR) package. It allows users
-to create, edit, and run scenarios for the Open Systems Pharmacology
-Suite.
+ESQapp is UI for the [esqlabsR](https://github.com/esqLABS/esqlabsR)
+package. It allows users to create, edit, and run scenarios for the Open
+Systems Pharmacology Suite.
 
 ## Installation
 
 You can install the package by running:
+
+``` r
+install.packages("remotes")
+```
 
 ``` r
 remotes::install_github("esqLABS/ESQapp@*release")
@@ -70,13 +73,12 @@ golem::add_to_description("package_name")
 golem::document_and_reload()
 ```
 
-Note: For changes related to the table interface, `shinyScenarioEditor`
-depends on
+Note: For changes related to the table interface, `ESQapp` depends on
 [`esqlabs.handsontable`](https://github.com/esqLABS/esqlabs.handsontable).
 
 ## Code of Conduct
 
-Please note that the shinyScenarioEditor project is released with a
-[Contributor Code of
+Please note that the ESQapp project is released with a [Contributor Code
+of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(shinyScenarioEditor)
+library(ESQapp)
 
-test_check("shinyScenarioEditor")
+test_check("ESQapp")
