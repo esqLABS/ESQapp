@@ -1,6 +1,6 @@
 #  News
 
-## Version 0.0.1 (2024-12-17)
+## Version 1.0.0 (2024-12-17)
 
 ### Initial Release (development version)
 
@@ -20,6 +20,7 @@ This is the initial release of the `ESQapp` package, providing core features for
 - **Shortcuts**: Implements keyboard shortcuts to enhance user efficiency.
 - **Integration with esqlabs.ui Package**: Integrates with the `esqlabs.ui` package for a seamless user experience.
 - **Multiselect Dropdown Column Editor**: A column editor that supports multiselect dropdowns for more flexible data entry.
+- **Project Configuration Import Validation**: The application validates the imported configuration against the default structure. If discrepancies are detected, it displays a warning message and provides a list of issues for the user to review.
 
 ---
 
