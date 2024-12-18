@@ -1,6 +1,6 @@
 default:
   golem_name: ESQapp
-  golem_version: 0.0.1
+  golem_version: 1.0.0
   app_prod: yes
 production:
   app_prod: yes
