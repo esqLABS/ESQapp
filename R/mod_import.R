@@ -37,6 +37,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     shinyFiles::shinyFileChoose(input,
                                 id = "projectConfigurationFile",
                                 roots = volumes,
+                                filetypes = c("xlsx"),
                                 session = session
     )
 
@@ -50,38 +51,45 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       req(projectConfigurationFilePath$datapath)
 
       esqlabsR::createDefaultProjectConfiguration(path = projectConfigurationFilePath$datapath)
+
     })
 
     observeEvent(projectConfiguration(), {
-      config_map <- list(
-        "scenarios" = projectConfiguration()$scenarioDefinitionFile,
-        "individuals" = projectConfiguration()$individualsFile,
-        "populations" = projectConfiguration()$populationParamsFile,
-        "models" = projectConfiguration()$paramsFile,
-        "plots" = projectConfiguration()$plotsFile
-      )
 
-      for (config_file in r$data$get_config_files()) {
-        r$data[[config_file]]$file_path <- config_map[[config_file]]
+      tryCatch({
+        config_map <- list(
+          "scenarios" = projectConfiguration()$scenariosFile,
+          "individuals" = projectConfiguration()$individualsFile,
+          "populations" = projectConfiguration()$populationsFile,
+          "models" = projectConfiguration()$modelParamsFile,
+          "plots" = projectConfiguration()$plotsFile
+        )
+
+        for (config_file in r$data$get_config_files()) {
+          r$data[[config_file]]$file_path <- config_map[[config_file]]
 
 
-        # Check if the file path is valid
-        if (!is.na(r$data[[config_file]]$file_path) && file.exists(r$data[[config_file]]$file_path)) {
-          sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
-          r$data[[config_file]]$sheets <- sheet_names
-          for (sheet in sheet_names) {
-            r$data$add_sheet(config_file, sheet, r$warnings)
+          # Check if the file path is valid
+          if (!is.na(r$data[[config_file]]$file_path) && file.exists(r$data[[config_file]]$file_path)) {
+            sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
+            r$data[[config_file]]$sheets <- sheet_names
+            for (sheet in sheet_names) {
+              r$data$add_sheet(config_file, sheet, r$warnings)
+            }
           }
-        }
 
-        # Populate dropdowns
-        DROPDOWNS$scenarios$individual_id        <- r$data$individuals$IndividualBiometrics$modified$IndividualId
-        DROPDOWNS$scenarios$population_id        <- r$data$populations$Demographics$modified$PopulationName
-        DROPDOWNS$scenarios$outputpath_id        <- r$data$scenarios$OutputPaths$modified$OutputPathId
-        DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
-        DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
-        DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
-      }
+          # Populate dropdowns
+          DROPDOWNS$scenarios$individual_id        <- r$data$individuals$IndividualBiometrics$modified$IndividualId
+          DROPDOWNS$scenarios$population_id        <- r$data$populations$Demographics$modified$PopulationName
+          DROPDOWNS$scenarios$outputpath_id        <- r$data$scenarios$OutputPaths$modified$OutputPathId
+          DROPDOWNS$plots$scenario_options         <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
+          DROPDOWNS$plots$path_options             <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
+          DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
+        }
+      }, error = function(e) {
+        return(NULL)
+      })
+
     })
 
     output$selected_file_path <- renderUI({
