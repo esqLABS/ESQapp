@@ -1,6 +1,6 @@
 Package: ESQapp
 Title: Shiny App to edit {esqLABSR} Edit Simulation Scenarios
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
     person("Felix", "Mil", email = "felix.mil@esqlabs.com", role = c('cre', 'aut')),
     person("Anastasiia", "Kostiv", email = "anastasiia.kostiv.ext@esqlabs.com", role = c("aut"),
@@ -14,7 +14,7 @@ Imports:
     config (>= 0.3.2),
     golem (>= 0.4.1),
     shiny (>= 1.7.5),
-    esqlabsR (>= 5.1.1),
+    esqlabsR (>= 5.3.0),
     bslib,
     shinyFiles,
     rio,
