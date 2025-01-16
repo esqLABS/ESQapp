@@ -1,5 +1,26 @@
 #  News
 
+## Version 1.0.1 (2025-01-16)
+
+### Project Core Package Update (esqlabsR 5.1.1 => 5.3.0)
+
+#### **Main Changes:**
+
+##### **Package Update**
+
+Updated esqlabsR package version to 5.3.0.
+
+##### **Bug Fixes**
+
+- Resolved a crash when trying to load a project configuration. (#63)
+- Fixed a crash that occurred when selecting a non-xlsx file while loading a project configuration. (#62)
+- Addressed a warning message displayed during startup. (#60)
+
+##### **Documentation**
+
+Updated installation instructions to recommend the use of the pack package. (#59)
+
+
 ## Version 1.0.0 (2024-12-17)
 
 ### Initial Release (development version)
