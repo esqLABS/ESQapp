@@ -2,12 +2,13 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # ESQapp
+
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/shinyScenarioEditor?branch=main)
+coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/ESQapp?branch=main)
 <!-- badges: end -->
 
 ESQapp is UI for the [esqlabsR](https://github.com/esqLABS/esqlabsR)
@@ -16,20 +17,22 @@ Systems Pharmacology Suite.
 
 ## Installation
 
+Install remotes:
+
+``` r
+install.packages("pak")
+```
+
 You can install the package by running:
 
 ``` r
-install.packages("remotes")
-```
-
-``` r
-remotes::install_github("esqLABS/ESQapp@*release")
+pak::pak("esqLABS/ESQapp@*release")
 ```
 
 Get the latest development version with:
 
 ``` r
-remotes::install_github("esqLABS/ESQapp")
+pak::pak("esqLABS/ESQapp")
 ```
 
 ## Usage
