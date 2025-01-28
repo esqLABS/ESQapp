@@ -13,6 +13,7 @@ run_app <- function(
     enableBookmarking = NULL,
     uiPattern = "/",
     ...) {
+  options(golem.app.prod = TRUE)
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
