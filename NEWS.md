@@ -1,6 +1,27 @@
 #  News
 
-## Version 0.0.1 (2024-12-17)
+## Version 1.0.1 (2025-01-16)
+
+### Project Core Package Update (esqlabsR 5.1.1 => 5.3.0)
+
+#### **Main Changes:**
+
+##### **Package Update**
+
+Updated esqlabsR package version to 5.3.0.
+
+##### **Bug Fixes**
+
+- Resolved a crash when trying to load a project configuration. (#63)
+- Fixed a crash that occurred when selecting a non-xlsx file while loading a project configuration. (#62)
+- Addressed a warning message displayed during startup. (#60)
+
+##### **Documentation**
+
+Updated installation instructions to recommend the use of the pack package. (#59)
+
+
+## Version 1.0.0 (2024-12-17)
 
 ### Initial Release (development version)
 
@@ -20,6 +41,7 @@ This is the initial release of the `ESQapp` package, providing core features for
 - **Shortcuts**: Implements keyboard shortcuts to enhance user efficiency.
 - **Integration with esqlabs.ui Package**: Integrates with the `esqlabs.ui` package for a seamless user experience.
 - **Multiselect Dropdown Column Editor**: A column editor that supports multiselect dropdowns for more flexible data entry.
+- **Project Configuration Import Validation**: The application validates the imported configuration against the default structure. If discrepancies are detected, it displays a warning message and provides a list of issues for the user to review.
 
 ---
 

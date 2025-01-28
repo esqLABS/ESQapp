@@ -6,10 +6,6 @@
 #' @noRd
 app_server <- function(input, output, session) {
   # Your application server logic
-
-  # if app_prod() is true, print "production", otherwise, print "dev"
-  message("Mode: ", if (golem::app_prod()) "Prod" else "Dev")
-
   r <- list()
 
   r$states <- reactiveValues()

@@ -28,22 +28,22 @@ ESQapp is UI for the [esqlabsR](https://github.com/esqLABS/esqlabsR) package. It
 
 ## Installation
 
-Install remotes:
+Install pak:
 
 ```r
-install.packages("remotes")
+install.packages("pak")
 ```
 
 You can install the package by running:
 
 ```r
-remotes::install_github("esqLABS/ESQapp@*release")
+pak::pak("esqLABS/ESQapp@*release")
 ```
 
 Get the latest development version with:
 
 ```r
-remotes::install_github("esqLABS/ESQapp")
+pak::pak("esqLABS/ESQapp")
 ```
 
 ## Usage
