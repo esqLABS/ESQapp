@@ -4,7 +4,7 @@ output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Introduction to esqlabsR}
+  %\VignetteIndexEntry{Getting started}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -48,14 +48,14 @@ Start the app by calling
 ESQapp::run_app()
 ```
 
-![](Figures/getting-started/fig1.png)
+![starting screen](Figures/getting-started/fig1.png)
 
 Click on the button "Select Project Configuration" and select the
 `ProjectConfiguration.xlsx` file of your project. The app will load the
 project and show the contents of the scenario definitions, individuals,
 populations, and plots.
 
-![](Figures/getting-started/fig2.png)
+![import project configuration](Figures/getting-started/fig2.png)
 
 ## Design Scenarios
 
@@ -64,7 +64,7 @@ field, e.g., `Scenario_name`, double-click on it. To remove a scenario
 or add a new one, right click on a row and select either "Insert" or
 "Remove row".
 
-![](Figures/getting-started/fig3.png)
+![design scenario](Figures/getting-started/fig3.png)
 
 The main properties that can be defined for a scenario are:
 
@@ -79,12 +79,11 @@ The main properties that can be defined for a scenario are:
     click on the cell and select "Clear".
 
 -   To edit the **simulation time** of the scenario, right click on the
-    `SimulationTime` entry and select "Enter Simulation Time".\
-    ![](Figures/getting-started/fig4.png)
-
-    In the following window, you can edit the output intervals of the
-    simulation\
-    ![](Figures/getting-started/fig5.png)\
+    `SimulationTime` entry and select "Enter Simulation Time".  
+    ![simulation time edit](Figures/getting-started/fig4.png)  
+    In the following window, you can edit the output intervals of the 
+    simulation.  
+    ![](Figures/getting-started/fig5.png)  
     To add or remove an interval, right click on an existing row. You
     can define the start and the end time of the interval, define the
     units, and define the resolution. As the original excel structure do
@@ -120,7 +119,7 @@ the excel file.
 Parameter sets specified in the column `ModelParameterSheets` of the
 `Scenarios` tab are listed in the tab `Parameter sets`.
 
-![](Figures/getting-started/fig6.png)
+![parameter sets](Figures/getting-started/fig6.png)
 
 In the current version of the app, it is not possible to add new or to
 remove the existing sets. This must be performed in the excel file.
@@ -139,7 +138,7 @@ Definition of the figures within the `{esqlabsR}` [Plotting
 Workflow](#plotting-workflow) is supported by the `{ESQapp}` in the tab
 `Plots`.
 
-![](Figures/getting-started/fig7.png)
+![plots](Figures/getting-started/fig7.png)
 
 The `DataCombined` defining the mappings of simulation results with
 observer data are specified in the `DataCombined` tab. The app allows
@@ -154,7 +153,7 @@ the configurations!
 After editing the scenarios, plots, or other configurations, the changes
 must be saved by clicking on the "Export" button.
 
-![](Figures/getting-started/fig8.png)
+![export](Figures/getting-started/fig8.png)
 
 The changes will be written into the excel files. Of course, manually
 editing the excel files still remains the option.

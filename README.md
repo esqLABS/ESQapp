@@ -17,7 +17,7 @@ Systems Pharmacology Suite.
 
 ## Installation
 
-Install remotes:
+Install pak:
 
 ``` r
 install.packages("pak")
@@ -41,6 +41,9 @@ pak::pak("esqLABS/ESQapp")
 library(ESQapp)
 ESQapp::run_app()
 ```
+
+Get started and learn how to use the {ESQapp} in
+`vignette("getting-started")`
 
 ## Development
 
