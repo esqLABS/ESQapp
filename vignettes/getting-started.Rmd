@@ -95,7 +95,8 @@ The main properties that can be defined for a scenario are:
 -   Output paths are defined in the column `OutputPathsIds`. When
     double-clicking on a cell, a list of output paths defined in the
     `OutputPaths` tab is presented and the user can select the paths
-    that should be added to the scenario.
+    that should be added to the scenario.\
+    ![output-paths-order](Figures/getting-started/fig10.png)
 
 ### Individuals
 
