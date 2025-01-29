@@ -13,9 +13,8 @@ app_ui <- function(request) {
     tags$head(
       golem::bundle_resources(
         path = app_sys("app/www"),
-        app_title = "Your App Title"
+        app_title = "ESQapp"
       ),
-      # Add your JS script here
       tags$script(src = "www/app_exit_protection.js")
     ),
     # Your application UI logic
