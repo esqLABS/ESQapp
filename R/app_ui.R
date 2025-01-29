@@ -10,6 +10,13 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     esqlabs.ui::intro_screen(width = '100%'),
+    tags$head(
+      golem::bundle_resources(
+        path = app_sys("app/www"),
+        app_title = "ESQapp"
+      ),
+      tags$script(src = "www/app_exit_protection.js")
+    ),
     # Your application UI logic
     bslib::page_navbar(
       title = span(
