@@ -158,4 +158,3 @@ must be saved by clicking on the "Export" button.
 
 The changes will be written into the excel files. Of course, manually
 editing the excel files still remains the option.
-
