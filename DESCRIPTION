@@ -8,7 +8,7 @@ Authors@R: c(
   )
 Description: Shiny App to edit {esqLABSR} Edit Simulation Scenarios.
 License: file LICENSE
-URL: https://github.com/esqLABS/ESQapp
+URL: https://github.com/esqLABS/ESQapp, https://esqlabs.github.io/ESQapp/
 BugReports: https://github.com/esqLABS/ESQapp/issues
 Imports: 
     config (>= 0.3.2),

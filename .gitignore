@@ -6,3 +6,4 @@
 .quarto
 *.xlsx
 dev_mode_artifacts/*
+docs
