@@ -13,6 +13,7 @@ run_app <- function(
     enableBookmarking = NULL,
     uiPattern = "/",
     ...) {
+  options(shiny.launch.browser = TRUE)
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
