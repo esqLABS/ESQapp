@@ -40,6 +40,9 @@ library(ESQapp)
 ESQapp::run_app()
 ```
 
+Get started and learn how to use the {ESQapp} in
+`vignette("getting-started")`
+
 ## Development
 
 To run the package locally:
