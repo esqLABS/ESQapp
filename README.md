@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/ESQapp?branch=main)
 <!-- badges: end -->
@@ -17,7 +15,7 @@ Systems Pharmacology Suite.
 
 ## Installation
 
-Install remotes:
+Install pak:
 
 ``` r
 install.packages("pak")
