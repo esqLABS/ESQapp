@@ -46,10 +46,23 @@ mod_export_server <- function(id, r, configuration_path) {
           sheet_list[[sheet]] <- r$data[[config_file]][[sheet]]$modified
         }
 
-        rio::export(
-          x = sheet_list,
-          file = export_path
+        # Try exporting and catch any errors
+        tryCatch(
+          {
+            rio::export(
+              x = sheet_list,
+              file = export_path
+            )
+            message("Export successful: ", export_path)
+          },
+          error = function(e) {
+            message("Error exporting ", config_file, ": File might be open or locked. Please close it and try again.")
+            r$states$export_xlsx_error <- paste0("File might be open or locked. Please close ", fs::path_file(export_path),
+                                                 " and try again."
+                                                 )
+          }
         )
+
       }
     })
   })
