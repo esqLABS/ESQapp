@@ -7,7 +7,7 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_simulationtime_module_ui <- function(id){
+mod_simulationtime_module_ui <- function(id) {
   ns <- NS(id)
   tagList()
 }
@@ -15,15 +15,14 @@ mod_simulationtime_module_ui <- function(id){
 #' simulationtime_module Server Functions
 #'
 #' @noRd
-mod_simulationtime_module_server <- function(id){
-  moduleServer( id, function(input, output, session) {
+mod_simulationtime_module_server <- function(id) {
+  moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     # input$process_simulation_time_conversion comes from esqlabs.handsontable |>
     # utils/simulationTimeModal.js |>
     # function sendSimulationTimeModalDataToShinyAndAwaitResponse
     observeEvent(input$process_simulation_time_conversion, {
-
       json_data_parsed_js <- jsonlite::fromJSON(
         input$process_simulation_time_conversion,
         simplifyVector = FALSE
@@ -37,9 +36,7 @@ mod_simulationtime_module_server <- function(id){
         "shinyResponse",
         simulation_time_list_res$Intervals
       )
-
     })
-
   })
 }
 
