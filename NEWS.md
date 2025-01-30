@@ -1,5 +1,26 @@
 #  News
 
+## Version 1.0.2 (2025-01-30)
+
+#### **Main Changes:**
+
+- **Exit Confirmation:** Users will now see a confirmation dialog before closing the application, preventing accidental exits. (#97)  
+- **Default Browser Launch:** The application now opens in the system’s default web browser instead of the RStudio viewer for a better user experience. (#98)  
+- **Export Status Dialog:** A new dialog window displays the export status, providing clear feedback on success or failure. (#100)  
+- **Guided Walkthrough:** Introduced an interactive walkthrough to help users navigate the app and understand its key features. (#94)  
+
+
+##### **Bug Fixes**
+
+- **Enhanced Handsontable Functionality:** Upgraded `esqlabs.handsontable` to support dynamically adding and removing parameter sheets in the Individuals tab. (#95)  
+- **Improved Export Behavior:** Modified the export function to overwrite the existing file instead of creating duplicates. (#96)  
+
+
+##### **Documentation**
+
+Updated documentation. (#102)
+
+
 ## Version 1.0.1 (2025-01-16)
 
 ### Project Core Package Update (esqlabsR 5.1.1 => 5.3.0)
