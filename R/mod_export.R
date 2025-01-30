@@ -31,6 +31,8 @@ mod_export_server <- function(id, r, configuration_path) {
     observeEvent(input$export, {
       message("exporting data")
 
+      export_success <- TRUE  # Track overall success
+
       for (config_file in r$data$get_config_files()) {
         if (!golem::app_prod()) {
           export_path <- paste0(fs::path_ext_remove(r$data[[config_file]]$file_path), "_copy.xlsx")
@@ -57,14 +59,28 @@ mod_export_server <- function(id, r, configuration_path) {
           },
           error = function(e) {
             message("Error exporting ", config_file, ": File might be open or locked. Please close it and try again.")
-            r$states$export_xlsx_error <- paste0("File might be open or locked. Please close ", fs::path_file(export_path),
-                                                 " and try again."
-                                                 )
+            r$states$export_xlsx_status <- list(
+              status = "Error: XLSX file might be open",
+              message = paste0("File might be open or locked. Please close ", fs::path_file(export_path),
+                               " and try again."
+              )
+            )
+            export_success <<- FALSE  # Mark failure
           }
         )
 
       }
+
+      # Set success message if no errors occurred
+      if (export_success) {
+        r$states$export_xlsx_status <- list(
+          status = "Success",
+          message = "Export completed successfully!"
+        )
+      }
     })
+
+
   })
 }
 

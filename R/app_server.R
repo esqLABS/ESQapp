@@ -23,18 +23,18 @@ app_server <- function(input, output, session) {
   # Call utils logic
   mod_simulationtime_module_server("simulationtime_logic")
 
-  # Call export xlsx error
-  observeEvent(r$states$export_xlsx_error, {
+  # Show export status modal
+  observeEvent(r$states$export_xlsx_status, {
     showModal(
       modalDialog(
-        title = "Error: XLSX file might be open",
+        title = r$states$export_xlsx_status$status,
         p(
-          r$states$export_xlsx_error
+          r$states$export_xlsx_status$message
         ),
         easyClose = TRUE
       )
     )
-    r$states$export_xlsx_error <- NULL
+    r$states$export_xlsx_status <- NULL
   })
 
 
