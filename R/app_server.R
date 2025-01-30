@@ -36,6 +36,4 @@ app_server <- function(input, output, session) {
     )
     r$states$export_xlsx_status <- NULL
   })
-
-
 }

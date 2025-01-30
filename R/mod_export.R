@@ -22,16 +22,19 @@ mod_export_server <- function(id, r, configuration_path) {
     ns <- session$ns
 
     # Enable the export button when the configuration file is loaded first time
-    observeEvent(configuration_path(), {
-      updateActionButton(session, inputId = "export", disabled = FALSE)
-    }, once = TRUE)
+    observeEvent(configuration_path(),
+      {
+        updateActionButton(session, inputId = "export", disabled = FALSE)
+      },
+      once = TRUE
+    )
 
 
     # Listen to the export button
     observeEvent(input$export, {
       message("exporting data")
 
-      export_success <- TRUE  # Track overall success
+      export_success <- TRUE # Track overall success
 
       for (config_file in r$data$get_config_files()) {
         if (!golem::app_prod()) {
@@ -61,14 +64,14 @@ mod_export_server <- function(id, r, configuration_path) {
             message("Error exporting ", config_file, ": File might be open or locked. Please close it and try again.")
             r$states$export_xlsx_status <- list(
               status = "Error: XLSX file might be open",
-              message = paste0("File might be open or locked. Please close ", fs::path_file(export_path),
-                               " and try again."
+              message = paste0(
+                "File might be open or locked. Please close ", fs::path_file(export_path),
+                " and try again."
               )
             )
-            export_success <<- FALSE  # Mark failure
+            export_success <<- FALSE # Mark failure
           }
         )
-
       }
 
       # Set success message if no errors occurred
@@ -79,8 +82,6 @@ mod_export_server <- function(id, r, configuration_path) {
         )
       }
     })
-
-
   })
 }
 

@@ -9,16 +9,16 @@
 #' @importFrom shiny NS tagList
 mod_warning_ui <- function(id) {
   ns <- NS(id)
-    # Show warning icon
-    bslib::nav_item(
-      actionButton(
-        inputId = ns("open_warning_modal"),
-        label = NULL,
-        icon = icon("bell"),
-        disabled = TRUE,
-        style = "color: black;"
-      )
+  # Show warning icon
+  bslib::nav_item(
+    actionButton(
+      inputId = ns("open_warning_modal"),
+      label = NULL,
+      icon = icon("bell"),
+      disabled = TRUE,
+      style = "color: black;"
     )
+  )
 }
 
 #' warning Server Functions
@@ -75,14 +75,11 @@ mod_warning_server <- function(id, r) {
 
         # Return the accordion with the items
         accordion(!!!items, multiple = FALSE)
-
       })
     })
 
     observeEvent(input$close_warning_modal, {
       removeModal()
     })
-
-
   })
 }
