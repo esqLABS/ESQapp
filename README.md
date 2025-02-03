@@ -1,17 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ESQapp
+# ESQapp <a href="https://esqlabs.github.io/ESQapp/"><img src="man/figures/logo.png" align="right" height="139" alt="ESQapp website" /></a>
 
 <!-- badges: start -->
-
-[![Codecov test
-coverage](https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/esqLABS/ESQapp?branch=main)
 <!-- badges: end -->
 
-ESQapp is UI for the [esqlabsR](https://github.com/esqLABS/esqlabsR)
+ESQapp is a GUI for the [esqlabsR](https://github.com/esqLABS/esqlabsR)
 package. It allows users to create, edit, and run scenarios for the Open
-Systems Pharmacology Suite.
+Systems Pharmacology Suite. See [Getting
+started](https://esqlabs.github.io/ESQapp/articles/getting-started.html)
+to learn how to use the app.
+
+![](vignettes/Figures/getting-started/fig2.png)
 
 ## Installation
 
@@ -35,8 +36,9 @@ pak::pak("esqLABS/ESQapp")
 
 ## Usage
 
+Start the app by calling
+
 ``` r
-library(ESQapp)
 ESQapp::run_app()
 ```
 
