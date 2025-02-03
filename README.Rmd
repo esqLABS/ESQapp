@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# ESQapp
+# ESQapp <a href="https://esqlabs.github.io/ESQapp/"><img src="man/figures/logo.png" align="right" height="139" alt="ESQapp website" /></a>
+
 
 <!-- badges: start -->
 
