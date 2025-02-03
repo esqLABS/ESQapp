@@ -13,6 +13,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Shiny App to edit {esqLABSR} Edit Simulation Scenarios">
 <meta name="description" content="Shiny App to edit {esqLABSR} Edit Simulation Scenarios.">
 <meta property="og:description" content="Shiny App to edit {esqLABSR} Edit Simulation Scenarios.">
+<meta property="og:image" content="https://esqlabs.github.io/ESQapp/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,11 +54,15 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="esqapp">ESQapp<a class="anchor" aria-label="anchor" href="#esqapp"></a>
-</h1></div>
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="esqapp-">ESQapp 
+<a class="anchor" aria-label="anchor" href="#esqapp-"></a>
+</h1>
+</div>
 <!-- badges: start -->
-
-<p>ESQapp is UI for the <a href="https://github.com/esqLABS/esqlabsR" class="external-link">esqlabsR</a> package. It allows users to create, edit, and run scenarios for the Open Systems Pharmacology Suite.</p>
+<!-- badges: end -->
+<p>ESQapp is a GUI for the <a href="https://github.com/esqLABS/esqlabsR" class="external-link">esqlabsR</a> package. It allows users to create, edit, and run scenarios for the Open Systems Pharmacology Suite. See <a href="https://esqlabs.github.io/ESQapp/articles/getting-started.html">Getting started</a> to learn how to use the app.</p>
+<p><img src="articles/Figures/getting-started/fig2.png"></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -74,9 +79,9 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
+<p>Start the app by calling</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/esqLABS/ESQapp" class="external-link">ESQapp</a></span><span class="op">)</span></span>
-<span><span class="fu">ESQapp</span><span class="fu">::</span><span class="fu"><a href="reference/run_app.html">run_app</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ESQapp</span><span class="fu">::</span><span class="fu"><a href="reference/run_app.html">run_app</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Get started and learn how to use the {ESQapp} in <code><a href="articles/getting-started.html">vignette("getting-started")</a></code></p>
 </div>
 <div class="section level2">
@@ -156,12 +161,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/esqLABS/ESQapp?branch=main" class="external-link"><img src="https://codecov.io/gh/esqLABS/ESQapp/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
