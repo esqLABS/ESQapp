@@ -62,7 +62,7 @@ mod_export_server <- function(id, r, configuration_path) {
           },
           error = function(e) {
             message("Error exporting ", config_file, ": File might be open or locked. Please close it and try again.")
-            r$states$export_xlsx_status <- list(
+            r$states$modal_message <- list(
               status = "Error: XLSX file might be open",
               message = paste0(
                 "File might be open or locked. Please close ", fs::path_file(export_path),
@@ -76,7 +76,7 @@ mod_export_server <- function(id, r, configuration_path) {
 
       # Set success message if no errors occurred
       if (export_success) {
-        r$states$export_xlsx_status <- list(
+        r$states$modal_message <- list(
           status = "Success",
           message = "Export completed successfully!"
         )
