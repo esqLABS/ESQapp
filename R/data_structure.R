@@ -104,7 +104,9 @@ DataStructure <- R6::R6Class("DataStructure",
         return(NULL)
       }
     },
+    # Import sheets ============================================================
     add_sheet = function(config_file, sheet_name, warning_obj) {
+
       if (is.null(self[[config_file]][[sheet_name]])) {
         self[[config_file]][[sheet_name]] <- reactiveValues()
       }
@@ -130,7 +132,8 @@ DataStructure <- R6::R6Class("DataStructure",
         warning_obj$add_warning(config_file, sheet_name, "Sheet is empty")
       }
     },
-    remove_individual_sheet = function(config_name, sheet_name) {
+    # Manage sheets ============================================================
+    remove_sheet = function(config_name, sheet_name) {
       if (!(sheet_name %in% self[[config_name]]$sheets)) {
         message("Sheet does not exist")
         return()
@@ -142,7 +145,7 @@ DataStructure <- R6::R6Class("DataStructure",
         self[[config_name]][[sheet_name]] <- NULL
       }
     },
-    create_new_individual_sheet = function(config_name, sheet_name) {
+    create_new_sheet = function(config_name, sheet_name) {
       if (sheet_name %in% self[[config_name]]$sheets) {
         message("Sheet already exists")
         return()

@@ -121,14 +121,14 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
             jsonlite::fromJSON()
 
           if (event_recorded$eventType == "individualId_added") {
-            r$data$create_new_individual_sheet(
+            r$data$create_new_sheet(
               config_name = tab_section,
               sheet_name = event_recorded$individualIdName
             )
           }
 
           if (event_recorded$eventType == "individualId_removed") {
-            r$data$remove_individual_sheet(
+            r$data$remove_sheet(
               config_name = tab_section,
               sheet_name = event_recorded$individualIdName
             )
