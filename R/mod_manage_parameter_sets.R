@@ -11,8 +11,8 @@ mod_manage_parameter_sets_ui <- function(id) {
   ns <- NS(id)
   tagList(
     div(
-      actionButton(ns("add_parameter"), "Add parameter", icon = icon("plus")),
-      actionButton(ns("edit_parameters"), "Edit parameter sets", icon = icon("edit"))
+      actionButton(ns("add_parameter"), "Add parameter set", icon = icon("plus")),
+      actionButton(ns("remove_parameters"), "Remove parameter set", icon = icon("edit"))
     ),
     br()
   )
@@ -56,10 +56,10 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section){
     })
 
     # Activate/Deactivate Edit Parameters mode
-    observeEvent(input$edit_parameters, {
+    observeEvent(input$remove_parameters, {
       r$states$edit_mode_parameters_set <- (!r$states$edit_mode_parameters_set)
-      updateActionButton(session, "edit_parameters",
-                         label = if (r$states$edit_mode_parameters_set) "Finish editing" else "Edit parameters")
+      updateActionButton(session, "remove_parameters",
+                         label = if (r$states$edit_mode_parameters_set) "Done" else "Remove parameter set")
 
     })
 
@@ -67,7 +67,7 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section){
     observeEvent(r$data[[tab_section]]$sheets, {
       if(length(r$data[[tab_section]]$sheets) == 0){
         r$states$edit_mode_parameters_set <- FALSE
-        updateActionButton(session, "edit_parameters", label = "Edit parameters")
+        updateActionButton(session, "remove_parameters", label = "Remove parameter set")
       }
     })
 
