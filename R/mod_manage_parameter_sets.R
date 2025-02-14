@@ -21,7 +21,7 @@ mod_manage_parameter_sets_ui <- function(id) {
 #' manage_parameter_sets Server Functions
 #'
 #' @noRd
-mod_manage_parameter_sets_server <- function(id, r, tab_section){
+mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
@@ -57,16 +57,16 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section){
 
     # Activate/Deactivate Edit Parameters mode
     observeEvent(input$remove_parameters, {
-      r$states$edit_mode_parameters_set <- (!r$states$edit_mode_parameters_set)
+      r$states[[state_name]] <- (!r$states[[state_name]])
       updateActionButton(session, "remove_parameters",
-                         label = if (r$states$edit_mode_parameters_set) "Done" else "Remove parameter set")
+                         label = if (r$states[[state_name]]) "Done" else "Remove parameter set")
 
     })
 
     # Handle all tabs removed
     observeEvent(r$data[[tab_section]]$sheets, {
       if(length(r$data[[tab_section]]$sheets) == 0){
-        r$states$edit_mode_parameters_set <- FALSE
+        r$states[[state_name]] <- FALSE
         updateActionButton(session, "remove_parameters", label = "Remove parameter set")
       }
     })

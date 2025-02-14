@@ -33,7 +33,8 @@ mod_tab_models_server <- function(id, r, DROPDOWNS) {
     mod_manage_parameter_sets_server(
       id = "manage_parameters_models",
       r = r,
-      tab_section = "models"
+      tab_section = "models",
+      state_name = "edit_mode_models"
     )
 
   })

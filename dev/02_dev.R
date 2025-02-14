@@ -59,6 +59,7 @@ golem::add_module(name = "tab_models")
 golem::add_module(name = "tab_plots")
 golem::add_module(name = "simulationtime_module")
 golem::add_module(name = "manage_parameter_sets")
+golem::add_module(name = "tab_applications")
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*

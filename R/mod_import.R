@@ -54,6 +54,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     })
 
     observeEvent(projectConfiguration(), {
+
       tryCatch(
         {
           config_map <- list(
@@ -61,6 +62,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             "individuals" = projectConfiguration()$individualsFile,
             "populations" = projectConfiguration()$populationsFile,
             "models" = projectConfiguration()$modelParamsFile,
+            "applications" = projectConfiguration()$applicationsFile,
             "plots" = projectConfiguration()$plotsFile
           )
 

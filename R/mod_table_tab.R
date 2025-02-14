@@ -21,7 +21,8 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    r$states$edit_mode_parameters_set <- FALSE
+    r$states$edit_mode_models <- FALSE
+    r$states$edit_mode_applications <- FALSE
 
     output$ui <- renderUI({
       req(r$data[[tab_section]]$sheets)
@@ -29,32 +30,23 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
       nav_panel_list <- list()
 
       for (sheet in r$data[[tab_section]]$sheets) {
+        # Skip completely empty sheets
+        if (sheet %in% r$warnings$invalid_sheets_name[[tab_section]]) {
+          next
+        }
+
         nav_panel_list[[length(nav_panel_list) + 1]] <-
           nav_panel(
             title = div(
               sheet,
-              {
-                if (r$states$edit_mode_parameters_set && tab_section == "models") {
-                  actionButton(
-                    inputId = paste("remove", sheet, sep = "_"),
-                    label = "x",
-                    class = "btn-close",
-                    onclick = sprintf("Shiny.setInputValue('%s', '%s');", ns("remove_parameter_name"), sheet),
-                    style = "
-                      margin-left: 10px;
-                      padding: 0;
-                      font-size: 14px;
-                      background: none;
-                      border: none;
-                      cursor: pointer;
-                      position: absolute;
-                      right: -23px;
-                      top: -18px;
-                      color: red;
-                    "
-                  )
+              tagList(
+                if (r$states$edit_mode_models && tab_section == "models") {
+                  cross_btn(sheet, ns)
+                },
+                if (r$states$edit_mode_applications && tab_section == "applications") {
+                  cross_btn(sheet, ns)
                 }
-              },
+              ),
               style = "display: flex; align-items: center; gap: 5px; position: relative;"
             ),
             br(),
