@@ -47,7 +47,7 @@
       ospsuite::toUnit(ospsuite::ospDimensions$Resolution,
         paramValues[["Resolution"]],
         targetUnit = paste0("pts/", schemaUnit),
-        sourceUnit = paste0("pts/", paramUnits[["Resolution"]])
+        sourceUnit = paste0(paramUnits[["Resolution"]])
       ),
       sep = ", "
     )
