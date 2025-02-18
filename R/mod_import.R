@@ -54,6 +54,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     })
 
     observeEvent(projectConfiguration(), {
+
       tryCatch(
         {
           config_map <- list(
@@ -61,6 +62,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             "individuals" = projectConfiguration()$individualsFile,
             "populations" = projectConfiguration()$populationsFile,
             "models" = projectConfiguration()$modelParamsFile,
+            "applications" = projectConfiguration()$applicationsFile,
             "plots" = projectConfiguration()$plotsFile
           )
 
@@ -88,6 +90,14 @@ mod_import_server <- function(id, r, DROPDOWNS) {
         },
         error = function(e) {
           return(NULL)
+          message("Error in reading the project configuration file")
+          r$states$modal_message <- list(
+            status = "Error in reading the project configuration file",
+            message = paste0(
+              "File might be missing or not in the correct format. Please check the file and try again.",
+            )
+          )
+
         }
       )
     })

@@ -27,6 +27,10 @@ mod_main_panel_ui <- function(id) {
       mod_tab_models_ui(ns("tab_models_1"))
     ),
     nav_panel(
+      title = "Applications",
+      mod_tab_applications_ui(ns("tab_applications_1"))
+    ),
+    nav_panel(
       title = "Plots",
       mod_tab_plots_ui(ns("tab_plots_1"))
     )
@@ -47,6 +51,8 @@ mod_main_panel_server <- function(id, r, DROPDOWNS) {
     mod_tab_populations_server("tab_populations_1", r, DROPDOWNS)
 
     mod_tab_models_server("tab_models_1", r, DROPDOWNS)
+
+    mod_tab_applications_server("tab_applications_1", r, DROPDOWNS)
 
     mod_tab_plots_server("tab_plots_1", r, DROPDOWNS)
   })

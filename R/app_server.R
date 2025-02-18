@@ -23,17 +23,18 @@ app_server <- function(input, output, session) {
   # Call utils logic
   mod_simulationtime_module_server("simulationtime_logic")
 
-  # Show export status modal
-  observeEvent(r$states$export_xlsx_status, {
+  # Show export/import file status modal
+  observeEvent(r$states$modal_message, {
+
     showModal(
       modalDialog(
-        title = r$states$export_xlsx_status$status,
+        title = r$states$modal_message$status,
         p(
-          r$states$export_xlsx_status$message
+          r$states$modal_message$message
         ),
         easyClose = TRUE
       )
     )
-    r$states$export_xlsx_status <- NULL
+    r$states$modal_message <- NULL
   })
 }

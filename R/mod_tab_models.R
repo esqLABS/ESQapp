@@ -10,6 +10,7 @@
 mod_tab_models_ui <- function(id) {
   ns <- NS(id)
   tagList(
+    mod_manage_parameter_sets_ui(ns("manage_parameters_models")),
     mod_table_tab_ui(ns("tab_models"))
   )
 }
@@ -28,6 +29,14 @@ mod_tab_models_server <- function(id, r, DROPDOWNS) {
       tab_section = "models",
       DROPDOWNS = DROPDOWNS
     )
+
+    mod_manage_parameter_sets_server(
+      id = "manage_parameters_models",
+      r = r,
+      tab_section = "models",
+      state_name = "edit_mode_models"
+    )
+
   })
 }
 

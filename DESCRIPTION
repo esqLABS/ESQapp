@@ -50,6 +50,6 @@ RoxygenNote: 7.3.1
 Remotes: 
     esqLABS/esqlabsR@*release,
     yonicd/covrpage,
-    esqLABS/esqlabs.ui@a152e76c96d2686f6590ee71c7b7940e695c9068,
-    esqLABS/esqlabs.handsontable@613e52dd43bb91ee292cb7ccf3ad5b9f4d0a9352
+    esqLABS/esqlabs.ui@39075c722c7fa78a3b4ff035aa76e11e3912e0c0,
+    esqLABS/esqlabs.handsontable@52766a8c073eddd47d3ff719c6dde322b955c8b4
 VignetteBuilder: knitr

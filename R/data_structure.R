@@ -16,6 +16,10 @@ data_structure <- function() {
       file_path = NA,
       sheets = NA
     ),
+    "applications" = reactiveValues(
+      file_path = NA,
+      sheets = NA
+    ),
     "plots" = reactiveValues(
       file_path = NA,
       sheets = NA
@@ -66,16 +70,18 @@ DataStructure <- R6::R6Class("DataStructure",
     individuals = NULL,
     populations = NULL,
     models = NULL,
+    applications = NULL,
     plots = NULL,
     initialize = function() {
       self$scenarios <- reactiveValues(file_path = NA, sheets = NA)
       self$individuals <- reactiveValues(file_path = NA, sheets = NA)
       self$populations <- reactiveValues(file_path = NA, sheets = NA)
       self$models <- reactiveValues(file_path = NA, sheets = NA)
+      self$applications <- reactiveValues(file_path = NA, sheets = NA)
       self$plots <- reactiveValues(file_path = NA, sheets = NA)
     },
     get_config_files = function() {
-      c("scenarios", "individuals", "populations", "models", "plots")
+      c("scenarios", "individuals", "populations", "models", "applications", "plots")
     },
     is_sheet_empty = function(file_path, sheet) {
       # Read the sheet without importing data to check dimensions
@@ -104,7 +110,9 @@ DataStructure <- R6::R6Class("DataStructure",
         return(NULL)
       }
     },
+    # Import sheets ============================================================
     add_sheet = function(config_file, sheet_name, warning_obj) {
+
       if (is.null(self[[config_file]][[sheet_name]])) {
         self[[config_file]][[sheet_name]] <- reactiveValues()
       }
@@ -115,7 +123,8 @@ DataStructure <- R6::R6Class("DataStructure",
         empty_columns <- self$check_empty_column_names(self[[config_file]]$file_path, sheet_name)
         if (!is.null(empty_columns)) {
           warning_obj$add_warning(
-            config_file, sheet_name,
+            config_file,
+            sheet_name,
             sprintf("Sheet contains empty column names: %s", paste(empty_columns, collapse = ", "))
           )
         }
@@ -127,10 +136,11 @@ DataStructure <- R6::R6Class("DataStructure",
         )
         self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
       } else {
-        warning_obj$add_warning(config_file, sheet_name, "Sheet is empty")
+        warning_obj$add_warning(config_file, sheet_name, "Sheet is empty", warning_code = "empty_sheet")
       }
     },
-    remove_individual_sheet = function(config_name, sheet_name) {
+    # Manage sheets ============================================================
+    remove_sheet = function(config_name, sheet_name) {
       if (!(sheet_name %in% self[[config_name]]$sheets)) {
         message("Sheet does not exist")
         return()
@@ -142,7 +152,7 @@ DataStructure <- R6::R6Class("DataStructure",
         self[[config_name]][[sheet_name]] <- NULL
       }
     },
-    create_new_individual_sheet = function(config_name, sheet_name) {
+    create_new_sheet = function(config_name, sheet_name) {
       if (sheet_name %in% self[[config_name]]$sheets) {
         message("Sheet already exists")
         return()
@@ -188,6 +198,8 @@ WarningHandler <- R6::R6Class(
 
     # Store warning messages
     warning_messages = NULL,
+    invalid_sheets_name = NULL,
+
 
     # Initialize
     initialize = function() {
@@ -195,10 +207,15 @@ WarningHandler <- R6::R6Class(
     },
 
     # Method to add a warning
-    add_warning = function(config_file, sheet_name, message) {
+    add_warning = function(config_file, sheet_name, message, warning_code = NULL) {
       self$warning_messages$config_files <- c(self$warning_messages$config_files, config_file)
       warning_msg <- sprintf("Warning for sheet <b>'%s'</b>: %s", sheet_name, message)
       self$warning_messages[[config_file]] <- c(self$warning_messages[[config_file]], warning_msg)
+
+      if (!is.null(warning_code)) {
+        self$invalid_sheets_name[[config_file]] <- c(self$invalid_sheets_name[[config_file]], sheet_name)
+      }
+
     }
   )
 )
