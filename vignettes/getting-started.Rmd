@@ -122,11 +122,9 @@ Parameter sets specified in the column `ModelParameterSheets` of the
 
 ![parameter sets](Figures/getting-started/fig6.png)
 
-In the current version of the app, it is not possible to add new or to
-remove the existing sets. This must be performed in the excel file.
-
 To add new entries, right-click on a row and select "Insert row" or
-"Remove row".
+"Remove row". To add a new parameter set (excel sheet), click on "Add
+parameter set".
 
 ### Applications
 
