@@ -44,6 +44,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
         axisscale_options = DROPDOWNS$plots$axisscale_options,
         aggregation_options = DROPDOWNS$plots$aggregation_options,
         path_options = DROPDOWNS$plots$path_options,
+        application_protocol_options = DROPDOWNS$applications$application_protocols,
         sheet_name = sheet,
         column_headers = (
           colnames(
@@ -94,6 +95,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           axisscale_option_dropdown = DROPDOWNS$plots$axisscale_options,
           aggregation_option_dropdown = DROPDOWNS$plots$aggregation_options,
           path_option_dropdown = DROPDOWNS$plots$path_options,
+          application_protocol_dropdown = DROPDOWNS$applications$application_protocols,
           sheet = sheet,
           shiny_el_id_name = ns("scenario_table_input"),
           column_headers = column_names_header

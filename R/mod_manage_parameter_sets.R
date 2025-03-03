@@ -21,7 +21,7 @@ mod_manage_parameter_sets_ui <- function(id) {
 #' manage_parameter_sets Server Functions
 #'
 #' @noRd
-mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name){
+mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DROPDOWNS){
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
@@ -51,6 +51,8 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name){
         )
       } else {
         r$data$create_new_sheet(tab_section, input$parameter_name)
+        # Update global `DROPDOWN` options (sourced from sheet names)
+        DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
         removeModal()
       }
     })
@@ -58,6 +60,9 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name){
     # Activate/Deactivate Edit Parameters mode
     observeEvent(input$remove_parameters, {
       r$states[[state_name]] <- (!r$states[[state_name]])
+      # Update global `DROPDOWN` options (sourced from sheet names)
+      DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
+      # Update Button Label
       updateActionButton(session, "remove_parameters",
                          label = if (r$states[[state_name]]) "Done" else "Remove parameter set")
 
