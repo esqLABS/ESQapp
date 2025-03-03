@@ -45,6 +45,9 @@ dropdown_values <- function() {
       height_unit = ospsuite::ospUnits$Length |> sapply(function(x) x) |> unname(),
       bmi_unit = ospsuite::ospUnits$BMI |> sapply(function(x) x) |> unname()
     ),
+    "applications" = reactiveValues(
+      application_protocols = c()
+    ),
     "plots" = reactiveValues(
       datatype_options = c("simulated", "observed"),
       scenario_options = c(),
@@ -137,6 +140,9 @@ DataStructure <- R6::R6Class("DataStructure",
         self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
       } else {
         warning_obj$add_warning(config_file, sheet_name, "Sheet is empty", warning_code = "empty_sheet")
+        # Remove sheet from the list of sheets
+        self[[config_file]][[sheet_name]] <- NULL
+        self[[config_file]]$sheets <- setdiff(self[[config_file]]$sheets, sheet_name)
       }
     },
     # Manage sheets ============================================================

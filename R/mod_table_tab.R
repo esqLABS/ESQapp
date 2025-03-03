@@ -30,10 +30,6 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
       nav_panel_list <- list()
 
       for (sheet in r$data[[tab_section]]$sheets) {
-        # Skip completely empty sheets
-        if (sheet %in% r$warnings$invalid_sheets_name[[tab_section]]) {
-          next
-        }
 
         nav_panel_list[[length(nav_panel_list) + 1]] <-
           nav_panel(

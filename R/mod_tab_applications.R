@@ -33,7 +33,8 @@ mod_tab_applications_server <- function(id, r, DROPDOWNS){
       id = "manage_parameters_applications",
       r = r,
       tab_section = "applications",
-      state_name = "edit_mode_applications"
+      state_name = "edit_mode_applications",
+      DROPDOWNS = DROPDOWNS
     )
 
   })
