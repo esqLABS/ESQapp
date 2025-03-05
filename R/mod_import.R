@@ -83,6 +83,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             DROPDOWNS$scenarios$individual_id <- r$data$individuals$IndividualBiometrics$modified$IndividualId
             DROPDOWNS$scenarios$population_id <- r$data$populations$Demographics$modified$PopulationName
             DROPDOWNS$scenarios$outputpath_id <- r$data$scenarios$OutputPaths$modified$OutputPathId
+            DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
             DROPDOWNS$plots$scenario_options <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
             DROPDOWNS$plots$path_options <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
             DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
