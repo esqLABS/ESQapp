@@ -53,6 +53,7 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
         r$data$create_new_sheet(tab_section, input$parameter_name)
         # Update global `DROPDOWN` options (sourced from sheet names)
         DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
+        DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
         removeModal()
       }
     })
@@ -62,6 +63,7 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
       r$states[[state_name]] <- (!r$states[[state_name]])
       # Update global `DROPDOWN` options (sourced from sheet names)
       DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
+      DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
       # Update Button Label
       updateActionButton(session, "remove_parameters",
                          label = if (r$states[[state_name]]) "Done" else "Remove parameter set")
