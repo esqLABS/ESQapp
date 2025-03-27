@@ -1,5 +1,32 @@
 #  News
 
+## Version 1.0.3 (2025-03-27)
+
+#### **Main Changes:**
+
+- **Enable first remove:** (#122)  
+- **ModelParameterSheets colum dropdown-sorting componet:** Listing all sheets present in the ModelParameters file. (#121)  
+- **Application Protocol Dropdown:** ApplicationProtocol - drop-down with sheet names from "Applications". (#113)  
+- **Simulation Time modal window update:** The "Enter Simulation Time" dialog (#76) now appears upon double-clicking the cell in the Scenarios table (#75), with full support for all time units (#111).
+- **Application tab and Parameter Tab:** In both the Application and Parameter tabs, users can add new or remove existing parameter sets within the Parameter Sets tab (#83).
+- **Application Staring time improved:** (#69)  
+- **[Scenarios] OutputPathId column update:** Disable sorting feature (#77)
+- **Add a --NONE-- option to all dropdown menus across the application.** The first entry in each dropdown is --NONE--, enabling users to intuitively clear the selection by choosing this option, which returns an empty value. (#72)
+
+
+##### **Documentation**
+
+Updated documentation. (#107); (#104)
+
+
+##### **Bug Fixes**
+
+- **Enhanced Handsontable Functionality:** Upgraded `esqlabs.handsontable` to support dynamically adding and removing parameter sheets in the Individuals tab. (#95)  
+- **Improved Export Behavior:** Modified the export function to overwrite the existing file instead of creating duplicates. (#96)  
+
+
+
+
 ## Version 1.0.2 (2025-01-30)
 
 #### **Main Changes:**
