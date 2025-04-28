@@ -168,26 +168,14 @@ DataStructure <- R6::R6Class("DataStructure",
 
         self[[config_name]][[sheet_name]] <- reactiveValues()
 
-        if(config_name %in% c("individuals")) {
-          self[[config_name]][[sheet_name]]$modified <- data.frame(
-            `Container Path` = NA_character_,
-            `Parameter Name` = NA_character_,
-            Value = NA_character_,
-            Units = NA_character_,
-            `Protein Ontogenies` = NA_character_,
-            check.names = FALSE,
-            row.names = NULL
-          )
-        } else {
-          self[[config_name]][[sheet_name]]$modified <- data.frame(
-            `Container Path` = NA_character_,
-            `Parameter Name` = NA_character_,
-            Value = NA_character_,
-            Units = NA_character_,
-            check.names = FALSE,
-            row.names = NULL
-          )
-        }
+        self[[config_name]][[sheet_name]]$modified <- data.frame(
+          `Container Path` = NA_character_,
+          `Parameter Name` = NA_character_,
+          Value = NA_character_,
+          Units = NA_character_,
+          check.names = FALSE,
+          row.names = NULL
+        )
 
       }
     },
