@@ -1,5 +1,12 @@
 #  News
 
+## Version 1.0.3.9001 (Development version)
+
+#### **Main Changes:**
+
+- **Enhancing Individual Biometrics and Population with Protein–Ontogeny Mapping** Adds a new column, Protein–Ontogeny, to the IndividualBiometrics sheet in the Individuals tab and the Demographics sheet in the Populations tab. Double-clicking a cell in this column opens a dialog for defining a Protein ↔ Ontogeny mapping, where the protein is entered by the user and the ontogeny is selected from `ospsuite::StandardOntogeny`. (#124)
+
+
 ## Version 1.0.3 (2025-03-27)
 
 #### **Main Changes:**

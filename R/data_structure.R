@@ -167,6 +167,7 @@ DataStructure <- R6::R6Class("DataStructure",
         self[[config_name]]$sheets <- c(self[[config_name]]$sheets, sheet_name)
 
         self[[config_name]][[sheet_name]] <- reactiveValues()
+
         self[[config_name]][[sheet_name]]$modified <- data.frame(
           `Container Path` = NA_character_,
           `Parameter Name` = NA_character_,
@@ -175,6 +176,7 @@ DataStructure <- R6::R6Class("DataStructure",
           check.names = FALSE,
           row.names = NULL
         )
+
       }
     },
     rename_individual_sheet = function(config_name, old_sheet_name, new_sheet_name) {
