@@ -1,5 +1,11 @@
 #  News
 
+## Version 1.0.3.9003 (Development version)
+
+#### **Main Changes:**
+
+- **"Enter Simulation Time" Dialog Automatically Converts Units Updates the "Enter Simulation Time** dialog to automatically convert user-entered time values to match the unit of the first "start" entry. (#132)
+
 ## Version 1.0.3.9001 (Development version)
 
 #### **Main Changes:**
