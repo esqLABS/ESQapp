@@ -1,5 +1,12 @@
 #  News
 
+## Version 1.0.3.9002 (Development version)
+
+##### **Bug Fixes**
+
+- **Enhanced Handsontable Functionality:** Resolved an issue in `esqlabs.handsontable` where rows became unresponsive after clearing their contents and pasting new copied rows value. (#131)
+
+
 ## Version 1.0.3.9001 (Development version)
 
 #### **Main Changes:**
