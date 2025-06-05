@@ -1,5 +1,13 @@
 #  News
 
+## Version 1.0.3.9004 (Development version)
+
+#### **Main Changes:**
+
+- **Scenario Name Validation** Added row highlight to prevent duplicate scenario names in the Scenario_name sheet. (#126)
+- **Dropdown Validation for `IndividualId` and `PopulationId`** If duplicates are found in the `IndividualId` or `PopulationId` dropdowns, they are highlighted, and all validation errors are shown in a pop-up window for clarity. (#127)
+
+
 ## Version 1.0.3.9003 (Development version)
 
 #### **Main Changes:**
