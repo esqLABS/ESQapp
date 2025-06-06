@@ -1,5 +1,19 @@
 #  News
 
+## Version 1.0.4 (2025-06-06)
+
+#### **Main Changes:**
+- **Scenario Name Validation** Added row highlight to prevent duplicate scenario names in the Scenario_name sheet. (#126)
+- **Dropdown Validation for `IndividualId` and `PopulationId`** If duplicates are found in the `IndividualId` or `PopulationId` dropdowns, they are highlighted, and all validation errors are shown in a pop-up window for clarity. (#127)
+- **"Enter Simulation Time" Dialog Automatically Converts Units Updates the "Enter Simulation Time** dialog to automatically convert user-entered time values to match the unit of the first "start" entry. (#132)
+- **Enhancing Individual Biometrics and Population with Protein–Ontogeny Mapping** Adds a new column, Protein–Ontogeny, to the IndividualBiometrics sheet in the Individuals tab and the Demographics sheet in the Populations tab. Double-clicking a cell in this column opens a dialog for defining a Protein ↔ Ontogeny mapping, where the protein is entered by the user and the ontogeny is selected from `ospsuite::StandardOntogeny`. (#124)
+
+
+##### **Bug Fixes**
+
+- **Enhanced Handsontable Functionality:** Resolved an issue in `esqlabs.handsontable` where rows became unresponsive after clearing their contents and pasting new copied rows value. (#131)
+  
+
 ## Version 1.0.3.9004 (Development version)
 
 #### **Main Changes:**
