@@ -3,7 +3,7 @@
 ## Version 1.0.4.9001 (Development version)
 
 ##### **Bug Fixes**
-- **"Del" key doesn't delete "SimulationTimeUnit" cell content:** Resolved an issue in (#133).
+- **"Del" key doesn't delete "SimulationTimeUnit" cell content:** Resolved an issue in (#139).
 
 ## Version 1.0.4 (2025-06-06)
 
