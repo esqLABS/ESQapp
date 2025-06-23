@@ -1,9 +1,16 @@
 #  News
 
+## Version 1.0.4.9002 (Development version)
+
+##### **Bug Fixes**
+- **"SimulationTimeUnit", "ModelParameterSheets" and "OutputPahtIds" are not copied in the "Scenario" sheet** Resolved an issue in (#140).
+- **Entries get reset when switching between tabs** Resolved an issue in (#140).
+
 ## Version 1.0.4.9001 (Development version)
 
 ##### **Bug Fixes**
 - **"Del" key doesn't delete "SimulationTimeUnit" cell content:** Resolved an issue in (#139).
+
 
 ## Version 1.0.4 (2025-06-06)
 
