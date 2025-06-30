@@ -1,5 +1,11 @@
 #  News
 
+## Version 1.0.4.9003 (Development version)
+
+#### **Main Changes:**
+- **Scenarios: Rename the column `ModelParameterSheets` to `Parameter sets`** Renamed the column only for presentation (in the UI), but retain the internal key ModelParameterSheets. (#141)
+- **Scenarios: `SimulationTime` column tooltip`** Tooltip added to the "SimulationTime" column. (#141)
+
 ## Version 1.0.4.9002 (Development version)
 
 ##### **Bug Fixes**
