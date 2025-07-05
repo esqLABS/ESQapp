@@ -1,5 +1,10 @@
 #  News
 
+## Version 1.0.4.9004 (Development version)
+
+#### **Main Changes:**
+- **`Applications` and `Parameter sets` dropdown** show available sheets as drop down in the "Applications" and "Parameter sets". (#142)
+
 ## Version 1.0.4.9003 (Development version)
 
 #### **Main Changes:**
