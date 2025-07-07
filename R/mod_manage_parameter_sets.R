@@ -25,6 +25,8 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
+    showDeleteConfirmationModal <- reactiveVal(FALSE)
+
     # Show Dialog to Add Parameter
     observeEvent(input$add_parameter, {
       showModal(
@@ -58,23 +60,47 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
       }
     })
 
-    # Activate/Deactivate Edit Parameters mode
+    # Activate Confirmation modal window
     observeEvent(input$remove_parameters, {
-      r$states[[state_name]] <- (!r$states[[state_name]])
+      showDeleteConfirmationModal(TRUE)
+    })
+
+    # Show confirmation modal for deletion
+    observeEvent(showDeleteConfirmationModal(), {
+      if(showDeleteConfirmationModal()){
+        showModal(
+          modalDialog(
+            title = "Delete Parameter Set",
+            "Are you sure you want to delete current parameter set?",
+            footer = tagList(
+              actionButton(ns("confirm_delete"), "Delete", class = "btn btn-danger"),
+              modalButton("Cancel")
+            )
+          )
+        )
+      } else {
+        removeModal()
+        showDeleteConfirmationModal(FALSE)
+      }
+    })
+
+    # Handle deletion confirmation
+    observeEvent(input$confirm_delete, {
+      # Send current tab_section name to the parent module and trigger deletion observeEvent there
+      r$states[[state_name]] <- list(tab_section = tab_section)
       # Update global `DROPDOWN` options (sourced from sheet names)
       DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
       DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
-      # Update Button Label
-      updateActionButton(session, "remove_parameters",
-                         label = if (r$states[[state_name]]) "Done" else "Remove parameter set")
-
+      # Remove modal window
+      removeModal()
+      showDeleteConfirmationModal(FALSE)
     })
+
 
     # Handle all tabs removed
     observeEvent(r$data[[tab_section]]$sheets, {
       if(length(r$data[[tab_section]]$sheets) == 0){
-        r$states[[state_name]] <- FALSE
-        updateActionButton(session, "remove_parameters", label = "Remove parameter set")
+        r$states[[state_name]] <- NULL # Send nothing to the observeEvent in the parent module
       }
     })
 

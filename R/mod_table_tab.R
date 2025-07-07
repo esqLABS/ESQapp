@@ -21,37 +21,92 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    r$states$edit_mode_models <- FALSE
-    r$states$edit_mode_applications <- FALSE
+    r$states$edit_mode_models <- NULL # Models (Parameter sets) tab
+    r$states$edit_mode_applications <- NULL # Applications tab
+    r$states$current_sheet_selected_models <- NULL
+    r$states$current_sheet_selected_applications <- NULL
 
+
+    # Render the UI (tabs) for the tab section
     output$ui <- renderUI({
       req(r$data[[tab_section]]$sheets)
 
-      nav_panel_list <- list()
+      if (tab_section %in% c("models", "applications")) {
+        sheets <- r$data[[tab_section]]$sheets
+        valid_sheets <- is.character(sheets) && length(sheets) > 0 && any(nzchar(sheets))
 
-      for (sheet in r$data[[tab_section]]$sheets) {
+        if (!valid_sheets) {
+          sheets <- NULL
+          selected_sheet <- NULL
+          if (tab_section == "models") {
+            r$states$current_sheet_selected_models <- NULL
+          }
+          if(tab_section == "applications") {
+            r$states$current_sheet_selected_applications <- NULL
+          }
+        } else {
+          selected_sheet <- tail(sheets, 1)
+          if (tab_section == "models") {
+            r$states$current_sheet_selected_models <- selected_sheet
+          }
+          if(tab_section == "applications") {
+            r$states$current_sheet_selected_applications <- selected_sheet
+          }
+        }
 
-        nav_panel_list[[length(nav_panel_list) + 1]] <-
-          nav_panel(
-            title = div(
-              sheet,
-              tagList(
-                if (r$states$edit_mode_models && tab_section == "models") {
-                  cross_btn(sheet, ns)
-                },
-                if (r$states$edit_mode_applications && tab_section == "applications") {
-                  cross_btn(sheet, ns)
-                }
+        tags_ <- tagList(
+          selectInput(ns("selected_sheet"), "Select parameter set", choices = sheets, selected = selected_sheet),
+          uiOutput(ns("selected_sheet_ui"))
+        )
+        return(tags_)
+      } else {
+        nav_panel_list <- list()
+
+        for (sheet in r$data[[tab_section]]$sheets) {
+
+          nav_panel_list[[length(nav_panel_list) + 1]] <-
+            nav_panel(
+              title = div(
+                sheet,
+                tagList(
+                  if(tab_section %in% c("models", "applications")) {
+                    next
+                  }
+                ),
+                style = "display: flex; align-items: center; gap: 5px; position: relative;"
               ),
-              style = "display: flex; align-items: center; gap: 5px; position: relative;"
-            ),
-            br(),
-            mod_edit_table_ui(id = ns(paste("tab", sheet, sep = "_")))
-          )
+              br(),
+              mod_edit_table_ui(id = ns(paste("tab", sheet, sep = "_")))
+            )
+        }
+
+        return(navset_pill(!!!nav_panel_list))
+
       }
 
-      return(navset_pill(!!!nav_panel_list))
     })
+
+    # Render the UI for the selected sheet Related to "Models" (Paramet Sets) and "Applications"
+    output$selected_sheet_ui <- renderUI({
+      selected <- if (tab_section == "models") {
+        r$states$current_sheet_selected_models
+      } else {
+        r$states$current_sheet_selected_applications
+      }
+      req(selected)
+      mod_edit_table_ui(id = ns(paste("tab", selected, sep = "_")))
+    })
+
+    # Observe the selected sheet and update the reactive state
+    observeEvent(input$selected_sheet, {
+      if (tab_section == "models") {
+        r$states$current_sheet_selected_models <- input$selected_sheet
+      }
+      if (tab_section == "applications") {
+        r$states$current_sheet_selected_applications <- input$selected_sheet
+      }
+    })
+
 
     observe({
       req(r$data[[tab_section]]$sheets)
@@ -70,12 +125,22 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
     })
 
 
-    # Delete sheet from parameters set
-    observeEvent(input$remove_parameter_name, {
+    # Delete sheet for "Models" (Parameter sets)
+    observeEvent(r$states$edit_mode_models, {
       r$data$remove_sheet(
-        config_name = tab_section,
-        sheet_name = input$remove_parameter_name
+        config_name = r$states$edit_mode_models$tab_section,
+        sheet_name = r$states$current_sheet_selected_models
       )
+      r$states$edit_mode_models <- NULL
+    })
+
+    # Delete sheet for "Applications"
+    observeEvent(r$states$edit_mode_applications, {
+      r$data$remove_sheet(
+        config_name = r$states$edit_mode_applications$tab_section,
+        sheet_name = r$states$current_sheet_selected_applications
+      )
+      r$states$edit_mode_applications <- NULL
     })
 
   })
