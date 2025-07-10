@@ -3,8 +3,8 @@
 ## Version 1.0.4.9005 (Development version)
 
 #### **Main Changes:**
-- **Plots: Hide tabs `dataTypes`, `plotTypes`, `ObservedDataNames`** Resolved an issue in (#143)
-- **Suppress printing `New names:` when loading excel files with columns without names** Resolved an issue in (#143)
+- **Plots: Hide tabs `dataTypes`, `plotTypes`, `ObservedDataNames`** Resolved an issue in (#146)
+- **Suppress printing `New names:` when loading excel files with columns without names** Resolved an issue in (#146)
 
 ## Version 1.0.4.9004 (Development version)
 
