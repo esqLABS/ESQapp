@@ -89,7 +89,9 @@ DataStructure <- R6::R6Class("DataStructure",
     },
     is_sheet_empty = function(file_path, sheet) {
       # Read the sheet without importing data to check dimensions
-      sheet_data <- readxl::read_excel(file_path, sheet = sheet, n_max = 1)
+      sheet_data <-  suppressMessages(suppressWarnings(
+                        readxl::read_excel(file_path, sheet = sheet, .name_repair = "minimal")
+                     ))
 
       # Check if the sheet has data
       return(nrow(sheet_data) == 0 & ncol(sheet_data) == 0)
@@ -98,7 +100,9 @@ DataStructure <- R6::R6Class("DataStructure",
       empty_columns <- c() # Vector to store empty column names
 
       # Read the entire sheet (to access column names)
-      sheet_data <- readxl::read_excel(file_path, sheet = sheet_name)
+      sheet_data <-  suppressMessages(suppressWarnings(
+                        readxl::read_excel(file_path, sheet = sheet_name, .name_repair = "minimal")
+                     ))
       # Check for empty or auto-assigned column names (e.g., ...1, ...2, etc.)
       for (col_name in names(sheet_data)) {
         # Check if the column name is NA, empty, or follows the auto-generated pattern (e.g., ...1, ...2)
@@ -133,11 +137,13 @@ DataStructure <- R6::R6Class("DataStructure",
           )
         }
 
-        self[[config_file]][[sheet_name]]$original <- rio::import(
-          self[[config_file]]$file_path,
-          sheet = sheet_name,
-          col_types = "text"
-        )
+        self[[config_file]][[sheet_name]]$original <- suppressMessages(suppressWarnings(
+                                                        rio::import(
+                                                          self[[config_file]]$file_path,
+                                                          sheet = sheet_name,
+                                                          col_types = "text"
+                                                        )
+                                                      ))
         self[[config_file]][[sheet_name]]$modified <- self[[config_file]][[sheet_name]]$original
       } else {
         warning_obj$add_warning(config_file, sheet_name, "Sheet is empty", warning_code = "empty_sheet")
