@@ -76,7 +76,11 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
                 style = "display: flex; align-items: center; gap: 5px; position: relative;"
               ),
               br(),
-              mod_edit_table_ui(id = ns(paste("tab", sheet, sep = "_")))
+              if(tab_section == "plots" && sheet %in% c("dataTypes", "plotTypes", "ObservedDataNames")) {
+                next
+              } else {
+                mod_edit_table_ui(id = ns(paste("tab", sheet, sep = "_")))
+              }
             )
         }
 
