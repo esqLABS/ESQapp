@@ -6,6 +6,7 @@
 - **Special characters not displayed properly in the "Parameters" table** Resolved an issue in (#147)
 - **When the "Demographics" sheet of the "Populations.xslx" file is empty, it is not possible to add new entries** Resolved an issue in (#147)
 - **Rename "Add Parameter" to "Add Parameter Set"** Resolved an issue in (#147)
+- **`Add new column` feature added to -> Plots: `plotConfiguration`, `plotGrids`, and `exportConfiguration`** Resolved an issue in (#147)
 
 
 ## Version 1.0.4.9005 (Development version)
