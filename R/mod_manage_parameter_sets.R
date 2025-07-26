@@ -27,21 +27,21 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
 
     showDeleteConfirmationModal <- reactiveVal(FALSE)
 
-    # Show Dialog to Add Parameter
+    # Show Dialog to Add parameter set
     observeEvent(input$add_parameter, {
       showModal(
         modalDialog(
-          title = "Add Parameter",
+          title = "Add Parameter Set",
           textInput(ns("parameter_name"), "Parameter Name"),
           footer = tagList(
-            actionButton(ns("add_parameter_button"), "Add Parameter"),
+            actionButton(ns("add_parameter_button"), "Add Parameter Set"),
             modalButton("Cancel")
           )
         )
       )
     })
 
-    # Add Parameter
+    # Add Parameter Set
     observeEvent(input$add_parameter_button, {
       if(input$parameter_name %in% r$data[[tab_section]]$sheets){
         showModal(
