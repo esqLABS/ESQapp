@@ -1,5 +1,11 @@
 #  News
 
+## Version 1.0.4.9006 (Development version)
+
+#### **Bug Fixes:**
+- **Special characters not displayed properly in the "Parameters" table** Resolved an issue in (#147)
+
+
 ## Version 1.0.4.9005 (Development version)
 
 #### **Main Changes:**
