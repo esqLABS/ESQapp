@@ -4,6 +4,7 @@
 
 #### **Bug Fixes:**
 - **Special characters not displayed properly in the "Parameters" table** Resolved an issue in (#147)
+- **When the "Demographics" sheet of the "Populations.xslx" file is empty, it is not possible to add new entries** Resolved an issue in (#147)
 
 
 ## Version 1.0.4.9005 (Development version)
