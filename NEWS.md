@@ -1,5 +1,11 @@
 #  News
 
+## Version 1.0.4.9007 (Development version)
+
+#### **Main Changes:**
+- **`Plots` tab -> `plotGrids` sheet -> `plotIDs`column added sortable dropdown feature** Resolved an issue in (#148)
+
+
 ## Version 1.0.4.9006 (Development version)
 
 #### **Main Changes:**
