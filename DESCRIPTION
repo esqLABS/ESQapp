@@ -51,5 +51,5 @@ Remotes:
     esqLABS/esqlabsR@*release,
     yonicd/covrpage,
     esqLABS/esqlabs.ui@39075c722c7fa78a3b4ff035aa76e11e3912e0c0,
-    esqLABS/esqlabs.handsontable@ef5f5d91c278b101c50d66b8dbd8ddcabb992d3f
+    esqLABS/esqlabs.handsontable@bf92147f893aa95e5b375f3434dccec76ce5f3d5
 VignetteBuilder: knitr
