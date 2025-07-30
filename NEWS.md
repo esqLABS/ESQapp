@@ -1,5 +1,26 @@
 #  News
 
+## Version 1.0.5 (2025-07-30)
+
+#### **Main Changes:**
+- **Scenarios: Rename the column `ModelParameterSheets` to `Parameter sets`** Renamed the column only for presentation (in the UI), but retain the internal key ModelParameterSheets. (#141)
+- **Scenarios: `SimulationTime` column tooltip`** Tooltip added to the "SimulationTime" column. (#141)
+- **`Applications` and `Parameter sets` dropdown** show available sheets as drop down in the "Applications" and "Parameter sets". (#142)
+- **Plots: Hide tabs `dataTypes`, `plotTypes`, `ObservedDataNames`** Resolved an issue in (#146)
+- **Suppress printing `New names:` when loading excel files with columns without names** Resolved an issue in (#146)
+- **Rename "Add Parameter" to "Add Parameter Set"** Resolved an issue in (#148)
+- **`Add new column` feature added to -> Plots: `plotConfiguration`, `plotGrids`, and `exportConfiguration`** Resolved an issue in (#148)
+- **`Plots` tab -> `exportConfiguration` sheet, replace `plotGridName` text type with dropdown** Resolved an issue in (#148)
+- **`Plots` tab -> `plotGrids` sheet -> `plotIDs`column added sortable dropdown feature** Resolved an issue in (#149)
+
+##### **Bug Fixes**
+- **"Del" key doesn't delete "SimulationTimeUnit" cell content:** Resolved an issue in (#139).
+- **"SimulationTimeUnit", "ModelParameterSheets" and "OutputPahtIds" are not copied in the "Scenario" sheet** Resolved an issue in (#140).
+- **Entries get reset when switching between tabs** Resolved an issue in (#140).
+- **Special characters not displayed properly in the "Parameters" table** Resolved an issue in (#148)
+- **When the "Demographics" sheet of the "Populations.xslx" file is empty, it is not possible to add new entries** Resolved an issue in (#148)
+
+
 ## Version 1.0.4.9007 (Development version)
 
 #### **Main Changes:**
