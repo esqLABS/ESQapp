@@ -47,6 +47,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           aggregation_options = DROPDOWNS$plots$aggregation_options,
           path_options = DROPDOWNS$plots$path_options,
           application_protocol_options = DROPDOWNS$applications$application_protocols,
+          plotgridnames_options = DROPDOWNS$plots$plotgridnames_options,
+          plotids_options = DROPDOWNS$plots$plotids_options,
           sheet_name = sheet,
           column_headers = (
             colnames(
@@ -76,6 +78,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
       DROPDOWNS$plots$scenario_options <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
       DROPDOWNS$plots$path_options <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
       DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
+      DROPDOWNS$plots$plotgridnames_options <- r$data$plots$plotGrids$modified$name |> unique()
+      DROPDOWNS$plots$plotids_options <- r$data$plots$plotConfiguration$modified$plotID |> unique()
 
       esqlabs.handsontable::updateScenario_table_Input(
         session = getDefaultReactiveDomain(),
@@ -101,6 +105,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           aggregation_option_dropdown = DROPDOWNS$plots$aggregation_options,
           path_option_dropdown = DROPDOWNS$plots$path_options,
           application_protocol_dropdown = DROPDOWNS$applications$application_protocols,
+          plotgridnames_option_dropdown = DROPDOWNS$plots$plotgridnames_options,
+          plotids_option_dropdown = DROPDOWNS$plots$plotids_options,
           sheet = sheet,
           shiny_el_id_name = ns("scenario_table_input"),
           column_headers = column_names_header

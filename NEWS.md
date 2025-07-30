@@ -1,5 +1,23 @@
 #  News
 
+## Version 1.0.4.9007 (Development version)
+
+#### **Main Changes:**
+- **`Plots` tab -> `plotGrids` sheet -> `plotIDs`column added sortable dropdown feature** Resolved an issue in (#149)
+
+
+## Version 1.0.4.9006 (Development version)
+
+#### **Main Changes:**
+- **Rename "Add Parameter" to "Add Parameter Set"** Resolved an issue in (#148)
+- **`Add new column` feature added to -> Plots: `plotConfiguration`, `plotGrids`, and `exportConfiguration`** Resolved an issue in (#148)
+- **`Plots` tab -> `exportConfiguration` sheet, replace `plotGridName` text type with dropdown** Resolved an issue in (#148)
+
+#### **Bug Fixes:**
+- **Special characters not displayed properly in the "Parameters" table** Resolved an issue in (#148)
+- **When the "Demographics" sheet of the "Populations.xslx" file is empty, it is not possible to add new entries** Resolved an issue in (#148)
+
+
 ## Version 1.0.4.9005 (Development version)
 
 #### **Main Changes:**
