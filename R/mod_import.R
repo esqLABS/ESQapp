@@ -88,6 +88,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             DROPDOWNS$plots$path_options <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
             DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
             DROPDOWNS$plots$plotgridnames_options <- r$data$plots$plotGrids$modified$name |> unique()
+            DROPDOWNS$plots$plotids_options <- r$data$plots$plotConfiguration$modified$plotID |> unique()
             DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
           }
         },
