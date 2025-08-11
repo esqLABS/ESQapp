@@ -63,6 +63,12 @@ cat('=== Validation Complete ===\\n')
 - Which dependencies are available vs missing
 - Whether to attempt advanced operations or focus on basic validation
 
+**DECISION TREE based on validation results:**
+- **5/5 dependencies available**: Proceed with full development workflow
+- **3-4/5 dependencies available**: Use partial workflow, focus on basic operations
+- **1-2/5 dependencies available**: Structure validation and manual inspection only
+- **0/5 dependencies available**: Manual file review, document missing packages
+
 3. **Attempt dependency restoration (ENVIRONMENT-DEPENDENT):**
    ```bash
    R --slave -e "source('renv/activate.R')"
@@ -292,3 +298,34 @@ ESQapp/
 6. **NEVER** commit dependency changes without updating the renv.lock snapshot
 
 Remember: This is a specialized pharmaceutical modeling application. Some functionality requires domain-specific packages that may not be available in all environments. Focus on code quality, structure, and basic functionality validation.
+
+## Appendix: Quick Environment Test
+
+Run this to simulate following the instructions step-by-step:
+
+```bash
+R --slave -e "
+cat('=== ENVIRONMENT CAPABILITY TEST ===\\n')
+
+# Package structure  
+structure_ok <- file.exists('DESCRIPTION') && file.exists('NAMESPACE') && dir.exists('R')
+cat('Package structure:', if(structure_ok) '✓ VALID' else '✗ INVALID', '\\n')
+
+# Dependencies
+deps <- c('devtools', 'testthat', 'shiny', 'golem', 'config')
+available_count <- sum(sapply(deps, function(x) requireNamespace(x, quietly=TRUE)))
+cat('Dependencies available:', available_count, '/', length(deps), '\\n')
+
+# Recommendation
+if(available_count >= 3) {
+  cat('RECOMMENDATION: Proceed with development workflow\\n')
+} else if(available_count >= 1) {
+  cat('RECOMMENDATION: Basic validation only\\n') 
+} else {
+  cat('RECOMMENDATION: Manual inspection only\\n')
+}
+cat('=== TEST COMPLETE ===\\n')
+"
+```
+
+Use this test result to choose the appropriate workflow level from the instructions above.
