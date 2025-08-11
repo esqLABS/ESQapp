@@ -10,12 +10,47 @@
 mod_import_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    shinyFiles::shinyFilesButton(
-      ns("projectConfigurationFile"),
-      "Select Project Configuration",
-      "Please select the projectConfiguration excel file",
-      multiple = FALSE
+    # Modern file input card
+    bslib::card(
+      height = "auto",
+      style = "border: 2px dashed #007bff; margin-bottom: 15px;",
+      bslib::card_body(
+        class = "text-center p-4",
+        
+        # File input
+        fileInput(
+          ns("projectConfigurationFile"),
+          label = NULL,
+          accept = ".xlsx,.xls",
+          buttonLabel = "Browse Files",
+          placeholder = "No file selected",
+          width = "100%"
+        ),
+        
+        # Visual enhancement with icon and instructions
+        div(
+          style = "margin-top: 15px;",
+          tags$div(
+            style = "font-size: 2.5rem; color: #007bff; margin-bottom: 10px;",
+            "📁" # Using emoji as fallback for icon
+          ),
+          tags$h6(
+            "Project Configuration File", 
+            style = "margin: 10px 0 5px 0; color: #495057; font-weight: 600;"
+          ),
+          tags$small(
+            "Select an Excel file (.xlsx, .xls)", 
+            style = "color: #6c757d; display: block; margin-bottom: 5px;"
+          ),
+          tags$small(
+            "Drag and drop supported", 
+            style = "color: #28a745; font-style: italic;"
+          )
+        )
+      )
     ),
+    
+    # File path display
     uiOutput(ns("selected_file_path"))
   )
 }
@@ -27,30 +62,25 @@ mod_import_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    volumes <- c(
-      "Current Project" = getwd(),
-      # "Test Project" = testthat::test_path("data"),
-      Home = Sys.getenv("R_USER"),
-      shinyFiles::getVolumes()()
-    )
-
-    shinyFiles::shinyFileChoose(input,
-      id = "projectConfigurationFile",
-      roots = volumes,
-      filetypes = c("xlsx"),
-      session = session
-    )
-
     projectConfiguration <- reactive({
       req(input$projectConfigurationFile)
-      projectConfigurationFilePath <- shinyFiles::parseFilePaths(
-        volumes,
-        input$projectConfigurationFile
-      )
+      
+      # Get the uploaded file info
+      file_info <- input$projectConfigurationFile
+      req(file_info$datapath)
+      
+      # Validate file extension
+      file_ext <- tools::file_ext(file_info$name)
+      if (!file_ext %in% c("xlsx", "xls")) {
+        showNotification(
+          "Please select an Excel file (.xlsx or .xls)",
+          type = "error",
+          duration = 5
+        )
+        return(NULL)
+      }
 
-      req(projectConfigurationFilePath$datapath)
-
-      esqlabsR::createDefaultProjectConfiguration(path = projectConfigurationFilePath$datapath)
+      esqlabsR::createDefaultProjectConfiguration(path = file_info$datapath)
     })
 
     observeEvent(projectConfiguration(), {
@@ -107,14 +137,39 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     })
 
     output$selected_file_path <- renderUI({
-      req(projectConfiguration())
-
-      verbatimTextOutput(ns("selected_file_path_text"))
+      req(input$projectConfigurationFile)
+      
+      file_info <- input$projectConfigurationFile
+      
+      # Create a nice display for the selected file
+      bslib::card(
+        style = "margin-top: 10px; border-left: 4px solid #28a745;",
+        bslib::card_body(
+          style = "padding: 10px 15px;",
+          div(
+            style = "display: flex; align-items: center;",
+            span(
+              style = "color: #28a745; margin-right: 8px; font-size: 1.2em;",
+              "✓"
+            ),
+            div(
+              tags$strong("Selected File:", style = "color: #495057;"),
+              br(),
+              tags$small(file_info$name, style = "color: #6c757d;"),
+              br(),
+              tags$small(
+                paste("Size:", round(file_info$size / 1024, 1), "KB"), 
+                style = "color: #6c757d;"
+              )
+            )
+          )
+        )
+      )
     })
 
     output$selected_file_path_text <- renderPrint({
-      req(projectConfiguration())
-      projectConfiguration()$projectConfigurationFilePath
+      req(input$projectConfigurationFile)
+      input$projectConfigurationFile$name
     })
 
     # Share project configuration path with the export module
