@@ -1,5 +1,15 @@
 #  News
 
+## Version 1.0.5.9001 (Development version)
+
+#### **Main Changes:**
+- **SimulationTime Modal: remove "Time Unit" headers in the table** Resolved an issue in (#156).
+
+##### **Bug Fixes**
+- **Sorted multi-dropdown menus: quoted sheets read incorrectly (`""`)** Resolved an issue in (#156).
+
+
+
 ## Version 1.0.5 (2025-07-30)
 
 #### **Main Changes:**
