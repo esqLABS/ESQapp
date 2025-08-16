@@ -3,10 +3,10 @@
 ## Version 1.0.5.9001 (Development version)
 
 #### **Main Changes:**
-- **SimulationTime Modal: remove "Time Unit" headers in the table** Resolved an issue in (#156).
+- **SimulationTime Modal: remove "Time Unit" headers in the table** Resolved an issue in (#158).
 
 ##### **Bug Fixes**
-- **Sorted multi-dropdown menus: quoted sheets read incorrectly (`""`)** Resolved an issue in (#156).
+- **Sorted multi-dropdown menus: quoted sheets read incorrectly (`""`)** Resolved an issue in (#158).
 
 
 
