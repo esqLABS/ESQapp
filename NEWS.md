@@ -3,7 +3,7 @@
 ## Version 1.0.5.9002 (Development version)
 
 #### **Main Changes:**
-- **Scenarios -> Outputpath_id column: show the actual path as sub-heading** Resolved an issue in (#159).
+- **Scenarios -> Outputpath_id column: show the actual path as sub-heading** Resolved an issue in (#160).
 
 
 ## Version 1.0.5.9001 (Development version)
