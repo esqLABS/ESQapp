@@ -31,6 +31,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           individual_id_options = DROPDOWNS$scenarios$individual_id,
           population_id_options = DROPDOWNS$scenarios$population_id,
           outputpath_id_options = DROPDOWNS$scenarios$outputpath_id,
+          outputpath_id_alias_options = DROPDOWNS$scenarios$outputpath_id_alias,
           model_parameters_options = DROPDOWNS$scenarios$model_parameters,
           steatystatetime_unit_options = DROPDOWNS$scenarios$steadystatetime_unit,
           species_options = DROPDOWNS$individuals$species_options,
@@ -75,6 +76,10 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
       DROPDOWNS$scenarios$individual_id <- r$data$individuals$IndividualBiometrics$modified$IndividualId
       DROPDOWNS$scenarios$population_id <- r$data$populations$Demographics$modified$PopulationName
       DROPDOWNS$scenarios$outputpath_id <- r$data$scenarios$OutputPaths$modified$OutputPathId
+      DROPDOWNS$scenarios$outputpath_id_alias <- setNames(
+        as.list(as.character(r$data$scenarios$OutputPaths$modified$OutputPath)),
+        r$data$scenarios$OutputPaths$modified$OutputPathId
+      )
       DROPDOWNS$plots$scenario_options <- r$data$scenarios$Scenarios$modified$Scenario_name |> unique()
       DROPDOWNS$plots$path_options <- r$data$scenarios$OutputPaths$modified$OutputPath |> unique()
       DROPDOWNS$plots$datacombinedname_options <- r$data$plots$DataCombined$modified$DataCombinedName |> unique()
@@ -89,6 +94,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           individual_id_dropdown = DROPDOWNS$scenarios$individual_id,
           population_id_dropdown = DROPDOWNS$scenarios$population_id,
           outputpath_id_dropdown = DROPDOWNS$scenarios$outputpath_id,
+          outputpath_id_alias_dropdown = DROPDOWNS$scenarios$outputpath_id_alias,
           model_parameters_dropdown = DROPDOWNS$scenarios$model_parameters,
           steatystatetime_unit_dropdown = DROPDOWNS$scenarios$steadystatetime_unit,
           species_option_dropdown = DROPDOWNS$individuals$species_options,
