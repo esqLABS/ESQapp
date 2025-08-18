@@ -11,7 +11,7 @@ mod_import_ui <- function(id) {
   ns <- NS(id)
   tagList(
     tags$div(
-      id = ns("dropzone"),   # NEW: JS will target this
+      id = ns("dropzone"),   # enhanced_file_input.js targets this ID
       bslib::card(
         height = "auto",
         style = "border: 2px dashed #007bff; margin-bottom: 15px;",
@@ -20,7 +20,7 @@ mod_import_ui <- function(id) {
           fileInput(
             ns("projectConfigurationFile"),
             label = NULL,
-            accept = c(".xlsx", ".xls"),  # small cleanup
+            accept = c(".xlsx", ".xls"),
             buttonLabel = "Browse Files",
             placeholder = "No file selected",
             width = "100%"
@@ -39,7 +39,7 @@ mod_import_ui <- function(id) {
       )
     ),
     uiOutput(ns("selected_file_path")),
-    # NEW: visual state while dragging over the dropzone
+    # Visual state while dragging over the dropzone
     tags$style(HTML(sprintf(
       "#%s.dragover { border-color:#28a745 !important; background-color:#e8f5e8; }",
       ns("dropzone")
