@@ -10,48 +10,40 @@
 mod_import_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    # Modern file input card
-    bslib::card(
-      height = "auto",
-      style = "border: 2px dashed #007bff; margin-bottom: 15px;",
-      bslib::card_body(
-        class = "text-center p-4",
-        
-        # File input
-        fileInput(
-          ns("projectConfigurationFile"),
-          label = NULL,
-          accept = ".xlsx,.xls",
-          buttonLabel = "Browse Files",
-          placeholder = "No file selected",
-          width = "100%"
-        ),
-        
-        # Visual enhancement with icon and instructions
-        div(
-          style = "margin-top: 15px;",
-          tags$div(
-            style = "font-size: 2.5rem; color: #007bff; margin-bottom: 10px;",
-            "📁" # Using emoji as fallback for icon
+    tags$div(
+      id = ns("dropzone"),   # NEW: JS will target this
+      bslib::card(
+        height = "auto",
+        style = "border: 2px dashed #007bff; margin-bottom: 15px;",
+        bslib::card_body(
+          class = "text-center p-4",
+          fileInput(
+            ns("projectConfigurationFile"),
+            label = NULL,
+            accept = c(".xlsx", ".xls"),  # small cleanup
+            buttonLabel = "Browse Files",
+            placeholder = "No file selected",
+            width = "100%"
           ),
-          tags$h6(
-            "Project Configuration File", 
-            style = "margin: 10px 0 5px 0; color: #495057; font-weight: 600;"
-          ),
-          tags$small(
-            "Select an Excel file (.xlsx, .xls)", 
-            style = "color: #6c757d; display: block; margin-bottom: 5px;"
-          ),
-          tags$small(
-            "Drag and drop supported", 
-            style = "color: #28a745; font-style: italic;"
+          div(
+            style = "margin-top: 15px;",
+            tags$div(style = "font-size: 2.5rem; color: #007bff; margin-bottom: 10px;", "📁"),
+            tags$h6("Project Configuration File",
+                    style = "margin: 10px 0 5px 0; color: #495057; font-weight: 600;"),
+            tags$small("Select an Excel file (.xlsx, .xls)",
+                       style = "color: #6c757d; display: block; margin-bottom: 5px;"),
+            tags$small("Drag and drop supported",
+                       style = "color: #28a745; font-style: italic;")
           )
         )
       )
     ),
-    
-    # File path display
-    uiOutput(ns("selected_file_path"))
+    uiOutput(ns("selected_file_path")),
+    # NEW: visual state while dragging over the dropzone
+    tags$style(HTML(sprintf(
+      "#%s.dragover { border-color:#28a745 !important; background-color:#e8f5e8; }",
+      ns("dropzone")
+    )))
   )
 }
 
@@ -64,11 +56,11 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
     projectConfiguration <- reactive({
       req(input$projectConfigurationFile)
-      
+
       # Get the uploaded file info
       file_info <- input$projectConfigurationFile
       req(file_info$datapath)
-      
+
       # Validate file extension
       file_ext <- tools::file_ext(file_info$name)
       if (!file_ext %in% c("xlsx", "xls")) {
@@ -138,9 +130,9 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
     output$selected_file_path <- renderUI({
       req(input$projectConfigurationFile)
-      
+
       file_info <- input$projectConfigurationFile
-      
+
       # Create a nice display for the selected file
       bslib::card(
         style = "margin-top: 10px; border-left: 4px solid #28a745;",
@@ -158,7 +150,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
               tags$small(file_info$name, style = "color: #6c757d;"),
               br(),
               tags$small(
-                paste("Size:", round(file_info$size / 1024, 1), "KB"), 
+                paste("Size:", round(file_info$size / 1024, 1), "KB"),
                 style = "color: #6c757d;"
               )
             )
