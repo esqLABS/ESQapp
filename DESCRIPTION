@@ -14,7 +14,7 @@ Imports:
     config (>= 0.3.2),
     golem (>= 0.4.1),
     shiny (>= 1.7.5),
-    esqlabsR (>= 5.3.0),
+    esqlabsR (>= 5.5.0),
     bslib,
     shinyFiles,
     rio,
