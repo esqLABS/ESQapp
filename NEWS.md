@@ -1,5 +1,15 @@
 #  News
 
+## Version 2.0.0 (2025-08-19)
+
+#### **Main Changes:**
+- **SimulationTime Modal: remove "Time Unit" headers in the table** Resolved an issue in (#158).
+- **Scenarios -> Outputpath_id column: show the actual path as sub-heading** Resolved an issue in (#160).
+
+##### **Bug Fixes**
+- **Sorted multi-dropdown menus: quoted sheets read incorrectly (`""`)** Resolved an issue in (#158).
+
+
 ## Version 1.0.5.9002 (Development version)
 
 #### **Main Changes:**
