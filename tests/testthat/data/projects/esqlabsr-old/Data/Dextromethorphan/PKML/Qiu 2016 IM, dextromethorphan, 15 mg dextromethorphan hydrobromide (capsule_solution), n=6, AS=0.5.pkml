@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="f956845e-a70d-4d0b-bdb7-cf1d3819dea5" name="Qiu 2016 IM, dextromethorphan, 15 mg dextromethorphan hydrobromide (capsule/solution), n=6, AS=0.5" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="f1fb0a65-ed2c-46d9-b371-56a480ab5a9e" name="[h]" dimension="Time" isInternal="0" baseGrid="f1fb0a65-ed2c-46d9-b371-56a480ab5a9e">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Qiu 2016 IM, dextromethorphan, 15 mg dextromethorphan hydrobromide (capsule/solution), n=6, AS=0.5|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAwAAAALp6DqQV1cNUKinXRC4rmzQlWt7kJjQTRDtNJtQzXXtENZc/BDHQgWRNa8M0QU/7NECw==</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="33e4afc2-9f49-4c36-8c91-263e31d0e20d" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="f1fb0a65-ed2c-46d9-b371-56a480ab5a9e">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Qiu 2016 IM, dextromethorphan, 15 mg dextromethorphan hydrobromide (capsule/solution), n=6, AS=0.5|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAwAAAALAAAAACBmcjAhpLIwd5bFMOwiRTH4SQkx1Bz4MH+JiDDNF58wqYeFMGq/jDCYuwYwCw==</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="4cdc5cf4-d931-4de4-a8c1-bc65ba293f44" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="f1fb0a65-ed2c-46d9-b371-56a480ab5a9e">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.714E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Qiu 2016 IM, dextromethorphan, 15 mg dextromethorphan hydrobromide (capsule/solution), n=6, AS=0.5|ObservedData|Peripheral Venous Blood|Plasma|Dextromethorphan|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAwAAAALbfMTMJ2k4DBHNDsxfBaBMW9LtzEGc6Yx8+OFMRuPDzHMZfow67zFMJg2nzAOEh4wCw==</Values>
+      <RelatedColumnsCache>
+        <ColumnId>33e4afc2-9f49-4c36-8c91-263e31d0e20d</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextromethorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>

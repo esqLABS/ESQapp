@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<McDataRepository id="a1b4e250-2d63-4aec-a492-2b8212525164" name="Storelli 2018 NM, dextrorphan, 5 mg dextromethorphan base (capsule/solution), n=17, AS=2" icon="ObservedData" version="16">
+  <Columns>
+    <McBaseGrid id="318175ab-9a51-4f67-b9a1-d9d2769cf0a0" name="[h]" dimension="Time" isInternal="0" baseGrid="318175ab-9a51-4f67-b9a1-d9d2769cf0a0">
+      <DataInfo origin="BaseGrid" auxiliaryType="Undefined" />
+      <QuantityInfo type="Time" orderIndex="0" Path="Storelli 2018 NM, dextrorphan, 5 mg dextromethorphan base (capsule/solution), n=17, AS=2|[h]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAALuIfhQoghMUMAAHBDid+0Q7x/8EPNXxZECw==</Values>
+      <RelatedColumnsCache />
+    </McBaseGrid>
+    <McDataColumn id="76863832-ac96-486c-b7e6-6b243d149c31" name="[ng/mL](1)" dimension="Concentration (mass)" isInternal="0" baseGrid="318175ab-9a51-4f67-b9a1-d9d2769cf0a0">
+      <DataInfo origin="ObservationAuxiliary" auxiliaryType="ArithmeticStdDev" molWeight="2.5737E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Storelli 2018 NM, dextrorphan, 5 mg dextromethorphan base (capsule/solution), n=17, AS=2|ObservedData|Peripheral Venous Blood|Plasma|Dextrorphan|[ng/mL](1)" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw==</Values>
+      <RelatedColumnsCache />
+    </McDataColumn>
+    <McDataColumn id="5850d03d-8d05-4a03-9bba-3b93f24e99a7" name="[ng/mL]" dimension="Concentration (mass)" isInternal="0" baseGrid="318175ab-9a51-4f67-b9a1-d9d2769cf0a0">
+      <DataInfo origin="Observation" auxiliaryType="Undefined" molWeight="2.5737E-07" />
+      <QuantityInfo type="Undefined" orderIndex="0" Path="Storelli 2018 NM, dextrorphan, 5 mg dextromethorphan base (capsule/solution), n=17, AS=2|ObservedData|Peripheral Venous Blood|Plasma|Dextrorphan|[ng/mL]" />
+      <Values>AAEAAAD/////AQAAAAAAAAAPAQAAAAYAAAAL0UGbMDc5VTA9WSUwYUIEMKkKvi+DZ3EvCw==</Values>
+      <RelatedColumnsCache>
+        <ColumnId>76863832-ac96-486c-b7e6-6b243d149c31</ColumnId>
+      </RelatedColumnsCache>
+    </McDataColumn>
+  </Columns>
+  <ExtendedProperties>
+    <StringExtendedProperty name="Molecule" readOnly="0" value="Dextrorphan" />
+    <StringExtendedProperty name="Species" readOnly="0" value="Human" />
+    <StringExtendedProperty name="Organ" readOnly="0" value="Peripheral Venous Blood" />
+    <StringExtendedProperty name="Compartment" readOnly="0" value="Plasma" />
+  </ExtendedProperties>
+</McDataRepository>
