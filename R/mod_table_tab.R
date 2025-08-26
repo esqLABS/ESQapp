@@ -25,13 +25,15 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
     r$states$edit_mode_applications <- NULL # Applications tab
     r$states$current_sheet_selected_models <- NULL
     r$states$current_sheet_selected_applications <- NULL
+    r$states$current_sheet_selected_individuals <- NULL
+    r$states$current_sheet_selected_populations <- NULL
 
 
     # Render the UI (tabs) for the tab section
     output$ui <- renderUI({
       req(r$data[[tab_section]]$sheets)
 
-      if (tab_section %in% c("models", "applications")) {
+      if (tab_section %in% c("models", "applications", "individuals", "populations")) {
         sheets <- r$data[[tab_section]]$sheets
         valid_sheets <- is.character(sheets) && length(sheets) > 0 && any(nzchar(sheets))
 
@@ -44,13 +46,31 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
           if(tab_section == "applications") {
             r$states$current_sheet_selected_applications <- NULL
           }
+          if(tab_section == "individuals") {
+            r$states$current_sheet_selected_individuals <- NULL
+          }
+          if(tab_section == "populations") {
+            r$states$current_sheet_selected_populations <- NULL
+          }
         } else {
-          selected_sheet <- tail(sheets, 1)
+
+          if (tab_section %in% c("individuals", "populations")) {
+            selected_sheet <- head(sheets, 1)
+          } else {
+            selected_sheet <- tail(sheets, 1)
+          }
+
           if (tab_section == "models") {
             r$states$current_sheet_selected_models <- selected_sheet
           }
           if(tab_section == "applications") {
             r$states$current_sheet_selected_applications <- selected_sheet
+          }
+          if(tab_section == "individuals") {
+            r$states$current_sheet_selected_individuals <- selected_sheet
+          }
+          if(tab_section == "populations") {
+            r$states$current_sheet_selected_populations <- selected_sheet
           }
         }
 
@@ -69,7 +89,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
               title = div(
                 sheet,
                 tagList(
-                  if(tab_section %in% c("models", "applications")) {
+                  if(tab_section %in% c("models", "applications", "individuals", "populations")) {
                     next
                   }
                 ),
@@ -92,11 +112,13 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
 
     # Render the UI for the selected sheet Related to "Models" (Paramet Sets) and "Applications"
     output$selected_sheet_ui <- renderUI({
-      selected <- if (tab_section == "models") {
-        r$states$current_sheet_selected_models
-      } else {
-        r$states$current_sheet_selected_applications
-      }
+      selected <- switch(
+        tab_section,
+        "models"       = r$states$current_sheet_selected_models,
+        "applications" = r$states$current_sheet_selected_applications,
+        "individuals"  = r$states$current_sheet_selected_individuals,
+        "populations"  = r$states$current_sheet_selected_populations
+      )
       req(selected)
       mod_edit_table_ui(id = ns(paste("tab", selected, sep = "_")))
     })
@@ -108,6 +130,12 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
       }
       if (tab_section == "applications") {
         r$states$current_sheet_selected_applications <- input$selected_sheet
+      }
+      if (tab_section == "individuals") {
+        r$states$current_sheet_selected_individuals <- input$selected_sheet
+      }
+      if (tab_section == "populations") {
+        r$states$current_sheet_selected_populations <- input$selected_sheet
       }
     })
 
