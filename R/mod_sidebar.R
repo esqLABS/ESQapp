@@ -12,7 +12,30 @@ mod_sidebar_ui <- function(id) {
   bslib::sidebar(
     mod_import_ui(ns("import_project_configuration_1")),
     hr(),
-    mod_export_ui(ns("export_1"))
+    mod_export_ui(ns("export_1")),
+    tags$footer(
+      style = "
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+        background-color: #f8f9fa;
+        color: #6c757d;
+        font-size: 12px;
+        border-top: 1px solid #e0e0e0;
+        z-index: 1000;
+      ",
+      HTML(sprintf(
+        '<a href="https://esqlabs.github.io/ESQapp/" target="_blank" style="text-decoration:none; color:inherit;">
+          v%s
+         </a> • © %s ESQLabs GmbH',
+        app_version(),
+        format(Sys.Date(), "%Y")
+      ))
+    )
+
   )
 }
 
