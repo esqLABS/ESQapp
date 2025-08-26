@@ -3,7 +3,7 @@
 ## Version 2.0.0.9001 (Development version)
 
 #### **Main Changes:**
-- **`Individuals` and `Population` dropdown** show available sheets as drop down in the "Individuals" and "Population". (#165)
+- **`Individuals` and `Population` dropdown** show available sheets as drop down in the "Individuals" and "Population". (#163)
 
 
 ## Version 2.0.0 (2025-08-19)
