@@ -15,7 +15,8 @@ app_ui <- function(request) {
         path = app_sys("app/www"),
         app_title = "ESQapp"
       ),
-      tags$script(src = "www/app_exit_protection.js")
+      tags$script(src = "www/app_exit_protection.js"),
+      tags$script(src = "www/enhanced_file_input.js")
     ),
     # Your application UI logic
     bslib::page_navbar(
