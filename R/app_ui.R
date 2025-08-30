@@ -9,6 +9,7 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    shinyjs::useShinyjs(),
     esqlabs.ui::intro_screen(width = "100%"),
     tags$head(
       golem::bundle_resources(
