@@ -7,4 +7,4 @@
 *.xlsx
 dev_mode_artifacts/*
 docs/
-!tests/testthat/data/projects/**
+!tests/testthat/data/**
