@@ -122,3 +122,9 @@
     "Unit" = schemaUnit
   ))
 }
+
+
+#' Get current package version
+app_version <- function() {
+  utils::packageDescription('ESQapp')$Version
+}
