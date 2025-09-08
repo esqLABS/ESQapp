@@ -2,9 +2,6 @@
 
 ## Version 2.0.0.9002 (Development version)
 
-#### **Main Changes:**
-- **Add tests that covers `esqlabsR` workflow** Resolved an issue in (#171).
-
 #### **Bug Fixes**
 - **Remove `""` formatting from OutputPathIds dropdown** Resolved an issue in (#171).
 
