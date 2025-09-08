@@ -6,3 +6,4 @@
 .quarto
 dev_mode_artifacts/*
 docs/
+!tests/testthat/data/**
