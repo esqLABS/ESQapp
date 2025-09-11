@@ -103,7 +103,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
                   br()
                 )
               },
-              if(tab_section == "plots" && sheet %in% c("dataTypes", "plotTypes", "ObservedDataNames")) {
+              if(tab_section == "plots" && sheet %in% c("dataTypes", "plotTypes", "ObservedDataNames", "observedDataNames")) {
                 next
               } else {
                 mod_edit_table_ui(id = ns(paste("tab", sheet, sep = "_")))
