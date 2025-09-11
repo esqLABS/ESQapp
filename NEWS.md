@@ -4,6 +4,12 @@
 - **Plots › DataCombined:** loads observed data in a modal window where users can select desired sheets; the *dataset* column is now a dropdown with available dataset names. (#168)
 
 
+## Version 2.0.0.9002 (Development version)
+
+#### **Bug Fixes**
+- **Remove `""` formatting from OutputPathIds dropdown** Resolved an issue in (#171).
+
+
 ## Version 2.0.0.9001 (Development version)
 
 #### **Main Changes:**
