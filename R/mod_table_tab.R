@@ -27,7 +27,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
     r$states$current_sheet_selected_applications <- NULL
     r$states$current_sheet_selected_individuals <- NULL
     r$states$current_sheet_selected_populations <- NULL
-
+    r$states$observed_loader_inited <- FALSE
 
     # Render the UI (tabs) for the tab section
     output$ui <- renderUI({
@@ -96,6 +96,13 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
                 style = "display: flex; align-items: center; gap: 5px; position: relative;"
               ),
               br(),
+              if(tab_section == "plots" && sheet %in% c("DataCombined")) {
+                tagList(
+                  mod_observed_loader_ui(id = ns("observed_loader_dc")),
+                  br(),
+                  br()
+                )
+              },
               if(tab_section == "plots" && sheet %in% c("dataTypes", "plotTypes", "ObservedDataNames")) {
                 next
               } else {
@@ -136,6 +143,20 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
       }
       if (tab_section == "populations") {
         r$states$current_sheet_selected_populations <- input$selected_sheet
+      }
+    })
+
+
+    # Run `observe` once when "plots" tab and "DataCombined" sheet appears
+    observe({
+      req(tab_section == "plots")
+      req(is.character(r$data[[tab_section]]$sheets))
+
+      if ("DataCombined" %in% r$data[[tab_section]]$sheets &&
+          !isTRUE(r$states$observed_loader_inited)) {
+
+        r$states$observed_loader_inited <- TRUE
+        mod_observed_loader_server(id = "observed_loader_dc", r = r, DROPDOWNS = DROPDOWNS)
       }
     })
 

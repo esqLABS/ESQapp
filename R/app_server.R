@@ -7,12 +7,14 @@
 app_server <- function(input, output, session) {
   # Your application server logic
   r <- list()
-
+  # Application states (modals, etc.)
   r$states <- reactiveValues()
-
+  # Project data
   r$data <- DataStructure$new()
-
+  # Warning list
   r$warnings <- WarningHandler$new()
+  r$config <- reactiveValues()
+  r$observed_store <- reactiveValues()
 
   DROPDOWNS <- dropdown_values()
 

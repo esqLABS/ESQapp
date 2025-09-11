@@ -112,64 +112,19 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       pc <- projectConfiguration()
       data_path <- pc$dataFile
       has_data_file <- isTruthy(data_path) && nzchar(data_path) && file.exists(data_path)
+      # Make projectConfiguration path available across modules
+      r$config$projectConfiguration <- pc
 
       if (has_data_file) {
         sheets <- tryCatch(readxl::excel_sheets(data_path), error = function(e) character(0))
         sheets <- setdiff(sheets, "MetaInfo")
 
         if (length(sheets) > 0) {
-          showModal(
-            modalDialog(
-              title = "Load observed data",
-              tagList(
-                p("Select the sheets to load from the observed data Excel file:"),
-                checkboxGroupInput(
-                  inputId = ns("selectedSheets"),
-                  label   = NULL,
-                  choices = sheets,
-                  selected = NULL
-                )
-              ),
-              footer = tagList(
-                actionButton(ns("skip_load_data"), "Skip"),
-                actionButton(ns("confirm_load_data"), "Load selected sheets")
-              ),
-              easyClose = FALSE
-            )
-          )
-
-
-          observeEvent(input$confirm_load_data, ignoreInit = TRUE, once = TRUE, {
-            removeModal()
-            sel <- input$selectedSheets %||% character(0)
-            if (length(sel) > 0) {
-              # store in r$observed_data
-              r$observed_data <- tryCatch(
-                esqlabsR::loadObservedData(pc, sel),
-                error = function(e) {
-                  r$states$modal_message <- list(
-                    status  = "Error loading observed data",
-                    message = paste("Details:", conditionMessage(e))
-                  )
-                  NULL
-                }
-              )
-
-              if (!is.null(r$observed_data)) {
-                DROPDOWNS$plots$datasets_options <- unique(names(r$observed_data))
-              }
-
-            }
-            runAfterConfig()
-          })
-
-          # --- Skip button: close modal but still load config
-          observeEvent(input$skip_load_data, ignoreInit = TRUE, once = TRUE, {
-            removeModal()
-            runAfterConfig()
-          })
-
-          return(invisible(NULL))
+          r$observed_store$available  <- sheets
+          r$observed_store$loaded  <- character(0)
+        } else {
+          r$observed_store$available  <- character(0)
+          r$observed_store$loaded  <- character(0)
         }
       }
 
