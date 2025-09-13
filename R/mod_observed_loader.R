@@ -11,12 +11,12 @@ mod_observed_loader_ui <- function(id) {
 #' observed_loader Server Function
 #'
 #' @noRd
-mod_observed_loader_server <- function(id, r, DROPDOWNS) {
+mod_observed_loader_server <- function(id, r, DROPDOWNS, METADATA) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     observeEvent(input$open_loader, {
-      # Validation: chech config path presence
+      # Validation: check config path presence
       if (is.null(r$config) || is.null(r$config$projectConfiguration)) {
         showModal(modalDialog("Project configuration is not loaded yet.", easyClose = TRUE))
         return(invisible(NULL))
@@ -88,9 +88,16 @@ mod_observed_loader_server <- function(id, r, DROPDOWNS) {
         )
       )
 
+      # Keep references to nested observers to destroy them on close
+      enable_obs   <- NULL
+      cancel_obs   <- NULL
+      confirm_obs  <- NULL
+      select_all_obs <- NULL
+      clear_all_obs  <- NULL
+
 
       # Disable/Enable load data button
-      observeEvent(input$selectedSheets, {
+      enable_obs <- observeEvent(input$selectedSheets, {
         sel <- input$selectedSheets %||% character(0)
         if (length(sel) > 0) {
           updateActionButton(session, 'confirm_load_data', disabled = FALSE)
@@ -100,12 +107,19 @@ mod_observed_loader_server <- function(id, r, DROPDOWNS) {
       }, ignoreNULL = FALSE)
 
       # Close button
-      observeEvent(input$cancel_load_data, ignoreInit = TRUE, once = TRUE, {
+      cancel_obs <- observeEvent(input$cancel_load_data, ignoreInit = TRUE, once = TRUE, {
         removeModal()
+
+        # Destroy all nested observers created for this modal instance
+        if (!is.null(enable_obs))    enable_obs$destroy()
+        if (!is.null(select_all_obs)) select_all_obs$destroy()
+        if (!is.null(clear_all_obs))  clear_all_obs$destroy()
+        if (!is.null(confirm_obs))    confirm_obs$destroy()
+        cancel_obs$destroy()
       })
 
       # Confirm button
-      observeEvent(input$confirm_load_data, ignoreInit = TRUE, once = TRUE, {
+      confirm_obs <- observeEvent(input$confirm_load_data, ignoreInit = TRUE, once = TRUE, {
         removeModal()
         sel <- input$selectedSheets %||% character(0)
         if (length(sel) > 0) {
@@ -123,19 +137,28 @@ mod_observed_loader_server <- function(id, r, DROPDOWNS) {
           if (!is.null(observed_data)) {
             r$observed_store$observed_data[names(observed_data)] <- observed_data
             DROPDOWNS$plots$datasets_options <- unique(names(r$observed_store$observed_data))
+            METADATA$plots$loaddata_metadata[names(observed_data)] <- lapply(observed_data, `[[`, "metaData")
             # Mark selected sheets as loaded
             r$observed_store$loaded <- union(isolate(r$observed_store$loaded), sel)
           }
+
+          # Destroy all nested observers created for this modal instance
+          if (!is.null(enable_obs))    enable_obs$destroy()
+          if (!is.null(select_all_obs)) select_all_obs$destroy()
+          if (!is.null(clear_all_obs))  clear_all_obs$destroy()
+          if (!is.null(cancel_obs))     cancel_obs$destroy()
+          confirm_obs$destroy()
+
 
         }
       })
 
       # Select all
-      observeEvent(input$select_all, {
+      select_all_obs <- observeEvent(input$select_all, {
         updateCheckboxGroupInput(session, "selectedSheets", selected = selectable)
       })
       # Deselect all
-      observeEvent(input$clear_all, {
+      clear_all_obs <- observeEvent(input$clear_all, {
         updateCheckboxGroupInput(session, "selectedSheets", selected = character(0))
       })
 

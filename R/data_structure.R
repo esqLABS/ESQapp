@@ -68,6 +68,14 @@ dropdown_values <- function() {
   )
 }
 
+metadata_values <- function() {
+  list(
+    "plots" = reactiveValues(
+      loaddata_metadata = list()
+    )
+  )
+}
+
 
 DataStructure <- R6::R6Class("DataStructure",
   public = list(

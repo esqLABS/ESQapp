@@ -17,9 +17,10 @@ app_server <- function(input, output, session) {
   r$observed_store <- reactiveValues()
 
   DROPDOWNS <- dropdown_values()
+  METADATA <- metadata_values()
 
   mod_sidebar_server("sidebar_1", r, DROPDOWNS)
-  mod_main_panel_server("main_panel_1", r, DROPDOWNS)
+  mod_main_panel_server("main_panel_1", r, DROPDOWNS, METADATA)
   mod_warning_server("warning_modal", r) # Call warnings module
 
   # Call utils logic

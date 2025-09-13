@@ -17,7 +17,7 @@ mod_table_tab_ui <- function(id) {
 #' table_tab Server Functions
 #'
 #' @noRd
-mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
+mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -156,7 +156,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
           !isTRUE(r$states$observed_loader_inited)) {
 
         r$states$observed_loader_inited <- TRUE
-        mod_observed_loader_server(id = "observed_loader_dc", r = r, DROPDOWNS = DROPDOWNS)
+        mod_observed_loader_server(id = "observed_loader_dc", r = r, DROPDOWNS = DROPDOWNS, METADATA = METADATA)
       }
     })
 
@@ -171,7 +171,8 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS) {
           r = r,
           tab_section = tab_section,
           sheet = sheet,
-          DROPDOWNS = DROPDOWNS
+          DROPDOWNS = DROPDOWNS,
+          METADATA = METADATA
         ))
       }
 
