@@ -1,6 +1,18 @@
 #  News
 
+## Version 2.1.0 (2025-09-15)
+
+#### **Main Changes:**
+- **`Individuals` and `Population` dropdown** show available sheets as drop down in the "Individuals" and "Population". (#163)
+- **Plots › DataCombined:** loads observed data in a modal window where users can select desired sheets; the *dataset* column is now a dropdown with available dataset names. (#168)
+
+#### **Bug Fixes**
+- **Remove `""` formatting from OutputPathIds dropdown** Resolved an issue in (#171).
+
+
 ## Version 2.0.0.9003 (Development version)
+
+#### **Main Changes:**
 - **Plots › DataCombined:** loads observed data in a modal window where users can select desired sheets; the *dataset* column is now a dropdown with available dataset names. (#168)
 
 
