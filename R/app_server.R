@@ -7,17 +7,20 @@
 app_server <- function(input, output, session) {
   # Your application server logic
   r <- list()
-
+  # Application states (modals, etc.)
   r$states <- reactiveValues()
-
+  # Project data
   r$data <- DataStructure$new()
-
+  # Warning list
   r$warnings <- WarningHandler$new()
+  r$config <- reactiveValues()
+  r$observed_store <- reactiveValues()
 
   DROPDOWNS <- dropdown_values()
+  METADATA <- metadata_values()
 
   mod_sidebar_server("sidebar_1", r, DROPDOWNS)
-  mod_main_panel_server("main_panel_1", r, DROPDOWNS)
+  mod_main_panel_server("main_panel_1", r, DROPDOWNS, METADATA)
   mod_warning_server("warning_modal", r) # Call warnings module
 
   # Call utils logic

@@ -17,7 +17,7 @@ mod_edit_table_ui <- function(id) {
 #' tab_edit_table Server Functions
 #'
 #' @noRd
-mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
+mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS, METADATA = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -50,6 +50,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           application_protocol_options = DROPDOWNS$applications$application_protocols,
           plotgridnames_options = DROPDOWNS$plots$plotgridnames_options,
           plotids_options = DROPDOWNS$plots$plotids_options,
+          datasets_options = DROPDOWNS$plots$datasets_options,
+          loaddata_metadata = METADATA$plots$loaddata_metadata,
           sheet_name = sheet,
           column_headers = (
             colnames(
@@ -113,6 +115,8 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS) {
           application_protocol_dropdown = DROPDOWNS$applications$application_protocols,
           plotgridnames_option_dropdown = DROPDOWNS$plots$plotgridnames_options,
           plotids_option_dropdown = DROPDOWNS$plots$plotids_options,
+          datasets_option_dropdown = DROPDOWNS$plots$datasets_options,
+          loaddata_metadata = METADATA$plots$loaddata_metadata,
           sheet = sheet,
           shiny_el_id_name = ns("scenario_table_input"),
           column_headers = column_names_header

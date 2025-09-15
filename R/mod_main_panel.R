@@ -40,7 +40,7 @@ mod_main_panel_ui <- function(id) {
 #' main_panel Server Functions
 #'
 #' @noRd
-mod_main_panel_server <- function(id, r, DROPDOWNS) {
+mod_main_panel_server <- function(id, r, DROPDOWNS, METADATA = NULL) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -54,7 +54,7 @@ mod_main_panel_server <- function(id, r, DROPDOWNS) {
 
     mod_tab_applications_server("tab_applications_1", r, DROPDOWNS)
 
-    mod_tab_plots_server("tab_plots_1", r, DROPDOWNS)
+    mod_tab_plots_server("tab_plots_1", r, DROPDOWNS, METADATA)
   })
 }
 

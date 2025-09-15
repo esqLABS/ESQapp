@@ -18,7 +18,7 @@ mod_tab_plots_ui <- function(id) {
 #' tab_plots Server Functions
 #'
 #' @noRd
-mod_tab_plots_server <- function(id, r, DROPDOWNS) {
+mod_tab_plots_server <- function(id, r, DROPDOWNS, METADATA) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -26,7 +26,8 @@ mod_tab_plots_server <- function(id, r, DROPDOWNS) {
       id = "tab_plots",
       r = r,
       tab_section = "plots",
-      DROPDOWNS = DROPDOWNS
+      DROPDOWNS = DROPDOWNS,
+      METADATA = METADATA
     )
   })
 }
