@@ -43,7 +43,9 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
 
     # Add Parameter Set
     observeEvent(input$add_parameter_button, {
-      if(input$parameter_name %in% r$data[[tab_section]]$sheets){
+      # Replace " with ' inside parameter_name before using it
+      clean_parameter_name <- gsub('"', "'", input$parameter_name)
+      if(clean_parameter_name %in% r$data[[tab_section]]$sheets){
         showModal(
           modalDialog(
             title = "Error",
@@ -52,7 +54,7 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
           )
         )
       } else {
-        r$data$create_new_sheet(tab_section, input$parameter_name)
+        r$data$create_new_sheet(tab_section, clean_parameter_name)
         # Update global `DROPDOWN` options (sourced from sheet names)
         DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
         DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
