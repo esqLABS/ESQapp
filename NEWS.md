@@ -3,7 +3,7 @@
 ## Version 2.1.0.9001 (Development version)
 
 #### **Bug Fixes**
-- **In the Parameter Sets modal, replace the double quotes ("") with single quotes ('') when adding parameter to protect "MutliSelect" sorting editor.** Resolved an issue in (#178).
+- **In the Parameter Sets modal, replace the double quotes ("") with single quotes ('') when adding parameter to protect "MutliSelect" sorting editor.** Resolved an issue in (#174).
 
 
 ## Version 2.1.0 (2025-09-15)
