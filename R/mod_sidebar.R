@@ -12,6 +12,8 @@ mod_sidebar_ui <- function(id) {
   bslib::sidebar(
     mod_import_ui(ns("import_project_configuration_1")),
     hr(),
+    mod_visulizer_app_ui(ns("visulizer_app")),
+    hr(),
     mod_export_ui(ns("export_1")),
     tags$footer(
       style = "
@@ -48,6 +50,7 @@ mod_sidebar_server <- function(id, r, DROPDOWNS) {
 
     configuration_path <- mod_import_server("import_project_configuration_1", r, DROPDOWNS)
 
+    mod_visulizer_app_server("visulizer_app")
     mod_export_server("export_1", r, configuration_path = configuration_path)
   })
 }

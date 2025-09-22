@@ -1,15 +1,12 @@
 # Get dependencies for current directory ----
 require(renv)
-# Get the current directory name ----
-renv_path <- file.path(getwd(), 'renv.lock')
-
-# Make a snapshot of the current directory ----
-message('--- LOG: snapshot for path: \n', renv_path)
-renv::snapshot(lockfile = renv_path, type = 'all', prompt = FALSE)
-
-# Remove renv_path variable ----
-remove(renv_path)
-
+# Sys.setenv(RENV_CONFIG_EXTERNAL_DOWNLOADER = "false")
+# Sys.setenv(RENV_DOWNLOAD_FILE_METHOD = "libcurl")
+# options(download.file.method = "libcurl", download.file.extra = NULL)
+#
+# # 2) (Optional) Ensure no user curl config is read in this session
+# Sys.setenv(CURL_HOME = tempfile())
+renv::snapshot(type = "explicit")
 
 
 # -------------- Dev notes --------------
