@@ -3,7 +3,7 @@
 ## Version 2.1.0.9002 (Development version)
 
 #### **Documentation**
-- **Update `Getting started` vignettes** Resolved an issue in (#177).
+- **Update `Getting started` vignettes** Resolved an issue in (#176).
 
 
 ## Version 2.1.0.9001 (Development version)
