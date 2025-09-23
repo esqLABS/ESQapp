@@ -64,38 +64,62 @@ or add a new one, right-click on a row and select "Insert" or "Remove
 row".
 
 ![design scenario](Figures/getting-started/fig3.png)
+Scenarios with duplicate names are highlighted in red, as each  
+`Scenario_name` must be unique.
+
+![unique scenario](Figures/getting-started/fig4.png)
+
 
 The main properties that can be defined for a scenario are:
-
--   The `IndividualId` column specifies the individual for a scenario.
-    This column shows a drop-down list with all individuals defined in
-    the Individuals tab. To unassign an individual from a scenario,
-    right-click on the cell and select "Clear".
+    
+-   The `IndividualId` column specifies the individual for a scenario.  
+    This column shows a drop-down list with all individuals defined in 
+    the **Individuals** tab. To unassign an individual from a scenario:  
+      - Right-click on the cell and select **Clear**, 
+      - Press the **Backspace** key on your keyboard, or
+      - Select `--NONE--` option in the drop-down list.
 
 -   The population is specified for a scenario in the column
-    PopulationId, which shows a drop-down list with all populations
-    defined in the `Populations` tab. To unassign a population from a
-    scenario, right-click on the cell and select "Clear".
+    `PopulationId`, which shows a drop-down list with all populations
+    defined in the **Populations** tab. To unassign a population from a
+    scenario: 
+      - Right-click on the cell and select **Clear**, 
+      - Press the **Backspace** key on your keyboard, or
+      - Select `--NONE--` option in the drop-down list.
 
--   To edit the **simulation time** of the scenario, right click on the
-    `SimulationTime` entry and select "Enter Simulation Time".\
-    ![simulation time edit](Figures/getting-started/fig4.png)\
-    In the following window, you can edit the output intervals of the
-    simulation.\
-    ![](Figures/getting-started/fig5.png)\
-    To add or remove an interval, right click on an existing row. You
-    can define the start and the end time of the interval, define the
-    units, and define the resolution. As the original excel structure do
-    not allow to mix time units for otput intervals definition, all
-    values must be converted to a common unit. This is done
-    automatically to the unit selected by the user, the unit is stored
-    in the read-only column `SimulationTimeUnit`.
+-   To edit the **simulation time** of a scenario, double-click on the  
+    `SimulationTime` cell. This will open a modal window where you can  
+    configure the output intervals of the simulation.\ 
+    ![simulation time edit](Figures/getting-started/fig5.png)  
+    In this window, you can add, remove, or edit intervals. For each  
+    interval, you can define the start and end time, the unit, and the  
+    resolution.\
+    ![simulation time intervals](Figures/getting-started/fig6.png)  
+    Since the original Excel structure does not allow mixing different time  
+    units within the output interval definition, all values are  
+    automatically converted to a **target unit**. The target unit is taken  
+    from the first unit cell of the table and is stored in the read-only  
+    column `SimulationTimeUnit`.  
+
+-   **Parameter sets** are defined in the `Parameter sets` column.  
+    When you double-click on a cell in this column, a list of parameter sets  
+    (from the **Parameter sets** tab) is displayed. You can then select the  
+    desired parameters and arrange their order to include them in the scenario.
+    ![parameter sets column](Figures/getting-started/fig17.png) 
+
+-   The applications is specified for a scenario in the column
+    `ApplicationProtocol`, which shows a drop-down list with all applications
+    defined in the **Applications** tab. To unassign a application protocol from a
+    scenario: 
+      - Right-click on the cell and select **Clear**, 
+      - Press the **Backspace** key on your keyboard, or
+      - Select `--NONE--` option in the drop-down list.
 
 -   Output paths are defined in the column `OutputPathsIds`. When
     double-clicking on a cell, a list of output paths defined in the
     `OutputPaths` tab is presented and the user can select the paths
     that should be added to the scenario.\
-    ![output-paths-order](Figures/getting-started/fig10.png)
+    ![output-paths-order](Figures/getting-started/fig7.png)
 
 ### Individuals
 
@@ -104,23 +128,31 @@ The individuals assigned to the scenarios must be specified in the
 entry and select "Isert row below". After entering the name of the
 individual, a new individual parameters sheet is added.
 
-![adding-individual-sheet](Figures/getting-started/fig9.png)
+![adding-individual-sheet](Figures/getting-started/fig8.png)
+![select-individual-sheet](Figures/getting-started/fig9.png)
 
-Currently, definition of protein ontogenies are currently not supported
-in the App.
+To **map a protein to ontogeny**, define a new protein–ontogeny  
+relationship, or edit an existing one, double-click the  
+`Protein Ontogenies` cell. This will open a modal window for managing  
+the mapping.  
+
+![protein-ontogenies](Figures/getting-started/fig10.png)
 
 ### Populations
 
-Populations are defined in the `Populations` tab. Definition of protein
-ontogenies are currently not supported in the App and must be done in
-the excel file.
+Populations are defined in the `Populations` tab. 
+To **map a protein to ontogeny**, define a new protein–ontogeny  
+relationship, or edit an existing one, double-click the  
+`Protein Ontogenies` cell. This will open a modal window for managing  
+the mapping.  
+
 
 ### Parameter sets
 
-Parameter sets specified in the column `ModelParameterSheets` of the
+Parameter sets specified in the column `Parameter sets` of the
 `Scenarios` tab are listed in the tab `Parameter sets`.
 
-![parameter sets](Figures/getting-started/fig6.png)
+![parameter sets](Figures/getting-started/fig11.png)
 
 To add new entries, right-click on a row and select "Insert row" or
 "Remove row". To add a new parameter set (excel sheet), click on "Add
@@ -128,8 +160,14 @@ parameter set".
 
 ### Applications
 
-Definition of application protocols is not supported yet and must be
-performed in the excel file.
+Application specified in the column `ApplicationProtocol` of the
+`Scenarios` tab are listed in the tab `Applications`.
+
+To add new entries, right-click on a row and select "Insert row" or
+"Remove row". To add a new parameter set (excel sheet), click on "Add
+parameter set".
+
+![applications](Figures/getting-started/fig12.png)
 
 ## Plot Results
 
@@ -137,12 +175,32 @@ Definition of the figures within the `{esqlabsR}` [Plotting
 Workflow](#plotting-workflow) is supported by the `{ESQapp}` in the tab
 `Plots`.
 
-![plots](Figures/getting-started/fig7.png)
+![plots](Figures/getting-started/fig13.png)
 
-The `DataCombined` defining the mappings of simulation results with
-observer data are specified in the `DataCombined` tab. The app allows
-selecting the scenarios defined in the `Scenarios` tab, and output paths
-from the `Scenarios|OutputPaths` list.
+
+The **DataCombined** tab defines the mappings between simulation results  
+and observer data. In this tab, the app allows you to select scenarios  
+(from the **Scenarios** tab) and output paths (from the  
+`Scenarios|OutputPaths` list).  
+
+To load observed data, click the **Load Observed Data** button. This  
+opens a modal window displaying the available observed sheet(s). You can  
+select the sheet(s) to load by marking the corresponding checkboxes.  
+
+![plots-load-observed-data](Figures/getting-started/fig14.png)
+
+Once loaded, the names of the observed sheets become available as a list  
+in the drop-down of the `dataSet` column. By right-clicking on a cell in  
+the `dataSet` column, you can access a context menu with the option  
+**Show metadata**. 
+
+![plots-load-observed-data-context-menu](Figures/getting-started/fig15.png)
+Selecting this option opens a modal window with a  
+metadata table. This table is read-only and available only for  
+previously loaded observed data.  
+
+![plots-load-observed-metadata](Figures/getting-started/fig16.png)
+
 
 ## Applying the changes
 
@@ -152,7 +210,7 @@ the configurations!
 After editing the scenarios, plots, or other configurations, the changes
 must be saved by clicking on the "Export" button.
 
-![export](Figures/getting-started/fig8.png)
+![export](Figures/getting-started/fig18.png)
 
 The changes will be written into the Excel files. Of course, you can
 still manually edit the Excel files.
