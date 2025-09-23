@@ -10,7 +10,7 @@
 mod_export_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    actionButton(ns("export"), "Export", disabled = TRUE)
+    actionButton(ns("export"), "Export", class = "btn-dark", disabled = TRUE)
   )
 }
 

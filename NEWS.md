@@ -1,5 +1,12 @@
 #  News
 
+## Version 2.1.0.9003 (Development version)
+
+#### **Main Changes:**
+- **Integrated FunctionVisualizer into the `{ESQapp}`** Resolved an issue in (#177).
+- **Updated the application color theme to the ESQlabs palette** Resolved an issue in (#177).
+
+
 ## Version 2.1.0.9002 (Development version)
 
 #### **Documentation**

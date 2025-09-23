@@ -20,6 +20,11 @@ app_ui <- function(request) {
     ),
     # Your application UI logic
     bslib::page_navbar(
+      theme = bs_theme(
+        primary = "#61c0ca",
+        success = "#7bbe6b",
+        danger  = "#e16a65"
+      ),
       title = span(
         img(
           src = "www/ESQLabs_Sign_RZ_positive_Rings - Copy.png",
