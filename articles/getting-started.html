@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ESQapp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Getting started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/esqLABS/ESQapp/blob/v2.1.0/vignettes/getting-started.Rmd" class="external-link"><code>vignettes/getting-started.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/esqLABS/ESQapp/blob/main/vignettes/getting-started.Rmd" class="external-link"><code>vignettes/getting-started.Rmd</code></a></small>
       <div class="d-none name"><code>getting-started.Rmd</code></div>
     </div>
 
@@ -103,36 +103,75 @@ individuals, populations, and plots.</p>
 a field, e.g., <code>Scenario_name</code>, double-click on it. To remove
 a scenario or add a new one, right-click on a row and select “Insert” or
 “Remove row”.</p>
+<p><img src="Figures/getting-started/fig3.png" alt="design scenario">
+Scenarios with duplicate names are highlighted in red, as each<br><code>Scenario_name</code> must be unique.</p>
 <div class="float">
-<img src="Figures/getting-started/fig3.png" alt="design scenario"><div class="figcaption">design scenario</div>
+<img src="Figures/getting-started/fig4.png" alt="unique scenario"><div class="figcaption">unique scenario</div>
 </div>
 <p>The main properties that can be defined for a scenario are:</p>
 <ul>
-<li><p>The <code>IndividualId</code> column specifies the individual for
-a scenario. This column shows a drop-down list with all individuals
-defined in the Individuals tab. To unassign an individual from a
-scenario, right-click on the cell and select “Clear”.</p></li>
-<li><p>The population is specified for a scenario in the column
-PopulationId, which shows a drop-down list with all populations defined
-in the <code>Populations</code> tab. To unassign a population from a
-scenario, right-click on the cell and select “Clear”.</p></li>
-<li><p>To edit the <strong>simulation time</strong> of the scenario,
-right click on the <code>SimulationTime</code> entry and select “Enter
-Simulation Time”.<br><img src="Figures/getting-started/fig4.png" alt="simulation time edit"><br>
-In the following window, you can edit the output intervals of the
-simulation.<br><img src="Figures/getting-started/fig5.png"><br>
-To add or remove an interval, right click on an existing row. You can
-define the start and the end time of the interval, define the units, and
-define the resolution. As the original excel structure do not allow to
-mix time units for otput intervals definition, all values must be
-converted to a common unit. This is done automatically to the unit
-selected by the user, the unit is stored in the read-only column
-<code>SimulationTimeUnit</code>.</p></li>
+<li>
+<p>The <code>IndividualId</code> column specifies the individual for
+a scenario.<br>
+This column shows a drop-down list with all individuals defined in the
+<strong>Individuals</strong> tab. To unassign an individual from a
+scenario:</p>
+<ul>
+<li>Right-click on the cell and select <strong>Clear</strong>,</li>
+<li>Press the <strong>Backspace</strong> key on your keyboard, or</li>
+<li>Select <code>--NONE--</code> option in the drop-down list.</li>
+</ul>
+</li>
+<li>
+<p>The population is specified for a scenario in the column
+<code>PopulationId</code>, which shows a drop-down list with all
+populations defined in the <strong>Populations</strong> tab. To unassign
+a population from a scenario:</p>
+<ul>
+<li>Right-click on the cell and select <strong>Clear</strong>,</li>
+<li>Press the <strong>Backspace</strong> key on your keyboard, or</li>
+<li>Select <code>--NONE--</code> option in the drop-down list.</li>
+</ul>
+</li>
+<li><p>To edit the <strong>simulation time</strong> of a scenario,
+double-click on the<br><code>SimulationTime</code> cell. This will open a modal window where
+you can<br>
+configure the output intervals of the simulation.  <img src="Figures/getting-started/fig5.png" alt="simulation time edit"><br>
+In this window, you can add, remove, or edit intervals. For each<br>
+interval, you can define the start and end time, the unit, and the<br>
+resolution.<br><img src="Figures/getting-started/fig6.png" alt="simulation time intervals"><br>
+Since the original Excel structure does not allow mixing different
+time<br>
+units within the output interval definition, all values are<br>
+automatically converted to a <strong>target unit</strong>. The target
+unit is taken<br>
+from the first unit cell of the table and is stored in the
+read-only<br>
+column <code>SimulationTimeUnit</code>.</p></li>
+<li><p><strong>Parameter sets</strong> are defined in the
+<code>Parameter sets</code> column.<br>
+When you double-click on a cell in this column, a list of parameter
+sets<br>
+(from the <strong>Parameter sets</strong> tab) is displayed. You can
+then select the<br>
+desired parameters and arrange their order to include them in the
+scenario. <img src="Figures/getting-started/fig17.png" alt="parameter sets column"></p></li>
+<li>
+<p>The applications is specified for a scenario in the column
+<code>ApplicationProtocol</code>, which shows a drop-down list with all
+applications defined in the <strong>Applications</strong> tab. To
+unassign a application protocol from a scenario:</p>
+<ul>
+<li>Right-click on the cell and select <strong>Clear</strong>,</li>
+<li>Press the <strong>Backspace</strong> key on your keyboard, or</li>
+<li>Select <code>--NONE--</code> option in the drop-down list.</li>
+</ul>
+</li>
 <li><p>Output paths are defined in the column
 <code>OutputPathsIds</code>. When double-clicking on a cell, a list of
 output paths defined in the <code>OutputPaths</code> tab is presented
 and the user can select the paths that should be added to the
-scenario.<br><img src="Figures/getting-started/fig10.png" alt="output-paths-order"></p></li>
+scenario.<br><img src="Figures/getting-started/fig7.png" alt="output-paths-order"></p></li>
 </ul>
 <div class="section level3">
 <h3 id="individuals">Individuals<a class="anchor" aria-label="anchor" href="#individuals"></a>
@@ -141,27 +180,34 @@ scenario.<br><img src="Figures/getting-started/fig10.png" alt="output-paths-orde
 <code>Individuals</code> tab. To add a new invidividual, right-click on
 an existing entry and select “Isert row below”. After entering the name
 of the individual, a new individual parameters sheet is added.</p>
+<p><img src="Figures/getting-started/fig8.png" alt="adding-individual-sheet"><img src="Figures/getting-started/fig9.png" alt="select-individual-sheet"></p>
+<p>To <strong>map a protein to ontogeny</strong>, define a new
+protein–ontogeny<br>
+relationship, or edit an existing one, double-click the<br><code>Protein Ontogenies</code> cell. This will open a modal window for
+managing<br>
+the mapping.</p>
 <div class="float">
-<img src="Figures/getting-started/fig9.png" alt="adding-individual-sheet"><div class="figcaption">adding-individual-sheet</div>
+<img src="Figures/getting-started/fig10.png" alt="protein-ontogenies"><div class="figcaption">protein-ontogenies</div>
 </div>
-<p>Currently, definition of protein ontogenies are currently not
-supported in the App.</p>
 </div>
 <div class="section level3">
 <h3 id="populations">Populations<a class="anchor" aria-label="anchor" href="#populations"></a>
 </h3>
-<p>Populations are defined in the <code>Populations</code> tab.
-Definition of protein ontogenies are currently not supported in the App
-and must be done in the excel file.</p>
+<p>Populations are defined in the <code>Populations</code> tab. To
+<strong>map a protein to ontogeny</strong>, define a new
+protein–ontogeny<br>
+relationship, or edit an existing one, double-click the<br><code>Protein Ontogenies</code> cell. This will open a modal window for
+managing<br>
+the mapping.</p>
 </div>
 <div class="section level3">
 <h3 id="parameter-sets">Parameter sets<a class="anchor" aria-label="anchor" href="#parameter-sets"></a>
 </h3>
-<p>Parameter sets specified in the column
-<code>ModelParameterSheets</code> of the <code>Scenarios</code> tab are
-listed in the tab <code>Parameter sets</code>.</p>
+<p>Parameter sets specified in the column <code>Parameter sets</code> of
+the <code>Scenarios</code> tab are listed in the tab
+<code>Parameter sets</code>.</p>
 <div class="float">
-<img src="Figures/getting-started/fig6.png" alt="parameter sets"><div class="figcaption">parameter sets</div>
+<img src="Figures/getting-started/fig11.png" alt="parameter sets"><div class="figcaption">parameter sets</div>
 </div>
 <p>To add new entries, right-click on a row and select “Insert row” or
 “Remove row”. To add a new parameter set (excel sheet), click on “Add
@@ -170,8 +216,15 @@ parameter set”.</p>
 <div class="section level3">
 <h3 id="applications">Applications<a class="anchor" aria-label="anchor" href="#applications"></a>
 </h3>
-<p>Definition of application protocols is not supported yet and must be
-performed in the excel file.</p>
+<p>Application specified in the column <code>ApplicationProtocol</code>
+of the <code>Scenarios</code> tab are listed in the tab
+<code>Applications</code>.</p>
+<p>To add new entries, right-click on a row and select “Insert row” or
+“Remove row”. To add a new parameter set (excel sheet), click on “Add
+parameter set”.</p>
+<div class="float">
+<img src="Figures/getting-started/fig12.png" alt="applications"><div class="figcaption">applications</div>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -180,13 +233,35 @@ performed in the excel file.</p>
 <p>Definition of the figures within the <a href="https://github.com/esqLABS/esqlabsR" class="external-link">esqlabsR</a> <a href="#plotting-workflow">Plotting Workflow</a> is supported by the
 <a href="https://github.com/esqLABS/ESQapp" class="external-link">ESQapp</a> in the tab <code>Plots</code>.</p>
 <div class="float">
-<img src="Figures/getting-started/fig7.png" alt="plots"><div class="figcaption">plots</div>
+<img src="Figures/getting-started/fig13.png" alt="plots"><div class="figcaption">plots</div>
 </div>
-<p>The <code>DataCombined</code> defining the mappings of simulation
-results with observer data are specified in the
-<code>DataCombined</code> tab. The app allows selecting the scenarios
-defined in the <code>Scenarios</code> tab, and output paths from the
-<code>Scenarios|OutputPaths</code> list.</p>
+<p>The <strong>DataCombined</strong> tab defines the mappings between
+simulation results<br>
+and observer data. In this tab, the app allows you to select
+scenarios<br>
+(from the <strong>Scenarios</strong> tab) and output paths (from
+the<br><code>Scenarios|OutputPaths</code> list).</p>
+<p>To load observed data, click the <strong>Load Observed Data</strong>
+button. This<br>
+opens a modal window displaying the available observed sheet(s). You
+can<br>
+select the sheet(s) to load by marking the corresponding checkboxes.</p>
+<div class="float">
+<img src="Figures/getting-started/fig14.png" alt="plots-load-observed-data"><div class="figcaption">plots-load-observed-data</div>
+</div>
+<p>Once loaded, the names of the observed sheets become available as a
+list<br>
+in the drop-down of the <code>dataSet</code> column. By right-clicking
+on a cell in<br>
+the <code>dataSet</code> column, you can access a context menu with the
+option<br><strong>Show metadata</strong>.</p>
+<p><img src="Figures/getting-started/fig15.png" alt="plots-load-observed-data-context-menu"> Selecting this option
+opens a modal window with a<br>
+metadata table. This table is read-only and available only for<br>
+previously loaded observed data.</p>
+<div class="float">
+<img src="Figures/getting-started/fig16.png" alt="plots-load-observed-metadata"><div class="figcaption">plots-load-observed-metadata</div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="applying-the-changes">Applying the changes<a class="anchor" aria-label="anchor" href="#applying-the-changes"></a>
@@ -196,7 +271,7 @@ changes made to the configurations!</p>
 <p>After editing the scenarios, plots, or other configurations, the
 changes must be saved by clicking on the “Export” button.</p>
 <div class="float">
-<img src="Figures/getting-started/fig8.png" alt="export"><div class="figcaption">export</div>
+<img src="Figures/getting-started/fig18.png" alt="export"><div class="figcaption">export</div>
 </div>
 <p>The changes will be written into the Excel files. Of course, you can
 still manually edit the Excel files.</p>
