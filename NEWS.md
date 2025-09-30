@@ -3,10 +3,10 @@
 ## Version 2.1.0.9004 (Development version)
 
 #### **Main Changes:**
-- **Added a new `pc_block` module that displays the selected project configuration path in a styled code block with a copy-to-clipboard button and success feedback.** Resolved an issue in (#180).
+- **Added a new `pc_block` module that displays the selected project configuration path in a styled code block with a copy-to-clipboard button and success feedback.** Resolved an issue in (#178).
 
 #### **Bug Fixes**
-- **Improved validation for Protein/Ontogeny table cells to mirror Save button logic (with a single-row empty case).** Resolved erroneous behavior of the Protein Ontogeny field in Populations → Demographics in (#180)
+- **Improved validation for Protein/Ontogeny table cells to mirror Save button logic (with a single-row empty case).** Resolved erroneous behavior of the Protein Ontogeny field in Populations → Demographics in (#178)
 
 
 ## Version 2.1.0.9003 (Development version)
