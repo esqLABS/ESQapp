@@ -33,6 +33,7 @@ app_ui <- function(request) {
         ),
         span(style = "font-weight: 600;", "ESQapp")
       ),
+      header = mod_pc_block_ui("pc_block_1"),
       sidebar = mod_sidebar_ui("sidebar_1"),
       nav_spacer(),
       !!!mod_main_panel_ui("main_panel_1"),

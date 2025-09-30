@@ -15,8 +15,7 @@ mod_import_ui <- function(id) {
       "Select Project Configuration",
       "Please select the projectConfiguration excel file",
       multiple = FALSE
-    ),
-    uiOutput(ns("selected_file_path"))
+    )
   )
 }
 
@@ -130,17 +129,6 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
       # if no data file or no sheets
       runAfterConfig()
-    })
-
-    output$selected_file_path <- renderUI({
-      req(projectConfiguration())
-
-      verbatimTextOutput(ns("selected_file_path_text"))
-    })
-
-    output$selected_file_path_text <- renderPrint({
-      req(projectConfiguration())
-      projectConfiguration()$projectConfigurationFilePath
     })
 
     # Share project configuration path with the export module
