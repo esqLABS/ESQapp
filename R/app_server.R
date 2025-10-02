@@ -22,6 +22,7 @@ app_server <- function(input, output, session) {
   mod_sidebar_server("sidebar_1", r, DROPDOWNS)
   mod_main_panel_server("main_panel_1", r, DROPDOWNS, METADATA)
   mod_warning_server("warning_modal", r) # Call warnings module
+  mod_pc_block_server("pc_block_1", r)
 
   # Call utils logic
   mod_simulationtime_module_server("simulationtime_logic")
