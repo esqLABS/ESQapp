@@ -109,10 +109,14 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     # Modal flow: only if dataFile exists and has sheets
     observeEvent(projectConfiguration(), {
       pc <- projectConfiguration()
-      data_path <- pc$dataFile
-      has_data_file <- isTruthy(data_path) && nzchar(data_path) && file.exists(data_path)
       # Make projectConfiguration path available across modules
       r$config$projectConfiguration <- pc
+      # handle data file
+      data_path <- pc$dataFile
+      has_data_file <- isTruthy(data_path) && nzchar(data_path) && file.exists(data_path)
+      # handle model folder
+      model_folder_path <- pc$modelFolder
+      has_model_folder <- isTruthy(model_folder_path) && nzchar(model_folder_path) && dir.exists(model_folder_path)
 
       if (has_data_file) {
         sheets <- tryCatch(readxl::excel_sheets(data_path), error = function(e) character(0))
@@ -125,6 +129,19 @@ mod_import_server <- function(id, r, DROPDOWNS) {
           r$observed_store$available  <- character(0)
           r$observed_store$loaded  <- character(0)
         }
+      }
+
+      if(has_model_folder) {
+        pkml_paths <- list.files(
+          model_folder_path,
+          pattern = "\\.pkml$",
+          full.names = TRUE,
+          ignore.case = TRUE,
+          recursive = FALSE
+        )
+        # get .pkml file names
+        pkml_names <- basename(pkml_paths)
+        DROPDOWNS$scenarios$model_files <- unique(pkml_names)
       }
 
       # if no data file or no sheets
