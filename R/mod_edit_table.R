@@ -22,44 +22,47 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS, METADATA
     ns <- session$ns
 
     output$edit_df <- renderUI({
-      if(!is.null((r$data[[tab_section]][[sheet]]$modified))) {
-        esqlabs.handsontable::scenario_table_Input(
-          inputId = ns("scenario_table_input"),
-          data = esqlabs.handsontable::prepare_js_data(
-            isolate(r$data[[tab_section]][[sheet]]$modified)
-          ),
-          individual_id_options = DROPDOWNS$scenarios$individual_id,
-          population_id_options = DROPDOWNS$scenarios$population_id,
-          outputpath_id_options = DROPDOWNS$scenarios$outputpath_id,
-          outputpath_id_alias_options = DROPDOWNS$scenarios$outputpath_id_alias,
-          model_parameters_options = DROPDOWNS$scenarios$model_parameters,
-          steatystatetime_unit_options = DROPDOWNS$scenarios$steadystatetime_unit,
-          species_options = DROPDOWNS$individuals$species_options,
-          population_options = DROPDOWNS$individuals$specieshuman_options,
-          gender_options = DROPDOWNS$individuals$gender_options,
-          weight_unit_options = DROPDOWNS$populations$weight_unit,
-          height_unit_options = DROPDOWNS$populations$height_unit,
-          bmi_unit_options = DROPDOWNS$populations$bmi_unit,
-          datatype_options = DROPDOWNS$plots$datatype_options,
-          scenario_options = DROPDOWNS$plots$scenario_options,
-          datacombinedname_options = DROPDOWNS$plots$datacombinedname_options,
-          plottype_options = DROPDOWNS$plots$plottype_options,
-          axisscale_options = DROPDOWNS$plots$axisscale_options,
-          aggregation_options = DROPDOWNS$plots$aggregation_options,
-          path_options = DROPDOWNS$plots$path_options,
-          application_protocol_options = DROPDOWNS$applications$application_protocols,
-          plotgridnames_options = DROPDOWNS$plots$plotgridnames_options,
-          plotids_options = DROPDOWNS$plots$plotids_options,
-          datasets_options = DROPDOWNS$plots$datasets_options,
-          loaddata_metadata = METADATA$plots$loaddata_metadata,
-          sheet_name = sheet,
-          column_headers = (
-            colnames(
-              isolate(r$data[[tab_section]][[sheet]]$modified)
-            )
+
+      data_init <- isolate(r$data[[tab_section]][[sheet]]$modified)
+      if(is.null(data_init)) return(NULL)
+
+      esqlabs.handsontable::scenario_table_Input(
+        inputId = ns("scenario_table_input"),
+        data = esqlabs.handsontable::prepare_js_data(
+          data_init
+        ),
+        individual_id_options = DROPDOWNS$scenarios$individual_id,
+        population_id_options = DROPDOWNS$scenarios$population_id,
+        outputpath_id_options = DROPDOWNS$scenarios$outputpath_id,
+        outputpath_id_alias_options = DROPDOWNS$scenarios$outputpath_id_alias,
+        model_parameters_options = DROPDOWNS$scenarios$model_parameters,
+        steatystatetime_unit_options = DROPDOWNS$scenarios$steadystatetime_unit,
+        model_files_options = DROPDOWNS$scenarios$model_files,
+        species_options = DROPDOWNS$individuals$species_options,
+        population_options = DROPDOWNS$individuals$specieshuman_options,
+        gender_options = DROPDOWNS$individuals$gender_options,
+        weight_unit_options = DROPDOWNS$populations$weight_unit,
+        height_unit_options = DROPDOWNS$populations$height_unit,
+        bmi_unit_options = DROPDOWNS$populations$bmi_unit,
+        datatype_options = DROPDOWNS$plots$datatype_options,
+        scenario_options = DROPDOWNS$plots$scenario_options,
+        datacombinedname_options = DROPDOWNS$plots$datacombinedname_options,
+        plottype_options = DROPDOWNS$plots$plottype_options,
+        axisscale_options = DROPDOWNS$plots$axisscale_options,
+        aggregation_options = DROPDOWNS$plots$aggregation_options,
+        path_options = DROPDOWNS$plots$path_options,
+        application_protocol_options = DROPDOWNS$applications$application_protocols,
+        plotgridnames_options = DROPDOWNS$plots$plotgridnames_options,
+        plotids_options = DROPDOWNS$plots$plotids_options,
+        datasets_options = DROPDOWNS$plots$datasets_options,
+        loaddata_metadata = METADATA$plots$loaddata_metadata,
+        sheet_name = sheet,
+        column_headers = (
+          colnames(
+            data_init
           )
         )
-      }
+      )
 
     })
 
@@ -99,6 +102,7 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS, METADATA
           outputpath_id_alias_dropdown = DROPDOWNS$scenarios$outputpath_id_alias,
           model_parameters_dropdown = DROPDOWNS$scenarios$model_parameters,
           steatystatetime_unit_dropdown = DROPDOWNS$scenarios$steadystatetime_unit,
+          model_files_dropdown = DROPDOWNS$scenarios$model_files,
           species_option_dropdown = DROPDOWNS$individuals$species_options,
           population_option_dropdown = DROPDOWNS$individuals$specieshuman_options,
           gender_option_dropdown = DROPDOWNS$individuals$gender_options,

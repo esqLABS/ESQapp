@@ -1,5 +1,12 @@
 #  News
 
+## Version 2.1.0.9005 (Development version)
+
+#### **Main Changes:**
+- **Scenarios -> ModelFile column. Added support for manual text entry and dropdown selection from available file options.** Resolved an issue in (#182).
+- **Handsontable Table rendering: Disabled full table rerendering when individual cell content is edited or changed.** Resolved an issue in (#182).
+
+
 ## Version 2.1.0.9004 (Development version)
 
 #### **Main Changes:**

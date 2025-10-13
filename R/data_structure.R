@@ -35,6 +35,7 @@ dropdown_values <- function() {
       outputpath_id = c(),
       outputpath_id_alias = list(),
       model_parameters = c(),
+      model_files = c(),
       steadystatetime_unit = ospsuite::ospUnits$Time |> sapply(function(x) x) |> unname()
     ),
     "individuals" = reactiveValues(
