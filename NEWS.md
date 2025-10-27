@@ -1,5 +1,11 @@
 #  News
 
+## Version 2.1.0.9006 (Development version)
+
+#### **Main Changes:**
+- **Handsontable Table rendering: Disabled table component rerendering when cell content is edited/changed, new row added/removed, row content copied/removed/added** Resolved an issue in (#185).
+
+
 ## Version 2.1.0.9005 (Development version)
 
 #### **Main Changes:**

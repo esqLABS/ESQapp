@@ -28,6 +28,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
     r$states$current_sheet_selected_individuals <- NULL
     r$states$current_sheet_selected_populations <- NULL
     r$states$observed_loader_inited <- FALSE
+    r$ui_triggers$selected_sheet <- NULL
 
     # Render the UI (tabs) for the tab section
     output$ui <- renderUI({
@@ -52,6 +53,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
           if(tab_section == "populations") {
             r$states$current_sheet_selected_populations <- NULL
           }
+          r$ui_triggers$selected_sheet <- NULL
         } else {
 
           if (tab_section %in% c("individuals", "populations")) {
@@ -72,6 +74,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
           if(tab_section == "populations") {
             r$states$current_sheet_selected_populations <- selected_sheet
           }
+          r$ui_triggers$selected_sheet <- runif(1)
         }
 
         tags_ <- tagList(
@@ -132,6 +135,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
 
     # Observe the selected sheet and update the reactive state
     observeEvent(input$selected_sheet, {
+
       if (tab_section == "models") {
         r$states$current_sheet_selected_models <- input$selected_sheet
       }
@@ -144,6 +148,7 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
       if (tab_section == "populations") {
         r$states$current_sheet_selected_populations <- input$selected_sheet
       }
+      r$ui_triggers$selected_sheet <- runif(1)
     })
 
 
