@@ -15,6 +15,8 @@ app_server <- function(input, output, session) {
   r$warnings <- WarningHandler$new()
   r$config <- reactiveValues()
   r$observed_store <- reactiveValues()
+  # UI triggers
+  r$ui_triggers <- reactiveValues()
 
   DROPDOWNS <- dropdown_values()
   METADATA <- metadata_values()

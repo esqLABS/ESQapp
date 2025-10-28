@@ -25,36 +25,37 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS, METADATA
 
       data_init <- isolate(r$data[[tab_section]][[sheet]]$modified)
       if(is.null(data_init)) return(NULL)
+      r$ui_triggers$selected_sheet # refresh key based on selected dropdown
 
       esqlabs.handsontable::scenario_table_Input(
         inputId = ns("scenario_table_input"),
         data = esqlabs.handsontable::prepare_js_data(
           data_init
         ),
-        individual_id_options = DROPDOWNS$scenarios$individual_id,
-        population_id_options = DROPDOWNS$scenarios$population_id,
-        outputpath_id_options = DROPDOWNS$scenarios$outputpath_id,
-        outputpath_id_alias_options = DROPDOWNS$scenarios$outputpath_id_alias,
-        model_parameters_options = DROPDOWNS$scenarios$model_parameters,
-        steatystatetime_unit_options = DROPDOWNS$scenarios$steadystatetime_unit,
-        model_files_options = DROPDOWNS$scenarios$model_files,
-        species_options = DROPDOWNS$individuals$species_options,
-        population_options = DROPDOWNS$individuals$specieshuman_options,
-        gender_options = DROPDOWNS$individuals$gender_options,
-        weight_unit_options = DROPDOWNS$populations$weight_unit,
-        height_unit_options = DROPDOWNS$populations$height_unit,
-        bmi_unit_options = DROPDOWNS$populations$bmi_unit,
-        datatype_options = DROPDOWNS$plots$datatype_options,
-        scenario_options = DROPDOWNS$plots$scenario_options,
-        datacombinedname_options = DROPDOWNS$plots$datacombinedname_options,
-        plottype_options = DROPDOWNS$plots$plottype_options,
-        axisscale_options = DROPDOWNS$plots$axisscale_options,
-        aggregation_options = DROPDOWNS$plots$aggregation_options,
-        path_options = DROPDOWNS$plots$path_options,
-        application_protocol_options = DROPDOWNS$applications$application_protocols,
-        plotgridnames_options = DROPDOWNS$plots$plotgridnames_options,
-        plotids_options = DROPDOWNS$plots$plotids_options,
-        datasets_options = DROPDOWNS$plots$datasets_options,
+        individual_id_options = isolate(DROPDOWNS$scenarios$individual_id),
+        population_id_options = isolate(DROPDOWNS$scenarios$population_id),
+        outputpath_id_options = isolate(DROPDOWNS$scenarios$outputpath_id),
+        outputpath_id_alias_options = isolate(DROPDOWNS$scenarios$outputpath_id_alias),
+        model_parameters_options = isolate(DROPDOWNS$scenarios$model_parameters),
+        steatystatetime_unit_options = isolate(DROPDOWNS$scenarios$steadystatetime_unit),
+        model_files_options = isolate(DROPDOWNS$scenarios$model_files),
+        species_options = isolate(DROPDOWNS$individuals$species_options),
+        population_options = isolate(DROPDOWNS$individuals$specieshuman_options),
+        gender_options = isolate(DROPDOWNS$individuals$gender_options),
+        weight_unit_options = isolate(DROPDOWNS$populations$weight_unit),
+        height_unit_options = isolate(DROPDOWNS$populations$height_unit),
+        bmi_unit_options = isolate(DROPDOWNS$populations$bmi_unit),
+        datatype_options = isolate(DROPDOWNS$plots$datatype_options),
+        scenario_options = isolate(DROPDOWNS$plots$scenario_options),
+        datacombinedname_options = isolate(DROPDOWNS$plots$datacombinedname_options),
+        plottype_options = isolate(DROPDOWNS$plots$plottype_options),
+        axisscale_options = isolate(DROPDOWNS$plots$axisscale_options),
+        aggregation_options = isolate(DROPDOWNS$plots$aggregation_options),
+        path_options = isolate(DROPDOWNS$plots$path_options),
+        application_protocol_options = isolate(DROPDOWNS$applications$application_protocols),
+        plotgridnames_options = isolate(DROPDOWNS$plots$plotgridnames_options),
+        plotids_options = isolate(DROPDOWNS$plots$plotids_options),
+        datasets_options = isolate(DROPDOWNS$plots$datasets_options),
         loaddata_metadata = METADATA$plots$loaddata_metadata,
         sheet_name = sheet,
         column_headers = (
@@ -67,9 +68,11 @@ mod_edit_table_server <- function(id, r, tab_section, sheet, DROPDOWNS, METADATA
     })
 
     observeEvent(input$scenario_table_input_edited, {
+      # Update data without re-rendering UI
       r$data[[tab_section]][[sheet]]$modified <- esqlabs.handsontable::parse_js_data(
         input$scenario_table_input_edited
       )
+
       # Column names
       column_names_header <- (
         colnames(
