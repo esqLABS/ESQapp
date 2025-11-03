@@ -1,5 +1,25 @@
 #  News
 
+## Version 2.2.0 (2025-11-03)
+
+#### **Main Changes:**
+- **Integrated FunctionVisualizer into the `{ESQapp}`** Resolved an issue in (#177).
+- **Updated the application color theme to the ESQlabs palette** Resolved an issue in (#177).
+- **Added a new `pc_block` module that displays the selected project configuration path in a styled code block with a copy-to-clipboard button and success feedback.** Resolved an issue in (#178).
+- **Scenarios -> ModelFile column. Added support for manual text entry and dropdown selection from available file options.** Resolved an issue in (#182).
+- **Handsontable Table rendering: Disabled full table rerendering when individual cell content is edited or changed.** Resolved an issue in (#182).
+- **Handsontable Table rendering: Disabled table component rerendering when cell content is edited/changed, new row added/removed, row content copied/removed/added** Resolved an issue in (#183).
+- **Handsontable Table rendering: Shortcuts have been added for all cells that support them.** Resolved an issue in (#183).
+
+#### **Bug Fixes**
+- **In the Parameter Sets modal, replace the double quotes ("") with single quotes ('') when adding parameter to protect "MutliSelect" sorting editor.** Resolved an issue in (#174).
+- **Improved validation for Protein/Ontogeny table cells to mirror Save button logic (with a single-row empty case).** Resolved erroneous behavior of the Protein Ontogeny field in Populations → Demographics in (#178)
+- **Validate dropdown columns before export and replace `--NONE--` entries with empty values.** Resolved an issue in (#184).
+
+#### **Documentation**
+- **Update `Getting started` vignettes** Resolved an issue in (#176).
+
+
 ## Version 2.1.0.9007 (Development version)
 
 #### **Bug Fixes:**
