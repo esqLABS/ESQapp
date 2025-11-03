@@ -48,7 +48,17 @@ mod_export_server <- function(id, r, configuration_path) {
         sheet_list <- list()
 
         for (sheet in r$data[[config_file]]$sheets) {
-          sheet_list[[sheet]] <- r$data[[config_file]][[sheet]]$modified
+          df <- r$data[[config_file]][[sheet]]$modified
+          # Get columns for this sheet (if any dropdown)
+          dropdown_cols <- DROPDOWN_COLUMN_TYPE_LIST[[config_file]][[sheet]]
+          # replace "--NONE--" with NA if it exists
+          if (!is.null(dropdown_cols)) {
+            df[dropdown_cols] <- lapply(df[dropdown_cols], function(col) {
+              replace(col, col == "--NONE--", NA)
+            })
+          }
+          # Save data to the `sheet_list`
+          sheet_list[[sheet]] <- df
         }
 
         # Try exporting and catch any errors

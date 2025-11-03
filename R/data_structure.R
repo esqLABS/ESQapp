@@ -27,6 +27,23 @@ data_structure <- function() {
   )
 }
 
+DROPDOWN_COLUMN_TYPE_LIST <- list(
+  "scenarios" = list(
+    "Scenarios" = c("IndividualId", "PopulationId", "ApplicationProtocol", "SteadyStateTime")
+  ),
+  "individuals" = list(
+    "IndividualBiometrics" = c("Species", "Population", "Gender")
+  ),
+  "populations" = list(
+    "Demographics" = c("species", "population", "weightUnit", "heightMax", "BMIUnit")
+  ),
+  "plots" = list(
+    "DataCombined" = c("dataType", "scenario", "path", "dataSet"),
+    "plotConfiguration" = c("DataCombinedName", "plotType", "xAxisScale", "yAxisScale", "aggregation"),
+    "exportConfiguration" = c("plotGridName")
+  )
+)
+
 dropdown_values <- function() {
   list(
     "scenarios" = reactiveValues(

@@ -1,5 +1,11 @@
 #  News
 
+## Version 2.1.0.9007 (Development version)
+
+#### **Bug Fixes:**
+- **Validate dropdown columns before export and replace `--NONE--` entries with empty values.** Resolved an issue in (#184).
+
+
 ## Version 2.1.0.9006 (Development version)
 
 #### **Main Changes:**
