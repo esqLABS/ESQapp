@@ -3,7 +3,7 @@
 ## Version 2.2.0.9001 (Development version)
 
 #### **Main Changes:**
-- **Handsontable Table Component: Added "Add new record" and "Remove current record" buttons for all tables** Resolved an issue in (#185).
+- **Handsontable Table Component: Added "Add new record" and "Remove current record" buttons for all tables** Resolved an issue in (#187).
 
 
 ## Version 2.2.0 (2025-11-03)
