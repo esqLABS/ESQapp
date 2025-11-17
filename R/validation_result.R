@@ -3,7 +3,6 @@
 #' @description An R6 class for storing three-tier validation results from Excel file imports.
 #' Contains data (if validation passed), critical errors (blocking issues), and warnings (non-blocking issues).
 #'
-#' @export
 ValidationResult <- R6::R6Class(
   "ValidationResult",
   public = list(
