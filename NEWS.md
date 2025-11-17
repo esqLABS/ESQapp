@@ -1,5 +1,15 @@
 #  News
 
+## Version 2.2.0.9002 (Development version)
+
+#### **Main Changes:**
+- **Dropdown Validation with Visual Feedback:** Updated `esqlabs.handsontable` components to include dropdown validation across multiple table components (DataCombined, PlotConfiguration, ExportConfiguration, Demographics, IndividualBiometrics). Invalid dropdown values now display with red background and warning tooltips on hover. Resolved an issue in (#187).
+- **Column Description Tooltips:** Added informative tooltips to all table column headers across the application. Hovering over any column header now displays a description extracted from official esqlabsR documentation, helping users understand the purpose and expected values for each field. Resolved an issue in (#187).
+
+#### **Bug Fixes**
+- **Numeric Column Export Fix:** Fixed export functionality to properly export numeric columns (weight, height, age, BMI, etc.) as numbers instead of text in Excel files. Added `NUMERIC_COLUMN_TYPE_LIST` configuration to automatically convert text-stored numeric values to proper numeric format during export across all sheets. Resolved an issue in (#187).
+
+
 ## Version 2.2.0.9001 (Development version)
 
 #### **Main Changes:**
