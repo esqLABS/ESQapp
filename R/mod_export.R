@@ -57,6 +57,19 @@ mod_export_server <- function(id, r, configuration_path) {
               replace(col, col == "--NONE--", NA)
             })
           }
+          # Convert numeric columns from text to numeric
+          numeric_cols <- NUMERIC_COLUMN_TYPE_LIST[[config_file]][[sheet]]
+          if (!is.null(numeric_cols)) {
+            # Only convert columns that exist in the dataframe
+            existing_numeric_cols <- intersect(numeric_cols, names(df))
+            if (length(existing_numeric_cols) > 0) {
+              df[existing_numeric_cols] <- suppressWarnings(
+                lapply(df[existing_numeric_cols], function(col) {
+                  as.numeric(as.character(col))
+                })
+              )
+            }
+          }
           # Save data to the `sheet_list`
           sheet_list[[sheet]] <- df
         }

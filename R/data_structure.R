@@ -44,6 +44,26 @@ DROPDOWN_COLUMN_TYPE_LIST <- list(
   )
 )
 
+# Column types for numeric conversion during export
+NUMERIC_COLUMN_TYPE_LIST <- list(
+  "scenarios" = list(
+    "Scenarios" = c("SteadyStateTime")
+  ),
+  "individuals" = list(
+    "IndividualBiometrics" = c("Age [year(s)]", "Height [cm]", "Weight [kg]")
+  ),
+  "populations" = list(
+    "Demographics" = c("numberOfIndividuals", "proportionOfFemales",
+                       "ageMin", "ageMax", "weightMin", "weightMax",
+                       "heightMin", "heightMax", "BMIMin", "BMIMax")
+  ),
+  "plots" = list(
+    "DataCombined" = c("xOffsets", "yOffsets", "xScaleFactors", "yScaleFactors"),
+    "plotConfiguration" = c("xValuesLimits", "yValuesLimits", "quantiles", "nsd", "foldDistance"),
+    "exportConfiguration" = c("width")
+  )
+)
+
 dropdown_values <- function() {
   list(
     "scenarios" = reactiveValues(
