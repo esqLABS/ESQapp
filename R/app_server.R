@@ -35,9 +35,7 @@ app_server <- function(input, output, session) {
     showModal(
       modalDialog(
         title = r$states$modal_message$status,
-        p(
-          r$states$modal_message$message
-        ),
+        HTML(r$states$modal_message$message),
         easyClose = TRUE
       )
     )
