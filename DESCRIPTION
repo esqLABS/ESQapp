@@ -1,6 +1,6 @@
 Package: ESQapp
 Title: Shiny App to edit {esqLABSR} Edit Simulation Scenarios
-Version: 2.2.0
+Version: 2.2.0.9002
 Authors@R: c(
     person("Felix", "Mil", email = "felix.mil@esqlabs.com", role = c('cre', 'aut')),
     person("Anastasiia", "Kostiv", email = "anastasiia.kostiv.ext@esqlabs.com", role = c("aut"),
@@ -54,6 +54,6 @@ Remotes:
     esqLABS/esqlabsR@*release,
     yonicd/covrpage,
     esqLABS/esqlabs.ui@39075c722c7fa78a3b4ff035aa76e11e3912e0c0,
-    esqLABS/esqlabs.handsontable@e7fc95f25c74e79a575be830b4dbec979988b0bb,
+    esqLABS/esqlabs.handsontable@d3fbf578708c1d1d129d24130d86dbd70a24e847,
     esqLABS/esqlabsR.FunctionVisualizer@4fa6149fd99fe80f1bd74b8a71ea355967ebdd36
 VignetteBuilder: knitr
