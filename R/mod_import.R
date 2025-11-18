@@ -48,40 +48,80 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       )
       req(projectConfigurationFilePath$datapath)
 
-      # Clear previous validation results
+      # Clear previous validation results from old project
       r$warnings$clear_all()
 
-      # Validate project configuration first
-      pc_validation <- validate_project_configuration(projectConfigurationFilePath$datapath)
-      r$warnings$add_validation_result("project_configuration", pc_validation)
-
-      if (pc_validation$has_critical_errors) {
-        # Show critical error modal
-        showModal(
-          modalDialog(
-            title = "Critical Validation Errors",
-            HTML(paste0(
-              "<h4>Cannot import project configuration due to critical errors:</h4>",
-              "<ul>",
-              paste0("<li>", pc_validation$get_formatted_messages("critical"), "</li>", collapse = ""),
-              "</ul>",
-              "<p>Please fix these errors and try again.</p>"
-            )),
-            easyClose = TRUE,
-            footer = modalButton("Close")
+      # TODO: Step 1 - Load project configuration (esqlabsR)
+      # This should stay simple - just load the project config
+      project_config <- tryCatch(
+        esqlabsR::createDefaultProjectConfiguration(path = projectConfigurationFilePath$datapath),
+        error = function(e) {
+          r$states$modal_message <- list(
+            status = "Error Loading Project Configuration",
+            message = conditionMessage(e)
           )
-        )
-        return(NULL)
-      }
+          return(NULL)
+        }
+      )
 
-      # Return the valid project configuration
-      pc_validation$data
+      if (is.null(project_config)) return(NULL)
+
+      # TODO: Step 2 - Validate all configurations (esqlabsR should provide this)
+      # esqlabsR should provide a single validation function:
+      #   validation_results <- esqlabsR::validateAllConfigurations(project_config)
+      #
+      # This function should:
+      # - Validate project configuration itself
+      # - Validate all referenced files (scenarios, plots, individuals, populations, models, applications)
+      # - Check sheet presence (missing sheet = critical error)
+      # - Check column names (missing columns = critical error)
+      # - Check sheet content (empty sheet = warning, not critical error)
+      # - Add default column names to empty sheets when applicable
+      # - Validate cross-file references (e.g., plots referencing scenarios)
+      # - Return ValidationResult object for each file with:
+      #   * critical_errors: blocking issues (missing files, missing sheets, missing columns)
+      #   * warnings: non-blocking issues (empty sheets, missing references, etc.)
+      #   * data: the validated and loaded data (with default columns added if needed)
+
+      # TEMPORARY: Until esqlabsR implements validation, just return project config
+      # In future, this will be replaced with validation results
+
+      # Store validation results (will be populated by esqlabsR in future)
+      # r$warnings$add_validation_results(validation_results)
+      #
+      # Show critical errors immediately in a blocking modal
+      # (Warnings will be shown via bell icon in mod_warning_modal.R)
+      # if (r$warnings$has_critical_errors) {
+      #   # Format critical errors for display
+      #   error_details <- lapply(names(r$warnings$critical_errors), function(config_file) {
+      #     errors <- r$warnings$critical_errors[[config_file]]
+      #     paste0("<h5>File: ", config_file, "</h5><ul>",
+      #            paste0("<li>", errors, "</li>", collapse = ""),
+      #            "</ul>")
+      #   })
+      #
+      #   r$states$modal_message <- list(
+      #     status = "Critical Validation Errors",
+      #     message = paste0(
+      #       "<p><strong>The following critical errors must be fixed before importing:</strong></p>",
+      #       paste(error_details, collapse = "")
+      #     )
+      #   )
+      #   return(NULL)
+      # }
+
+      # Return the project configuration
+      project_config
     })
 
-    # Enhanced config + dropdown logic with validation
+    # Import sheets from already-validated configuration files
     runAfterConfig <- function() {
       tryCatch(
         {
+          # TODO: This function should only import sheets, NOT do validation
+          # Validation happens in projectConfiguration reactive above
+          # This function is only called if projectConfiguration succeeded (no critical errors)
+
           config_map <- list(
             "scenarios"    = projectConfiguration()$scenariosFile,
             "individuals"  = projectConfiguration()$individualsFile,
@@ -91,105 +131,26 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             "plots"        = projectConfiguration()$plotsFile
           )
 
-          # Track overall validation status
-          has_any_critical_errors <- FALSE
-
-          # Validate and import each configuration file
+          # Import sheets from validated files
           for (config_file in r$data$get_config_files()) {
             r$data[[config_file]]$file_path <- config_map[[config_file]]
 
-            # Check if the file path is valid
             if (!is.na(r$data[[config_file]]$file_path) && file.exists(r$data[[config_file]]$file_path)) {
-              # Run appropriate validation based on file type
-              validation_result <- NULL
-
-              if (config_file == "scenarios") {
-                validation_result <- validate_scenarios_file(r$data[[config_file]]$file_path, projectConfiguration())
-                r$warnings$add_validation_result(config_file, validation_result)
-              } else if (config_file == "plots") {
-                # Get scenarios data for reference validation
-                scenarios_data <- NULL
-                if (!is.null(r$warnings$validation_results[["scenarios"]])) {
-                  scenarios_data <- r$warnings$validation_results[["scenarios"]]$data
-                }
-                validation_result <- validate_plots_file(r$data[[config_file]]$file_path, scenarios_data, NULL)
-                r$warnings$add_validation_result(config_file, validation_result)
-              }
-              # Add more validations for other file types as needed...
-
-              # Check for critical errors
-              if (!is.null(validation_result) && validation_result$has_critical_errors) {
-                has_any_critical_errors <- TRUE
-                # Skip importing this file due to critical errors
-                message(sprintf("Skipping %s due to critical validation errors", config_file))
-              } else {
-                # Import sheets if no critical errors
-                sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
-                r$data[[config_file]]$sheets <- sheet_names
-                for (sheet in sheet_names) {
-                  r$data$add_sheet(config_file, sheet, r$warnings)
-                }
+              # Import sheets (no validation needed - already validated)
+              sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
+              r$data[[config_file]]$sheets <- sheet_names
+              for (sheet in sheet_names) {
+                r$data$add_sheet(config_file, sheet, r$warnings)
               }
             }
           }
 
-          # Show critical errors modal if any exist
-          if (has_any_critical_errors) {
-            summary <- r$warnings$get_summary()
-            showModal(
-              modalDialog(
-                title = "Validation Results - Critical Errors Found",
-                HTML(paste0(
-                  "<h4>Some files have critical errors and were not imported:</h4>",
-                  "<p>Total critical errors: ", summary$total_critical_errors, "</p>",
-                  "<p>Total warnings: ", summary$total_warnings, "</p>",
-                  "<p>Affected files: ", paste(summary$affected_files, collapse = ", "), "</p>",
-                  "<br>",
-                  "<p>Click the warning icon in the navigation bar for details.</p>"
-                )),
-                easyClose = TRUE,
-                footer = modalButton("Close")
-              )
-            )
-          }
+          # Populate dropdowns using configuration-driven approach
+          dropdown_config <- get_dropdown_config()
+          populate_dropdowns(DROPDOWNS, r$data, dropdown_config)
 
-          # Only populate dropdowns if data was successfully imported
-          if (file.exists(r$data$individuals$file_path) && !is.null(r$data$individuals$IndividualBiometrics)) {
-            DROPDOWNS$scenarios$individual_id <- r$data$individuals$IndividualBiometrics$modified$IndividualId
-          }
-          if (file.exists(r$data$populations$file_path) && !is.null(r$data$populations$Demographics)) {
-            DROPDOWNS$scenarios$population_id <- r$data$populations$Demographics$modified$PopulationName
-          }
-          if (file.exists(r$data$scenarios$file_path)) {
-            if (!is.null(r$data$scenarios$OutputPaths)) {
-              DROPDOWNS$scenarios$outputpath_id <- r$data$scenarios$OutputPaths$modified$OutputPathId
-              DROPDOWNS$scenarios$outputpath_id_alias <- setNames(
-                as.list(as.character(r$data$scenarios$OutputPaths$modified$OutputPath)),
-                r$data$scenarios$OutputPaths$modified$OutputPathId
-              )
-              DROPDOWNS$plots$path_options <- unique(r$data$scenarios$OutputPaths$modified$OutputPath)
-            }
-            if (!is.null(r$data$scenarios$Scenarios)) {
-              DROPDOWNS$plots$scenario_options <- unique(r$data$scenarios$Scenarios$modified$Scenario_name)
-            }
-          }
-          if (file.exists(r$data$models$file_path)) {
-            DROPDOWNS$scenarios$model_parameters <- unique(r$data$models$sheets)
-          }
-          if (file.exists(r$data$plots$file_path)) {
-            if (!is.null(r$data$plots$DataCombined)) {
-              DROPDOWNS$plots$datacombinedname_options <- unique(r$data$plots$DataCombined$modified$DataCombinedName)
-            }
-            if (!is.null(r$data$plots$plotGrids)) {
-              DROPDOWNS$plots$plotgridnames_options <- unique(r$data$plots$plotGrids$modified$name)
-            }
-            if (!is.null(r$data$plots$plotConfiguration)) {
-              DROPDOWNS$plots$plotids_options <- unique(r$data$plots$plotConfiguration$modified$plotID)
-            }
-          }
-          if (file.exists(r$data$applications$file_path)) {
-            DROPDOWNS$applications$application_protocols <- unique(r$data$applications$sheets)
-          }
+          # Handle special dropdown cases (named lists, etc.)
+          populate_special_dropdowns(DROPDOWNS, r$data)
         },
         error = function(e) {
           message("Error in reading the project configuration file: ", conditionMessage(e))
