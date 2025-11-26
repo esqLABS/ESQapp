@@ -12,51 +12,11 @@ mod_export_ui <- function(id) {
   tagList(
     tags$div(
       style = "display: flex; flex-direction: column; gap: 10px; width: 100%;",
-      tags$div(
-        class = "btn-group",
-        style = "width: 100%;",
-        role = "group",
-        tags$button(
-          id = ns("downloadButton"),
-          type = "button",
-          class = "btn btn-dark dropdown-toggle",
-          style = "width: 100%; padding: 10px 10px;",
-          `data-bs-toggle` = "dropdown",
-          `aria-expanded` = "false",
-          disabled = NA,
-          icon("download"),
-          " Download Project ",
-          tags$span(class = "caret")
-        ),
-        tags$ul(
-          class = "dropdown-menu",
-          style = "width: 100%;",
-          tags$li(
-            downloadButton(
-              ns("downloadEsqapp"),
-              label = tagList(
-                icon("file-archive"),
-                " Download as ",
-                tags$em(style = "color: #404040; font-weight: 100;", ".esqapp")
-              ),
-              class = "btn-link",
-              style = "width: 100%; text-align: left; border: none; padding: 8px 10px;"
-            )
-          ),
-          tags$li(tags$hr(class = "dropdown-divider", style = "margin: 5px 0;")),
-          tags$li(
-            downloadButton(
-              ns("downloadZip"),
-              label = tagList(
-                icon("file-zipper"),
-                " Download as ",
-                tags$em(style = "color: #404040; font-weight: 100;", ".zip")
-              ),
-              class = "btn-link",
-              style = "width: 100%; text-align: left; border: none; padding: 8px 10px;"
-            )
-          )
-        )
+      save_dropdown_ui(
+        ns = ns,
+        esqapp_id = "downloadEsqapp",
+        zip_id = "downloadZip",
+        disabled = TRUE
       )
     )
   )

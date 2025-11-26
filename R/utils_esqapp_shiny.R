@@ -115,7 +115,11 @@ load_esqapp_shiny <- function(zip_path, file_name, r) {
 create_esqapp_shiny <- function(original_project_root, r, output_file,
                                 DROPDOWN_COLUMN_TYPE_LIST, NUMERIC_COLUMN_TYPE_LIST) {
 
-  shiny::withProgress(message = 'Creating .esqapp file...', value = 0, {
+  # Determine file extension for notifications
+  file_ext <- tools::file_ext(output_file)
+  if (file_ext == "") file_ext <- "esqapp"
+
+  shiny::withProgress(message = paste0('Creating .', file_ext, ' file...'), value = 0, {
     shiny::incProgress(0.2, detail = "Preparing files...")
 
     temp_export_dir <- file.path(tempdir(), paste0("esqapp_export_", format(Sys.time(), "%Y%m%d_%H%M%S")))
@@ -253,11 +257,11 @@ create_esqapp_shiny <- function(original_project_root, r, output_file,
       shiny::incProgress(1, detail = "Complete!")
     }, error = function(e) {
       tryCatch(setwd(old_wd_zip), error = function(e2) {})
-      shiny::showNotification(paste0("Failed to create .esqapp: ", e$message), type = "error", duration = 10)
+      shiny::showNotification(paste0("Failed to create .", file_ext, ": ", e$message), type = "error", duration = 10)
       return(FALSE)
     })
   })
 
-  shiny::showNotification(".esqapp file created successfully!", type = "message", duration = 5)
+  shiny::showNotification(paste0(".", file_ext, " file created successfully!"), type = "message", duration = 5)
   return(TRUE)
 }

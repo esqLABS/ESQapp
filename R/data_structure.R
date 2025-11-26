@@ -131,6 +131,21 @@ DataStructure <- R6::R6Class("DataStructure",
       self$applications <- reactiveValues(file_path = NA, sheets = NA)
       self$plots <- reactiveValues(file_path = NA, sheets = NA)
     },
+    # Reset all data for new project upload
+    reset = function() {
+      for (config_file in self$get_config_files()) {
+        # Remove all sheet data
+        current_sheets <- self[[config_file]]$sheets
+        if (!is.null(current_sheets) && !all(is.na(current_sheets))) {
+          for (sheet in current_sheets) {
+            self[[config_file]][[sheet]] <- NULL
+          }
+        }
+        # Reset to initial state
+        self[[config_file]]$file_path <- NA
+        self[[config_file]]$sheets <- NA
+      }
+    },
     get_config_files = function() {
       c("scenarios", "individuals", "populations", "models", "applications", "plots")
     },
@@ -262,10 +277,19 @@ WarningHandler <- R6::R6Class(
     warning_messages = NULL,
     invalid_sheets_name = NULL,
 
-
     # Initialize
     initialize = function() {
       self$warning_messages <- reactiveValues()
+      self$invalid_sheets_name <- NULL
+    },
+
+    # Reset for new project
+    reset = function() {
+      # Clear values inside existing reactiveValues to preserve observer bindings
+      for (name in names(self$warning_messages)) {
+        self$warning_messages[[name]] <- NULL
+      }
+      self$invalid_sheets_name <- NULL
     },
 
     # Method to add a warning
