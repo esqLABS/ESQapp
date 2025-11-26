@@ -10,12 +10,14 @@
 mod_import_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    shinyFiles::shinyFilesButton(
-      ns("projectConfigurationFile"),
-      "Select Project Configuration",
-      "Please select the projectConfiguration excel file",
-      multiple = FALSE
-    )
+    fileInput(
+      ns("projectEsqapp"),
+      "Upload Project File",
+      accept = c(".esqapp", ".zip"),
+      buttonLabel = "Browse...",
+      placeholder = "No file selected"
+    ),
+    helpText("Upload your project as an .esqapp file (or .zip)")
   )
 }
 
@@ -26,30 +28,10 @@ mod_import_server <- function(id, r, DROPDOWNS) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    volumes <- c(
-      "Current Project" = getwd(),
-      # "Test Project" = testthat::test_path("data"),
-      Home = Sys.getenv("R_USER"),
-      shinyFiles::getVolumes()()
-    )
-
-    shinyFiles::shinyFileChoose(input,
-      id = "projectConfigurationFile",
-      roots = volumes,
-      filetypes = c("xlsx"),
-      session = session
-    )
-
+    # Reactive for project configuration
     projectConfiguration <- reactive({
-      req(input$projectConfigurationFile)
-      projectConfigurationFilePath <- shinyFiles::parseFilePaths(
-        volumes,
-        input$projectConfigurationFile
-      )
-      req(projectConfigurationFilePath$datapath)
-      esqlabsR::createDefaultProjectConfiguration(
-        path = projectConfigurationFilePath$datapath
-      )
+      req(input$projectEsqapp)
+      load_esqapp_shiny(input$projectEsqapp$datapath, input$projectEsqapp$name, r)
     })
 
     # Unchanged config + dropdown logic
@@ -97,9 +79,10 @@ mod_import_server <- function(id, r, DROPDOWNS) {
         },
         error = function(e) {
           message("Error in reading the project configuration file: ", conditionMessage(e))
-          r$states$modal_message <- list(
-            status  = "Error in reading the project configuration file",
-            message = "File might be missing or not in the correct format. Please check the file and try again."
+          showNotification(
+            "Error reading configuration file. File might be missing or not in the correct format.",
+            type = "error",
+            duration = 10
           )
           return(NULL)
         }
