@@ -1,3 +1,66 @@
+#' Format validation summary for modal display
+#'
+#' @param validation_summary Named vector or list from esqlabsR::validationSummary()
+#' @return HTML-formatted string
+#' @noRd
+format_validation_summary <- function(validation_summary) {
+  if (is.null(validation_summary) || length(validation_summary) == 0) {
+    return("<p>No validation details available.</p>")
+  }
+
+  # If it's a named vector/list, format each element
+  if (!is.null(names(validation_summary))) {
+    html_parts <- lapply(names(validation_summary), function(name) {
+      value <- validation_summary[[name]]
+
+      # Format the label nicely
+      label <- switch(name,
+        "criticalErrorCount" = "Critical Errors",
+        "warningCount" = "Warnings",
+        "configFiles" = "Affected Configuration Files",
+        "crossReferences" = "Cross-Reference Issues",
+        gsub("([a-z])([A-Z])", "\\1 \\2", name)  # Default: split camelCase
+      )
+
+      # Format the value
+      if (is.character(value) && length(value) > 1) {
+        # Multiple items - show as list
+        items <- paste0("<li>", value, "</li>", collapse = "")
+        value_html <- paste0("<ul style='margin: 5px 0; padding-left: 20px;'>", items, "</ul>")
+      } else if (is.numeric(value)) {
+        # Numeric value with color coding
+        color <- if (name %in% c("criticalErrorCount", "criticalErrors") && value > 0) {
+          "color: #dc3545; font-weight: bold;"
+        } else if (name %in% c("warningCount", "warnings") && value > 0) {
+          "color: #ffc107; font-weight: bold;"
+        } else {
+          ""
+        }
+        value_html <- paste0("<span style='", color, "'>", value, "</span>")
+      } else {
+        value_html <- as.character(value)
+      }
+
+      paste0(
+        "<div style='margin-bottom: 10px;'>",
+        "<strong>", label, ":</strong> ", value_html,
+        "</div>"
+      )
+    })
+
+    return(paste(html_parts, collapse = ""))
+  }
+
+ # If it's a simple vector, join with line breaks
+  return(paste0(
+    "<div style='background: #f8f9fa; padding: 10px; border-radius: 4px;'>",
+    "<pre style='margin: 0; white-space: pre-wrap;'>",
+    paste(validation_summary, collapse = "\n"),
+    "</pre>",
+    "</div>"
+  ))
+}
+
 #' import UI Function
 #'
 #' @description A shiny Module.
@@ -48,67 +111,70 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       )
       req(projectConfigurationFilePath$datapath)
 
-      # Clear previous validation results from old project
-      r$warnings$clear_all()
+      # Clear previous validation results from old project (isolate to prevent reactive loop)
+      isolate(r$warnings$clear_all())
 
-      # TODO: Step 1 - Load project configuration (esqlabsR)
-      # This should stay simple - just load the project config
+      # Step 1 - Load project configuration
       project_config <- tryCatch(
         esqlabsR::createDefaultProjectConfiguration(path = projectConfigurationFilePath$datapath),
         error = function(e) {
-          r$states$modal_message <- list(
-            status = "Error Loading Project Configuration",
-            message = conditionMessage(e)
-          )
+          isolate({
+            r$states$modal_message <- list(
+              status = "Error Loading Project Configuration",
+              message = conditionMessage(e)
+            )
+          })
           return(NULL)
         }
       )
 
       if (is.null(project_config)) return(NULL)
 
-      # TODO: Step 2 - Validate all configurations (esqlabsR should provide this)
-      # esqlabsR should provide a single validation function:
-      #   validation_results <- esqlabsR::validateAllConfigurations(project_config)
-      #
-      # This function should:
-      # - Validate project configuration itself
-      # - Validate all referenced files (scenarios, plots, individuals, populations, models, applications)
-      # - Check sheet presence (missing sheet = critical error)
-      # - Check column names (missing columns = critical error)
-      # - Check sheet content (empty sheet = warning, not critical error)
-      # - Add default column names to empty sheets when applicable
-      # - Validate cross-file references (e.g., plots referencing scenarios)
-      # - Return ValidationResult object for each file with:
-      #   * critical_errors: blocking issues (missing files, missing sheets, missing columns)
-      #   * warnings: non-blocking issues (empty sheets, missing references, etc.)
-      #   * data: the validated and loaded data (with default columns added if needed)
+      # Step 2 - Validate all configurations using esqlabsR
+      validation_results <- tryCatch(
+        esqlabsR::validateAllConfigurations(project_config),
+        error = function(e) {
+          message("Validation error: ", conditionMessage(e))
+          NULL
+        }
+      )
 
-      # TEMPORARY: Until esqlabsR implements validation, just return project config
-      # In future, this will be replaced with validation results
+      # Process validation results if available
+      if (!is.null(validation_results)) {
+        # Check for critical errors
+        has_critical <- esqlabsR::isAnyCriticalErrors(validation_results)
 
-      # Store validation results (will be populated by esqlabsR in future)
-      # r$warnings$add_validation_results(validation_results)
-      #
-      # Show critical errors immediately in a blocking modal
-      # (Warnings will be shown via bell icon in mod_warning_modal.R)
-      # if (r$warnings$has_critical_errors) {
-      #   # Format critical errors for display
-      #   error_details <- lapply(names(r$warnings$critical_errors), function(config_file) {
-      #     errors <- r$warnings$critical_errors[[config_file]]
-      #     paste0("<h5>File: ", config_file, "</h5><ul>",
-      #            paste0("<li>", errors, "</li>", collapse = ""),
-      #            "</ul>")
-      #   })
-      #
-      #   r$states$modal_message <- list(
-      #     status = "Critical Validation Errors",
-      #     message = paste0(
-      #       "<p><strong>The following critical errors must be fixed before importing:</strong></p>",
-      #       paste(error_details, collapse = "")
-      #     )
-      #   )
-      #   return(NULL)
-      # }
+        # Get validation summary for display
+        validation_summary <- esqlabsR::validationSummary(validation_results)
+
+        # Store results in WarningHandler for display in mod_warning_modal (isolate to prevent reactive loop)
+        isolate(r$warnings$add_esqlabsR_validation(validation_results, validation_summary))
+
+        # If critical errors exist, show blocking modal and stop import
+        if (has_critical) {
+          # Format validation summary for display
+          # validation_summary is a named vector/list from esqlabsR
+          summary_html <- format_validation_summary(validation_summary)
+
+          isolate({
+            r$states$modal_message <- list(
+              status = "Critical Validation Errors",
+              message = HTML(paste0(
+                "<div style='max-height: 500px; overflow-y: auto;'>",
+                "<p><strong>The project configuration contains critical errors that must be fixed before importing.</strong></p>",
+                "<hr>",
+                summary_html,
+                "<hr>",
+                "<p style='color: #666; font-size: 0.9em;'>",
+                "<i class='fa fa-info-circle'></i> Please fix the errors in your Excel files and try importing again.",
+                "</p>",
+                "</div>"
+              ))
+            )
+          })
+          return(NULL)
+        }
+      }
 
       # Return the project configuration
       project_config
@@ -118,10 +184,6 @@ mod_import_server <- function(id, r, DROPDOWNS) {
     runAfterConfig <- function() {
       tryCatch(
         {
-          # TODO: This function should only import sheets, NOT do validation
-          # Validation happens in projectConfiguration reactive above
-          # This function is only called if projectConfiguration succeeded (no critical errors)
-
           config_map <- list(
             "scenarios"    = projectConfiguration()$scenariosFile,
             "individuals"  = projectConfiguration()$individualsFile,

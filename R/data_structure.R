@@ -265,6 +265,9 @@ WarningHandler <- R6::R6Class(
     validation_results = NULL,
     critical_errors = NULL,
     has_critical_errors = FALSE,
+    # Store esqlabsR validation results and summary
+    esqlabsR_results = NULL,
+    esqlabsR_summary = NULL,
 
 
     # Initialize
@@ -272,6 +275,8 @@ WarningHandler <- R6::R6Class(
       self$warning_messages <- reactiveValues()
       self$validation_results <- reactiveValues()
       self$critical_errors <- reactiveValues()
+      self$esqlabsR_results <- NULL
+      self$esqlabsR_summary <- NULL
     },
 
     # Method to add a warning (legacy support)
@@ -305,6 +310,20 @@ WarningHandler <- R6::R6Class(
       }
     },
 
+    # Add esqlabsR validation results
+    add_esqlabsR_validation = function(results, summary) {
+      self$esqlabsR_results <- results
+      self$esqlabsR_summary <- summary
+      self$has_critical_errors <- esqlabsR::isAnyCriticalErrors(results)
+
+      # Add summary to warning messages for display in modal
+      # summary can be a vector, so use length() and any() for proper check
+      if (!is.null(summary) && length(summary) > 0 && any(nzchar(summary))) {
+        self$warning_messages$config_files <- c(self$warning_messages$config_files, "esqlabsR_validation")
+        self$warning_messages[["esqlabsR_validation"]] <- summary
+      }
+    },
+
     # Clear all validation results
     clear_all = function() {
       self$warning_messages <- reactiveValues()
@@ -312,6 +331,8 @@ WarningHandler <- R6::R6Class(
       self$critical_errors <- reactiveValues()
       self$has_critical_errors <- FALSE
       self$invalid_sheets_name <- NULL
+      self$esqlabsR_results <- NULL
+      self$esqlabsR_summary <- NULL
     },
 
     # Get summary of all validations

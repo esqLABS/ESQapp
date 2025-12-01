@@ -31,14 +31,17 @@ app_server <- function(input, output, session) {
 
   # Show export/import file status modal
   observeEvent(r$states$modal_message, {
+    req(r$states$modal_message)
+
+    msg <- isolate(r$states$modal_message)
 
     showModal(
       modalDialog(
-        title = r$states$modal_message$status,
-        HTML(r$states$modal_message$message),
+        title = msg$status,
+        msg$message,
         easyClose = TRUE
       )
     )
     r$states$modal_message <- NULL
-  })
+  }, ignoreNULL = TRUE, ignoreInit = TRUE)
 }
