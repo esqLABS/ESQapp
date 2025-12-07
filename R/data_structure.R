@@ -1,3 +1,15 @@
+#' Null coalescing operator
+#'
+#' @description Returns the left-hand side if not NULL, otherwise the right-hand side
+#' @param lhs Left-hand side value
+#' @param rhs Right-hand side value (default)
+#' @return lhs if not NULL, otherwise rhs
+#' @noRd
+`%||%` <- function(lhs, rhs) {
+  if (is.null(lhs)) rhs else lhs
+}
+
+
 data_structure <- function() {
   list(
     "scenarios" = reactiveValues(
