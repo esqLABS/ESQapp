@@ -1,64 +1,67 @@
-#' Format validation summary for modal display
+#' Format detailed validation errors for modal display
 #'
-#' @param validation_summary Named vector or list from esqlabsR::validationSummary()
-#' @return HTML-formatted string
+#' @param validation_results Full validation results from esqlabsR::validateAllConfigurations()
+#' @return HTML-formatted string with detailed errors
 #' @noRd
-format_validation_summary <- function(validation_summary) {
-  if (is.null(validation_summary) || length(validation_summary) == 0) {
+format_validation_errors <- function(validation_results) {
+  if (is.null(validation_results)) {
     return("<p>No validation details available.</p>")
   }
 
-  # If it's a named vector/list, format each element
-  if (!is.null(names(validation_summary))) {
-    html_parts <- lapply(names(validation_summary), function(name) {
-      value <- validation_summary[[name]]
+  # Map internal names to user-friendly file names
+  file_name_map <- list(
+    "projectConfiguration" = "ProjectConfiguration.xlsx",
+    "scenarios" = "Scenarios.xlsx",
+    "plots" = "Plots.xlsx",
+    "individuals" = "IndividualBiometrics.xlsx",
+    "populations" = "Demographics.xlsx",
+    "models" = "ModelParameters.xlsx",
+    "applications" = "Applications.xlsx",
+    "crossReferences" = "Cross-References"
+  )
 
-      # Format the label nicely
-      label <- switch(name,
-        "criticalErrorCount" = "Critical Errors",
-        "warningCount" = "Warnings",
-        "configFiles" = "Affected Configuration Files",
-        "crossReferences" = "Cross-Reference Issues",
-        gsub("([a-z])([A-Z])", "\\1 \\2", name)  # Default: split camelCase
-      )
+  html_parts <- list()
 
-      # Format the value
-      if (is.character(value) && length(value) > 1) {
-        # Multiple items - show as list
-        items <- paste0("<li>", value, "</li>", collapse = "")
-        value_html <- paste0("<ul style='margin: 5px 0; padding-left: 20px;'>", items, "</ul>")
-      } else if (is.numeric(value)) {
-        # Numeric value with color coding
-        color <- if (name %in% c("criticalErrorCount", "criticalErrors") && value > 0) {
-          "color: #dc3545; font-weight: bold;"
-        } else if (name %in% c("warningCount", "warnings") && value > 0) {
-          "color: #ffc107; font-weight: bold;"
-        } else {
-          ""
-        }
-        value_html <- paste0("<span style='", color, "'>", value, "</span>")
-      } else {
-        value_html <- as.character(value)
-      }
+  # Loop through each validation result
+  for (config_name in names(validation_results)) {
+    result <- validation_results[[config_name]]
 
-      paste0(
-        "<div style='margin-bottom: 10px;'>",
-        "<strong>", label, ":</strong> ", value_html,
+    if (!inherits(result, "validationResult")) next
+
+    # Check if this result has critical errors
+    if (result$has_critical_errors()) {
+      file_display_name <- file_name_map[[config_name]] %||% config_name
+      errors <- result$critical_errors
+
+      # Build error list for this file
+      error_items <- lapply(errors, function(err) {
+        paste0(
+          "<li style='margin-bottom: 8px;'>",
+          "<strong style='color: #dc3545;'>[", err$category, "]</strong> ",
+          err$message,
+          if (!is.null(err$details)) paste0("<br><em style='color: #666;'>", err$details, "</em>") else "",
+          "</li>"
+        )
+      })
+
+      html_parts[[config_name]] <- paste0(
+        "<div style='margin-bottom: 20px; border-left: 4px solid #dc3545; padding-left: 12px;'>",
+        "<h5 style='margin-top: 0; color: #dc3545;'>",
+        "<i class='fa fa-file-excel-o'></i> ", file_display_name,
+        "</h5>",
+        "<ul style='margin: 0; padding-left: 20px;'>",
+        paste(error_items, collapse = ""),
+        "</ul>",
         "</div>"
       )
-    })
-
-    return(paste(html_parts, collapse = ""))
+    }
   }
 
- # If it's a simple vector, join with line breaks
-  return(paste0(
-    "<div style='background: #f8f9fa; padding: 10px; border-radius: 4px;'>",
-    "<pre style='margin: 0; white-space: pre-wrap;'>",
-    paste(validation_summary, collapse = "\n"),
-    "</pre>",
-    "</div>"
-  ))
+  if (length(html_parts) == 0) {
+    return("<p>No critical errors found.</p>")
+  }
+
+  return(paste(html_parts, collapse = ""))
 }
 
 #' import UI Function
@@ -152,21 +155,20 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
         # If critical errors exist, show blocking modal and stop import
         if (has_critical) {
-          # Format validation summary for display
-          # validation_summary is a named vector/list from esqlabsR
-          summary_html <- format_validation_summary(validation_summary)
+          # Format detailed errors for display
+          errors_html <- format_validation_errors(validation_results)
 
           isolate({
             r$states$modal_message <- list(
               status = "Critical Validation Errors",
               message = HTML(paste0(
                 "<div style='max-height: 500px; overflow-y: auto;'>",
-                "<p><strong>The project configuration contains critical errors that must be fixed before importing.</strong></p>",
+                "<p><strong>The following files contain errors that must be fixed before importing:</strong></p>",
                 "<hr>",
-                summary_html,
+                errors_html,
                 "<hr>",
                 "<p style='color: #666; font-size: 0.9em;'>",
-                "<i class='fa fa-info-circle'></i> Please fix the errors in your Excel files and try importing again.",
+                "<i class='fa fa-info-circle'></i> Please fix the errors in the Excel files listed above and try importing again.",
                 "</p>",
                 "</div>"
               ))
