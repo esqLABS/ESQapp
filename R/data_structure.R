@@ -261,14 +261,25 @@ WarningHandler <- R6::R6Class(
     # Store warning messages
     warning_messages = NULL,
     invalid_sheets_name = NULL,
+    # Store validation results
+    validation_results = NULL,
+    critical_errors = NULL,
+    has_critical_errors = FALSE,
+    # Store esqlabsR validation results and summary
+    esqlabsR_results = NULL,
+    esqlabsR_summary = NULL,
 
 
     # Initialize
     initialize = function() {
       self$warning_messages <- reactiveValues()
+      self$validation_results <- reactiveValues()
+      self$critical_errors <- reactiveValues()
+      self$esqlabsR_results <- NULL
+      self$esqlabsR_summary <- NULL
     },
 
-    # Method to add a warning
+    # Method to add a warning (legacy support)
     add_warning = function(config_file, sheet_name, message, warning_code = NULL) {
       self$warning_messages$config_files <- c(self$warning_messages$config_files, config_file)
       warning_msg <- sprintf("Warning for sheet <b>'%s'</b>: %s", sheet_name, message)
@@ -278,6 +289,72 @@ WarningHandler <- R6::R6Class(
         self$invalid_sheets_name[[config_file]] <- c(self$invalid_sheets_name[[config_file]], sheet_name)
       }
 
+    },
+
+    # Method to add ValidationResult objects
+    add_validation_result = function(config_file, validation_result) {
+      self$validation_results[[config_file]] <- validation_result
+
+      # Process critical errors
+      if (validation_result$has_critical_errors) {
+        self$has_critical_errors <- TRUE
+        self$critical_errors[[config_file]] <- validation_result$get_formatted_messages("critical")
+      }
+
+      # Process warnings
+      if (validation_result$has_warnings) {
+        # Add to warning messages for display
+        warning_msgs <- validation_result$get_formatted_messages("warning")
+        self$warning_messages$config_files <- c(self$warning_messages$config_files, config_file)
+        self$warning_messages[[config_file]] <- c(self$warning_messages[[config_file]], warning_msgs)
+      }
+    },
+
+    # Add esqlabsR validation results
+    add_esqlabsR_validation = function(results, summary) {
+      self$esqlabsR_results <- results
+      self$esqlabsR_summary <- summary
+      self$has_critical_errors <- esqlabsR::isAnyCriticalErrors(results)
+
+      # Add summary to warning messages for display in modal
+      # summary can be a vector, so use length() and any() for proper check
+      if (!is.null(summary) && length(summary) > 0 && any(nzchar(summary))) {
+        self$warning_messages$config_files <- c(self$warning_messages$config_files, "esqlabsR_validation")
+        self$warning_messages[["esqlabsR_validation"]] <- summary
+      }
+    },
+
+    # Clear all validation results
+    clear_all = function() {
+      self$warning_messages <- reactiveValues()
+      self$validation_results <- reactiveValues()
+      self$critical_errors <- reactiveValues()
+      self$has_critical_errors <- FALSE
+      self$invalid_sheets_name <- NULL
+      self$esqlabsR_results <- NULL
+      self$esqlabsR_summary <- NULL
+    },
+
+    # Get summary of all validations
+    get_summary = function() {
+      total_critical <- 0
+      total_warnings <- 0
+
+      for (config_file in names(self$validation_results)) {
+        result <- self$validation_results[[config_file]]
+        if (!is.null(result)) {
+          summary <- result$get_summary()
+          total_critical <- total_critical + summary$critical_error_count
+          total_warnings <- total_warnings + summary$warning_count
+        }
+      }
+
+      list(
+        has_critical_errors = self$has_critical_errors,
+        total_critical_errors = total_critical,
+        total_warnings = total_warnings,
+        affected_files = names(self$validation_results)
+      )
     }
   )
 )

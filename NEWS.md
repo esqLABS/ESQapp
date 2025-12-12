@@ -1,5 +1,11 @@
 #  News
 
+## Version 2.2.0.9003 (Development version)
+
+#### **Main Changes:**
+- **Validate the imported configuration file:** Use the R6 validation object from the `{esqlabsR}` package and show the user where the project must be edited to resolve the critical error. (#194)
+
+
 ## Version 2.2.0.9002 (Development version)
 
 #### **Main Changes:**

@@ -1,3 +1,69 @@
+#' Format detailed validation errors for modal display
+#'
+#' @param validation_results Full validation results from esqlabsR::validateAllConfigurations()
+#' @return HTML-formatted string with detailed errors
+#' @noRd
+format_validation_errors <- function(validation_results) {
+  if (is.null(validation_results)) {
+    return("<p>No validation details available.</p>")
+  }
+
+  # Map internal names to user-friendly file names
+  file_name_map <- list(
+    "projectConfiguration" = "ProjectConfiguration.xlsx",
+    "scenarios" = "Scenarios.xlsx",
+    "plots" = "Plots.xlsx",
+    "individuals" = "IndividualBiometrics.xlsx",
+    "populations" = "Demographics.xlsx",
+    "models" = "ModelParameters.xlsx",
+    "applications" = "Applications.xlsx",
+    "crossReferences" = "Cross-References"
+  )
+
+  html_parts <- list()
+
+  # Loop through each validation result
+  for (config_name in names(validation_results)) {
+    result <- validation_results[[config_name]]
+
+    if (!inherits(result, "validationResult")) next
+
+    # Check if this result has critical errors
+    if (result$has_critical_errors()) {
+      file_display_name <- file_name_map[[config_name]] %||% config_name
+      errors <- result$critical_errors
+
+      # Build error list for this file
+      error_items <- lapply(errors, function(err) {
+        paste0(
+          "<li style='margin-bottom: 8px;'>",
+          "<strong style='color: #dc3545;'>[", err$category, "]</strong> ",
+          err$message,
+          if (!is.null(err$details)) paste0("<br><em style='color: #666;'>", err$details, "</em>") else "",
+          "</li>"
+        )
+      })
+
+      html_parts[[config_name]] <- paste0(
+        "<div style='margin-bottom: 20px; border-left: 4px solid #dc3545; padding-left: 12px;'>",
+        "<h5 style='margin-top: 0; color: #dc3545;'>",
+        "<i class='fa fa-file-excel-o'></i> ", file_display_name,
+        "</h5>",
+        "<ul style='margin: 0; padding-left: 20px;'>",
+        paste(error_items, collapse = ""),
+        "</ul>",
+        "</div>"
+      )
+    }
+  }
+
+  if (length(html_parts) == 0) {
+    return("<p>No critical errors found.</p>")
+  }
+
+  return(paste(html_parts, collapse = ""))
+}
+
 #' import UI Function
 #'
 #' @description A shiny Module.
@@ -47,12 +113,76 @@ mod_import_server <- function(id, r, DROPDOWNS) {
         input$projectConfigurationFile
       )
       req(projectConfigurationFilePath$datapath)
-      esqlabsR::createDefaultProjectConfiguration(
-        path = projectConfigurationFilePath$datapath
+
+      # Clear previous validation results from old project (isolate to prevent reactive loop)
+      isolate(r$warnings$clear_all())
+
+      # Step 1 - Load project configuration
+      project_config <- tryCatch(
+        esqlabsR::createDefaultProjectConfiguration(path = projectConfigurationFilePath$datapath),
+        error = function(e) {
+          isolate({
+            r$states$modal_message <- list(
+              status = "Error Loading Project Configuration",
+              message = conditionMessage(e)
+            )
+          })
+          return(NULL)
+        }
       )
+
+      if (is.null(project_config)) return(NULL)
+
+      # Step 2 - Validate all configurations using esqlabsR
+      validation_results <- tryCatch(
+        esqlabsR::validateAllConfigurations(project_config),
+        error = function(e) {
+          message("Validation error: ", conditionMessage(e))
+          NULL
+        }
+      )
+
+      # Process validation results if available
+      if (!is.null(validation_results)) {
+        # Check for critical errors
+        has_critical <- esqlabsR::isAnyCriticalErrors(validation_results)
+
+        # Get validation summary for display
+        validation_summary <- esqlabsR::validationSummary(validation_results)
+
+        # Store results in WarningHandler for display in mod_warning_modal (isolate to prevent reactive loop)
+        isolate(r$warnings$add_esqlabsR_validation(validation_results, validation_summary))
+
+        # If critical errors exist, show blocking modal and stop import
+        if (has_critical) {
+          # Format detailed errors for display
+          errors_html <- format_validation_errors(validation_results)
+
+          isolate({
+            r$states$modal_message <- list(
+              status = "Critical Validation Errors",
+              message = HTML(paste0(
+                "<div style='max-height: 500px; overflow-y: auto;'>",
+                "<p><strong>The following files contain errors that must be fixed before importing:</strong></p>",
+                "<hr>",
+                errors_html,
+                "<hr>",
+                "<p style='color: #666; font-size: 0.9em;'>",
+                "<i class='fa fa-info-circle'></i> Please fix the errors in the Excel files listed above and try importing again.",
+                "</p>",
+                "</div>"
+              ))
+            )
+          })
+          return(NULL)
+        }
+      }
+
+      # Return the project configuration
+      project_config
     })
 
-    # Unchanged config + dropdown logic
+    # Import sheets from already-validated configuration files
     runAfterConfig <- function() {
       tryCatch(
         {
@@ -65,35 +195,26 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             "plots"        = projectConfiguration()$plotsFile
           )
 
+          # Import sheets from validated files
           for (config_file in r$data$get_config_files()) {
             r$data[[config_file]]$file_path <- config_map[[config_file]]
 
-
-            # Check if the file path is valid
             if (!is.na(r$data[[config_file]]$file_path) && file.exists(r$data[[config_file]]$file_path)) {
+              # Import sheets (no validation needed - already validated)
               sheet_names <- readxl::excel_sheets(r$data[[config_file]]$file_path)
               r$data[[config_file]]$sheets <- sheet_names
               for (sheet in sheet_names) {
                 r$data$add_sheet(config_file, sheet, r$warnings)
               }
             }
-
-            # Populate dropdowns
-            DROPDOWNS$scenarios$individual_id       <- r$data$individuals$IndividualBiometrics$modified$IndividualId
-            DROPDOWNS$scenarios$population_id       <- r$data$populations$Demographics$modified$PopulationName
-            DROPDOWNS$scenarios$outputpath_id       <- r$data$scenarios$OutputPaths$modified$OutputPathId
-            DROPDOWNS$scenarios$outputpath_id_alias <- setNames(
-              as.list(as.character(r$data$scenarios$OutputPaths$modified$OutputPath)),
-              r$data$scenarios$OutputPaths$modified$OutputPathId
-            )
-            DROPDOWNS$scenarios$model_parameters     <- unique(r$data$models$sheets)
-            DROPDOWNS$plots$scenario_options        <- unique(r$data$scenarios$Scenarios$modified$Scenario_name)
-            DROPDOWNS$plots$path_options            <- unique(r$data$scenarios$OutputPaths$modified$OutputPath)
-            DROPDOWNS$plots$datacombinedname_options<- unique(r$data$plots$DataCombined$modified$DataCombinedName)
-            DROPDOWNS$plots$plotgridnames_options   <- unique(r$data$plots$plotGrids$modified$name)
-            DROPDOWNS$plots$plotids_options         <- unique(r$data$plots$plotConfiguration$modified$plotID)
-            DROPDOWNS$applications$application_protocols <- unique(r$data$applications$sheets)
           }
+
+          # Populate dropdowns using configuration-driven approach
+          dropdown_config <- get_dropdown_config()
+          populate_dropdowns(DROPDOWNS, r$data, dropdown_config)
+
+          # Handle special dropdown cases (named lists, etc.)
+          populate_special_dropdowns(DROPDOWNS, r$data)
         },
         error = function(e) {
           message("Error in reading the project configuration file: ", conditionMessage(e))
