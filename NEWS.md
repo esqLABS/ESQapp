@@ -1,5 +1,9 @@
 #  News
 
+## Version 2.2.0.9004 (Development version)
+- **Fix parameter set dropdown sync after deletion:** Dropdown options now update immediately when parameter sets are deleted, with a warning UI to handle unavailable items.
+
+
 ## Version 2.2.0.9002 (Development version)
 
 #### **Main Changes:**

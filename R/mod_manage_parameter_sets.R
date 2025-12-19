@@ -25,8 +25,6 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
   moduleServer(id, function(input, output, session){
     ns <- session$ns
 
-    showDeleteConfirmationModal <- reactiveVal(FALSE)
-
     # Show Dialog to Add parameter set
     observeEvent(input$add_parameter, {
       showModal(
@@ -62,46 +60,37 @@ mod_manage_parameter_sets_server <- function(id, r, tab_section, state_name, DRO
       }
     })
 
-    # Activate Confirmation modal window
+    # Show confirmation modal for deletion - directly show modal on button click
     observeEvent(input$remove_parameters, {
-      showDeleteConfirmationModal(TRUE)
-    })
-
-    # Show confirmation modal for deletion
-    observeEvent(showDeleteConfirmationModal(), {
-      if(showDeleteConfirmationModal()){
-        showModal(
-          modalDialog(
-            title = "Delete Parameter Set",
-            "Are you sure you want to delete current parameter set?",
-            footer = tagList(
-              actionButton(ns("confirm_delete"), "Delete", class = "btn btn-danger"),
-              modalButton("Cancel")
-            )
+      showModal(
+        modalDialog(
+          title = "Delete Parameter Set",
+          "Are you sure you want to delete current parameter set?",
+          footer = tagList(
+            actionButton(ns("confirm_delete"), "Delete", class = "btn btn-danger"),
+            modalButton("Cancel")
           )
         )
-      } else {
-        removeModal()
-        showDeleteConfirmationModal(FALSE)
-      }
+      )
     })
 
     # Handle deletion confirmation
     observeEvent(input$confirm_delete, {
       # Send current tab_section name to the parent module and trigger deletion observeEvent there
-      r$states[[state_name]] <- list(tab_section = tab_section)
-      # Update global `DROPDOWN` options (sourced from sheet names)
-      DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
-      DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
+      # Include timestamp to ensure observeEvent always triggers (even if tab_section is same)
+      r$states[[state_name]] <- list(tab_section = tab_section, timestamp = Sys.time())
+      # Note: DROPDOWNS are updated in mod_table_tab.R AFTER the sheet is actually deleted
       # Remove modal window
       removeModal()
-      showDeleteConfirmationModal(FALSE)
     })
 
 
-    # Handle all tabs removed
+    # Handle all tabs removed - also update DROPDOWNS when sheets become empty
     observeEvent(r$data[[tab_section]]$sheets, {
       if(length(r$data[[tab_section]]$sheets) == 0){
+        # Update DROPDOWNS to reflect empty sheets list
+        DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
+        DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
         r$states[[state_name]] <- NULL # Send nothing to the observeEvent in the parent module
       }
     })

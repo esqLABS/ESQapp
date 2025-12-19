@@ -185,20 +185,26 @@ mod_table_tab_server <- function(id, r, tab_section, DROPDOWNS, METADATA = NULL)
 
 
     # Delete sheet for "Models" (Parameter sets)
-    observeEvent(r$states$edit_mode_models, {
+    observeEvent(r$states$edit_mode_models, ignoreNULL = TRUE, ignoreInit = TRUE, {
+      req(r$states$edit_mode_models)
       r$data$remove_sheet(
         config_name = r$states$edit_mode_models$tab_section,
         sheet_name = r$states$current_sheet_selected_models
       )
+      # Update DROPDOWNS after sheet is deleted (not before in confirm_delete)
+      DROPDOWNS$scenarios$model_parameters <- r$data$models$sheets |> unique()
       r$states$edit_mode_models <- NULL
     })
 
     # Delete sheet for "Applications"
-    observeEvent(r$states$edit_mode_applications, {
+    observeEvent(r$states$edit_mode_applications, ignoreNULL = TRUE, ignoreInit = TRUE, {
+      req(r$states$edit_mode_applications)
       r$data$remove_sheet(
         config_name = r$states$edit_mode_applications$tab_section,
         sheet_name = r$states$current_sheet_selected_applications
       )
+      # Update DROPDOWNS after sheet is deleted (not before in confirm_delete)
+      DROPDOWNS$applications$application_protocols <- r$data$applications$sheets |> unique()
       r$states$edit_mode_applications <- NULL
     })
 
