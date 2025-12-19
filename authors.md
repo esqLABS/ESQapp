@@ -13,13 +13,13 @@ Source:
 [`DESCRIPTION`](https://github.com/esqLABS/ESQapp/blob/main/DESCRIPTION)
 
 Mil F, Kostiv A (2025). *ESQapp: Shiny App to edit esqLABSR Edit
-Simulation Scenarios*. R package version 2.2.0.9002,
+Simulation Scenarios*. R package version 2.2.0.9003,
 <https://github.com/esqLABS/ESQapp>.
 
     @Manual{,
       title = {ESQapp: Shiny App to edit {esqLABSR} Edit Simulation Scenarios},
       author = {Felix Mil and Anastasiia Kostiv},
       year = {2025},
-      note = {R package version 2.2.0.9002},
+      note = {R package version 2.2.0.9003},
       url = {https://github.com/esqLABS/ESQapp},
     }
