@@ -2,6 +2,9 @@
 
 ## Version 2.2.0.9004 (Development version)
 
+#### **Main Changes:**
+- **Conditional column editing in DataCombined table:** `scenario` and `path` columns are now disabled when `dataType` is "observed", and `dataSet` column is disabled when dataType is "simulated".
+
 #### **Bug Fixes**
 - **Fix parameter set dropdown sync after deletion:** Dropdown options now update immediately when parameter sets are deleted, with a warning UI to handle unavailable items.
 - **Add horizontal scrollbar for wide tables:** Added a styled horizontal scrollbar to table containers for easier navigation of wide tables using mouse.
