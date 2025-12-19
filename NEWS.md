@@ -1,8 +1,11 @@
 #  News
 
 ## Version 2.2.0.9004 (Development version)
+
+#### **Bug Fixes**
 - **Fix parameter set dropdown sync after deletion:** Dropdown options now update immediately when parameter sets are deleted, with a warning UI to handle unavailable items.
 - **Add horizontal scrollbar for wide tables:** Added a styled horizontal scrollbar to table containers for easier navigation of wide tables using mouse.
+- **Fix add row button position:** Fixed the add row action button to insert new rows directly below the current row instead of skipping one row.
 
 
 ## Version 2.2.0.9002 (Development version)
