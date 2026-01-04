@@ -12,3 +12,101 @@
 /* .tab-content>.active.html-fill-container {
     width: calc(100% + 15%) !important;
 } */
+
+/* Drag and Drop File Upload */
+.dropzone {
+  position: relative;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fafafa;
+}
+
+/* Make child elements pass clicks through to dropzone */
+.dropzone-icon,
+.dropzone-text,
+.dropzone-hint {
+  pointer-events: none;
+}
+
+.dropzone:hover {
+  border-color: #61c0ca;
+  background: #f0f9fa;
+}
+
+.dropzone.dragover {
+  border-color: #61c0ca;
+  background: #e8f6f8;
+  border-style: solid;
+}
+
+.dropzone-icon {
+  font-size: 2.5rem;
+  color: #999;
+  margin-bottom: 10px;
+  transition: color 0.2s ease;
+}
+
+.dropzone:hover .dropzone-icon,
+.dropzone.dragover .dropzone-icon {
+  color: #61c0ca;
+}
+
+.dropzone-text {
+  color: #666;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.dropzone-text strong {
+  color: #61c0ca;
+}
+
+.dropzone-hint {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.dropzone-file-info {
+  display: none;
+  margin-top: 10px;
+  padding: 4px 10px;
+  background: #e8f6f8;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.dropzone-file-info.show {
+  display: block;
+}
+
+.dropzone-file-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.dropzone-file-size {
+  color: #888;
+  font-size: 0.75rem;
+}
+
+/* Hide the native Shiny fileInput inside dropzone */
+.dropzone > .form-group {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+
+.hr-dvivder-esqapp {
+  margin: 0.25rem 0 !important;
+}
