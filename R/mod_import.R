@@ -149,10 +149,8 @@ mod_import_server <- function(id, r, DROPDOWNS) {
             r$data[[config_file]]$sheets <- sheet_names
             
             for (sheet in sheet_names) {
-              # Remove existing sheet data if it exists
-              if (!is.null(r$data[[config_file]][[sheet]])) {
-                r$data[[config_file]][[sheet]] <- NULL
-              }
+              # Remove existing sheet data
+              r$data[[config_file]][[sheet]] <- NULL
               
               # Re-add the sheet (this will load fresh data)
               r$data$add_sheet(config_file, sheet, r$warnings)
