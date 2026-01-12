@@ -221,7 +221,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       showModal(
         modalDialog(
           title = "Reload Project",
-          "Your changes will be lost, are you sure?",
+          "Your changes will be lost. Are you sure?",
           footer = tagList(
             actionButton(ns("confirm_reload"), "Yes"),
             modalButton("No")
