@@ -18,14 +18,7 @@ mod_import_ui <- function(id) {
       "Please select the projectConfiguration excel file",
       multiple = FALSE
     ),
-    tags$div(
-      style = "margin-top: 10px;",
-      actionButton(
-        ns("reload_project"),
-        "Reload Project",
-        icon = icon("sync-alt")
-      )
-    )
+    actionButton(ns("reload_project"), "Reload Project")
   )
 }
 
@@ -169,6 +162,9 @@ mod_import_server <- function(id, r, DROPDOWNS) {
           # Update dropdowns with fresh data
           runAfterConfig()
 
+          # Trigger UI refresh to update the tables
+          r$ui_triggers$selected_sheet <- runif(1)
+
           showNotification("Project reloaded successfully!", type = "message")
           return(TRUE)
         },
@@ -222,8 +218,23 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       runAfterConfig()
     })
 
-    # Observe reload button clicks
+    # Show confirmation modal when reload button is clicked
     observeEvent(input$reload_project, {
+      showModal(
+        modalDialog(
+          title = "Reload Project",
+          "Your changes will be lost, are you sure?",
+          footer = tagList(
+            actionButton(ns("confirm_reload"), "Yes"),
+            modalButton("No")
+          )
+        )
+      )
+    })
+
+    # Handle reload confirmation
+    observeEvent(input$confirm_reload, {
+      removeModal()
       reloadProject()
     })
 
