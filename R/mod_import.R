@@ -7,6 +7,8 @@
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
+#' @importFrom shiny actionButton
+#' @importFrom shiny icon
 mod_import_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -15,7 +17,8 @@ mod_import_ui <- function(id) {
       "Select Project Configuration",
       "Please select the projectConfiguration excel file",
       multiple = FALSE
-    )
+    ),
+    actionButton(ns("reload_project"), "Reload Project")
   )
 }
 
@@ -106,6 +109,71 @@ mod_import_server <- function(id, r, DROPDOWNS) {
       )
     }
 
+    # Reload project function - re-reads all Excel files and resets modified data
+    reloadProject <- function() {
+      tryCatch(
+        {
+          # Check if project is loaded
+          if (is.null(r$config$projectConfiguration)) {
+            showNotification("No project loaded to reload.", type = "warning")
+            return(FALSE)
+          }
+
+          # Get current file paths from project configuration
+          config_map <- list(
+            "scenarios"    = r$config$projectConfiguration$scenariosFile,
+            "individuals"  = r$config$projectConfiguration$individualsFile,
+            "populations"  = r$config$projectConfiguration$populationsFile,
+            "models"       = r$config$projectConfiguration$modelParamsFile,
+            "applications" = r$config$projectConfiguration$applicationsFile,
+            "plots"        = r$config$projectConfiguration$plotsFile
+          )
+
+          # Clear warnings before reload
+          r$warnings$warning_messages <- reactiveValues()
+
+          # Re-read all files and reset modified data
+          for (config_file in r$data$get_config_files()) {
+            current_file_path <- config_map[[config_file]]
+            
+            # Skip if no file path or file doesn't exist
+            if (is.na(current_file_path) || !file.exists(current_file_path)) {
+              next
+            }
+
+            # Store current sheets for this config file
+            current_sheets <- r$data[[config_file]]$sheets
+            
+            # Re-read all sheets
+            sheet_names <- readxl::excel_sheets(current_file_path)
+            r$data[[config_file]]$sheets <- sheet_names
+            
+            for (sheet in sheet_names) {
+              # Remove existing sheet data
+              r$data[[config_file]][[sheet]] <- NULL
+              
+              # Re-add the sheet (this will load fresh data)
+              r$data$add_sheet(config_file, sheet, r$warnings)
+            }
+          }
+
+          # Update dropdowns with fresh data
+          runAfterConfig()
+
+          # Trigger UI refresh to update the tables
+          r$ui_triggers$selected_sheet <- runif(1)
+
+          showNotification("Project reloaded successfully!", type = "message")
+          return(TRUE)
+        },
+        error = function(e) {
+          message("Error reloading project: ", conditionMessage(e))
+          showNotification("Failed to reload project. Please check files and try again.", type = "error")
+          return(FALSE)
+        }
+      )
+    }
+
     # Modal flow: only if dataFile exists and has sheets
     observeEvent(projectConfiguration(), {
       pc <- projectConfiguration()
@@ -146,6 +214,26 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
       # if no data file or no sheets
       runAfterConfig()
+    })
+
+    # Show confirmation modal when reload button is clicked
+    observeEvent(input$reload_project, {
+      showModal(
+        modalDialog(
+          title = "Reload Project",
+          "Your changes will be lost. Are you sure?",
+          footer = tagList(
+            actionButton(ns("confirm_reload"), "Yes"),
+            modalButton("No")
+          )
+        )
+      )
+    })
+
+    # Handle reload confirmation
+    observeEvent(input$confirm_reload, {
+      removeModal()
+      reloadProject()
     })
 
     # Share project configuration path with the export module
