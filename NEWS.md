@@ -3,7 +3,7 @@
 ## Version 2.2.0.9004 (Development version)
 
 #### **Main Changes:**
-- **Numeric validation for Value column:** The Value column now only accepts numeric input with a toast notification ("Only numeric values are allowed") shown when non-numeric values are attempted. (#208)
+- **Numeric validation for Value column:** The Value column now only accepts numeric input with a toast notification ("Only numeric values are allowed") shown when non-numeric values are attempted. (#210)
 
 
 ## Version 2.2.0.9003 (Development version)
