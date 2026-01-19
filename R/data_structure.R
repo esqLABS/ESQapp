@@ -224,7 +224,7 @@ DataStructure <- R6::R6Class("DataStructure",
         self[[config_name]][[sheet_name]]$modified <- data.frame(
           `Container Path` = NA_character_,
           `Parameter Name` = NA_character_,
-          Value = NA_character_,
+          Value = NA_real_,
           Units = NA_character_,
           check.names = FALSE,
           row.names = NULL
