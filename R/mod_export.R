@@ -30,8 +30,37 @@ mod_export_server <- function(id, r, configuration_path) {
     )
 
 
+    # Disable export when critical errors exist
+    observeEvent(r$states$has_critical_errors, {
+      if (isTRUE(r$states$has_critical_errors)) {
+        updateActionButton(session, inputId = "export", disabled = TRUE)
+      } else {
+        updateActionButton(session, inputId = "export", disabled = FALSE)
+      }
+    })
+
     # Listen to the export button
     observeEvent(input$export, {
+      # Re-validate before exporting
+      if (!is.null(r$config$projectConfiguration)) {
+        validationResults <- esqlabsR::validateAllConfigurations(
+          r$config$projectConfiguration
+        )
+        if (esqlabsR::isAnyCriticalErrors(validationResults)) {
+          r$warnings$clear()
+          r$warnings$populate_from_validation(validationResults)
+          r$states$has_critical_errors <- TRUE
+          r$states$modal_message <- list(
+            status = "Export Blocked",
+            message = paste(
+              "Critical validation errors found.",
+              "Please fix the errors and try again."
+            )
+          )
+          return()
+        }
+      }
+
       message("exporting data")
 
       export_success <- TRUE # Track overall success

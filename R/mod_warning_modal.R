@@ -31,7 +31,7 @@ mod_warning_server <- function(id, r) {
     observeEvent(input$open_warning_modal, {
       showModal(
         modalDialog(
-          title = "Warning",
+          title = "Validation Results",
           uiOutput(ns("warning_accordion")),
           easyClose = TRUE,
           footer = tagList(
@@ -41,45 +41,98 @@ mod_warning_server <- function(id, r) {
       )
     })
 
-    observeEvent(r$warnings$warning_messages$config_files, {
+    # Watch for critical errors
+    observeEvent(r$warnings$critical_messages$config_files, {
       updateActionButton(
         session = session,
         inputId = "open_warning_modal",
-        icon = icon("warning"),
+        icon = icon("circle-exclamation"),
         disabled = FALSE
       )
 
       showNotification(
-        HTML(paste("Warnings found in config files. Press the", icon("warning"), "to view them")),
-        type = "warning",
-        duration = 7
+        HTML(paste(
+          "Critical errors found in config files. Press the",
+          icon("circle-exclamation"), "to view them"
+        )),
+        type = "error",
+        duration = 10
       )
 
-      output$warning_accordion <- renderUI({
-        items <- lapply(unique(r$warnings$warning_messages$config_files), function(x) {
-          # Check if there are messages for the current config file
-          if (length(r$warnings$warning_messages[[x]]) > 0) {
-            # Loop through each message inside the vector and create a list item
-            bullet_list <- sapply(r$warnings$warning_messages[[x]], function(msg) {
-              paste0("<li>", msg, "</li>")
-            })
-            # Combine the bullet list items into a single string
-            bullet_list_content <- paste(bullet_list, collapse = "")
-            # Wrap the content in an unordered list <ul> and pass to the accordion panel
-            accordion_panel(paste("File: ", x), HTML(paste("<ul>", bullet_list_content, "</ul>")))
-          } else {
-            # In case there are no messages, just show a message in the accordion panel
-            accordion_panel(paste("File: ", x), "No warnings.")
-          }
-        })
+      .render_accordion(output, ns, r)
+    })
 
-        # Return the accordion with the items
-        accordion(!!!items, multiple = FALSE)
-      })
+    # Watch for warnings (only update icon if no critical errors)
+    observeEvent(r$warnings$warning_messages$config_files, {
+      if (!r$warnings$has_critical_errors()) {
+        updateActionButton(
+          session = session,
+          inputId = "open_warning_modal",
+          icon = icon("triangle-exclamation"),
+          disabled = FALSE
+        )
+
+        showNotification(
+          HTML(paste(
+            "Warnings found in config files. Press the",
+            icon("triangle-exclamation"), "to view them"
+          )),
+          type = "warning",
+          duration = 7
+        )
+      }
+
+      .render_accordion(output, ns, r)
     })
 
     observeEvent(input$close_warning_modal, {
       removeModal()
     })
+  })
+}
+
+#' Render the warning/error accordion into an output
+#' @noRd
+.render_accordion <- function(output, ns, r) {
+  output$warning_accordion <- renderUI({
+    # Collect all config files that have issues
+    all_files <- unique(c(
+      r$warnings$critical_messages$config_files,
+      r$warnings$warning_messages$config_files
+    ))
+
+    items <- lapply(all_files, function(x) {
+      content_parts <- list()
+
+      # Critical errors section
+      critical_msgs <- r$warnings$critical_messages[[x]]
+      if (length(critical_msgs) > 0) {
+        bullets <- paste0("<li>", critical_msgs, "</li>", collapse = "")
+        content_parts <- c(content_parts, list(HTML(paste0(
+          "<div style='color: #dc3545; margin-bottom: 8px;'>",
+          "<strong>Critical Errors:</strong>",
+          "<ul>", bullets, "</ul></div>"
+        ))))
+      }
+
+      # Warnings section
+      warning_msgs <- r$warnings$warning_messages[[x]]
+      if (length(warning_msgs) > 0) {
+        bullets <- paste0("<li>", warning_msgs, "</li>", collapse = "")
+        content_parts <- c(content_parts, list(HTML(paste0(
+          "<div style='color: #856404;'>",
+          "<strong>Warnings:</strong>",
+          "<ul>", bullets, "</ul></div>"
+        ))))
+      }
+
+      if (length(content_parts) == 0) {
+        content_parts <- list("No issues.")
+      }
+
+      accordion_panel(paste("File:", x), tagList(content_parts))
+    })
+
+    accordion(!!!items, multiple = FALSE)
   })
 }

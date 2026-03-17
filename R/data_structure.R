@@ -260,12 +260,14 @@ WarningHandler <- R6::R6Class(
 
     # Store warning messages
     warning_messages = NULL,
+    # Store critical error messages
+    critical_messages = NULL,
     invalid_sheets_name = NULL,
-
 
     # Initialize
     initialize = function() {
       self$warning_messages <- reactiveValues()
+      self$critical_messages <- reactiveValues()
     },
 
     # Method to add a warning
@@ -277,7 +279,46 @@ WarningHandler <- R6::R6Class(
       if (!is.null(warning_code)) {
         self$invalid_sheets_name[[config_file]] <- c(self$invalid_sheets_name[[config_file]], sheet_name)
       }
+    },
 
+    # Method to add a critical error
+    add_critical_error = function(config_file, category, message) {
+      self$critical_messages$config_files <- c(self$critical_messages$config_files, config_file)
+      error_msg <- sprintf("<b>[%s]</b> %s", category, message)
+      self$critical_messages[[config_file]] <- c(self$critical_messages[[config_file]], error_msg)
+    },
+
+    # Check if any critical errors exist
+    has_critical_errors = function() {
+      length(self$critical_messages$config_files) > 0
+    },
+
+    # Clear all warnings and critical errors
+    clear = function() {
+      self$warning_messages <- reactiveValues()
+      self$critical_messages <- reactiveValues()
+      self$invalid_sheets_name <- NULL
+    },
+
+    # Populate from esqlabsR validationResults
+    populate_from_validation = function(validationResults) {
+      for (file_name in names(validationResults)) {
+        result <- validationResults[[file_name]]
+        if (!inherits(result, "validationResult")) next
+
+        for (err in result$critical_errors) {
+          self$add_critical_error(file_name, err$category, err$message)
+        }
+        for (warn in result$warnings) {
+          self$warning_messages$config_files <- c(
+            self$warning_messages$config_files, file_name
+          )
+          warning_msg <- sprintf("<b>[%s]</b> %s", warn$category, warn$message)
+          self$warning_messages[[file_name]] <- c(
+            self$warning_messages[[file_name]], warning_msg
+          )
+        }
+      }
     }
   )
 )

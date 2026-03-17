@@ -130,7 +130,7 @@ mod_import_server <- function(id, r, DROPDOWNS) {
           )
 
           # Clear warnings before reload
-          r$warnings$warning_messages <- reactiveValues()
+          r$warnings$clear()
 
           # Re-read all files and reset modified data
           for (config_file in r$data$get_config_files()) {
@@ -159,6 +159,22 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
           # Update dropdowns with fresh data
           runAfterConfig()
+
+          # Re-run esqlabsR validators
+          validationResults <- esqlabsR::validateAllConfigurations(
+            r$config$projectConfiguration
+          )
+          r$warnings$populate_from_validation(validationResults)
+
+          if (esqlabsR::isAnyCriticalErrors(validationResults)) {
+            r$states$has_critical_errors <- TRUE
+            showNotification(
+              "Critical validation errors found. Export is blocked.",
+              type = "error"
+            )
+          } else {
+            r$states$has_critical_errors <- FALSE
+          }
 
           # Trigger UI refresh to update the tables
           r$ui_triggers$selected_sheet <- runif(1)
@@ -214,6 +230,33 @@ mod_import_server <- function(id, r, DROPDOWNS) {
 
       # if no data file or no sheets
       runAfterConfig()
+
+      # Run esqlabsR validators
+      validationResults <- esqlabsR::validateAllConfigurations(pc)
+      r$warnings$populate_from_validation(validationResults)
+
+      if (esqlabsR::isAnyCriticalErrors(validationResults)) {
+        summary <- esqlabsR::validationSummary(validationResults)
+        r$states$has_critical_errors <- TRUE
+        showModal(modalDialog(
+          title = "Critical Validation Errors",
+          tagList(
+            tags$p(tags$strong(paste0(
+              summary$total_critical_errors, " critical error(s) found."
+            ))),
+            tags$p(
+              "The imported configuration has critical errors that must be",
+              "fixed before you can export. Click the",
+              icon("circle-exclamation"),
+              "icon to view details."
+            )
+          ),
+          easyClose = TRUE,
+          footer = modalButton("OK")
+        ))
+      } else {
+        r$states$has_critical_errors <- FALSE
+      }
     })
 
     # Show confirmation modal when reload button is clicked
